@@ -263,7 +263,10 @@ export default function App() {
   const savedWordIds = useMemo(() => new Set(savedWords.map((w) => w.id)), [savedWords]);
   const learnedWordIds = useMemo(() => new Set(learnedWordIdsList), [learnedWordIdsList]);
 
+  const [authErrorMessage, setAuthErrorMessage] = useState<string | null>(null);
+
   const handleSignInWithGoogle = async () => {
+    setAuthErrorMessage(null);
     try {
       const localSavedSnapshot = [...savedWords];
       const localLearnedSnapshot = [...learnedWordIdsList];
@@ -278,8 +281,29 @@ export default function App() {
           await markWordLearnedInCloud(user, vocab);
         }
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Google Sign-In failed or was cancelled:', err);
+      const code =
+        typeof err === 'object' && err !== null && 'code' in err
+          ? String((err as { code?: string }).code)
+          : '';
+      const message = err instanceof Error ? err.message : String(err);
+
+      if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') {
+        return;
+      }
+      if (code === 'auth/unauthorized-domain' || message.includes('unauthorized-domain')) {
+        const host = typeof window !== 'undefined' ? window.location.hostname : 'your live domain';
+        setAuthErrorMessage(
+          `The domain "${host}" is not yet authorized in Firebase Authentication. Add "${host}" under Firebase Console → Authentication → Settings → Authorized domains.`
+        );
+      } else if (code === 'auth/popup-blocked') {
+        setAuthErrorMessage(
+          'Your browser blocked the Google Sign-In popup. Please allow popups for this site and try again.'
+        );
+      } else {
+        setAuthErrorMessage(`Google Sign-In could not complete (${code || message}).`);
+      }
     }
   };
 
@@ -450,6 +474,24 @@ export default function App() {
         onSignInWithGoogle={handleSignInWithGoogle}
         onSignOut={handleSignOut}
       />
+
+      {/* Auth Error Banner (e.g., if live domain is not yet in Firebase Authorized Domains) */}
+      {authErrorMessage && (
+        <div className="bg-amber-50 border-b border-amber-200 px-4 sm:px-6 py-3 text-xs sm:text-sm text-amber-950">
+          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span className="font-bold">Google Sign-In Notice: </span>
+              <span>{authErrorMessage}</span>
+            </div>
+            <button
+              onClick={() => setAuthErrorMessage(null)}
+              className="text-xs font-semibold text-amber-900 hover:underline self-end sm:self-auto shrink-0"
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Main Body */}
       {readingArticle ? (
