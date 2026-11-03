@@ -1,0 +1,190 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Student profile associated with a Google account (non-PII display metadata).",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the student.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Student display name from Google account.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Optional avatar URL from Google account.",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the student profile was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the student profile was last updated."
+        }
+      },
+      "required": ["userId", "displayName", "createdAt", "updatedAt"]
+    },
+    "NotebookWord": {
+      "title": "NotebookWord",
+      "description": "A vocabulary word saved to a student's personal Vocabulary Notebook.",
+      "type": "object",
+      "properties": {
+        "wordId": {
+          "type": "string",
+          "description": "Canonical vocabulary item ID (e.g., v-b1-1).",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the owner student.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "word": {
+          "type": "string",
+          "description": "The English target word.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "phonetic": {
+          "type": "string",
+          "description": "IPA phonetic transcription.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "partOfSpeech": {
+          "type": "string",
+          "description": "Grammatical part of speech.",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "definition": {
+          "type": "string",
+          "description": "Uzbek meaning (for B1) or English definition (for B2/C1).",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "cefrLevel": {
+          "type": "string",
+          "description": "CEFR proficiency level.",
+          "enum": ["B1", "B2", "C1"]
+        },
+        "exampleSentence": {
+          "type": "string",
+          "description": "Contextual example sentence.",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "collocations": {
+          "type": "array",
+          "description": "Up to 10 common collocations for the word."
+        },
+        "savedAt": {
+          "type": "number",
+          "description": "Epoch milliseconds when the word was saved."
+        },
+        "reviewInterval": {
+          "type": "number",
+          "description": "SRS review interval in days."
+        },
+        "repetitions": {
+          "type": "number",
+          "description": "SRS consecutive successful repetitions count."
+        },
+        "nextReviewDate": {
+          "type": "number",
+          "description": "Epoch milliseconds for next scheduled review."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the notebook entry was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the notebook entry was last updated."
+        }
+      },
+      "required": [
+        "wordId",
+        "userId",
+        "word",
+        "phonetic",
+        "partOfSpeech",
+        "definition",
+        "cefrLevel",
+        "exampleSentence",
+        "collocations",
+        "savedAt",
+        "reviewInterval",
+        "repetitions",
+        "nextReviewDate",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "LearnedWord": {
+      "title": "LearnedWord",
+      "description": "A target vocabulary word marked as learned by a student for the Vocabulary Gym.",
+      "type": "object",
+      "properties": {
+        "wordId": {
+          "type": "string",
+          "description": "Canonical vocabulary item ID (e.g., v-b1-1).",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the owner student.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "cefrLevel": {
+          "type": "string",
+          "description": "CEFR level of the learned word.",
+          "enum": ["B1", "B2", "C1"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the word was marked as learned."
+        }
+      },
+      "required": ["wordId", "userId", "cefrLevel", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Stores each student's non-PII Google profile metadata."
+    },
+    "/users/{userId}/notebook/{wordId}": {
+      "schema": { "$ref": "#/entities/NotebookWord" },
+      "description": "Subcollection storing each student's personal saved Vocabulary Notebook words."
+    },
+    "/users/{userId}/learned/{wordId}": {
+      "schema": { "$ref": "#/entities/LearnedWord" },
+      "description": "Subcollection storing each student's learned vocabulary word IDs for the Vocabulary Gym."
+    }
+  }
+}

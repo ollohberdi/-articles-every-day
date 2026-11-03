@@ -203,3 +203,63 @@ test('resolveArticleFromLocation and buildArticleShareUrl resolve exact articles
   assert.equal(roundTrip.id, 'b1-sleep-habits');
 });
 
+test('B1 target words have Uzbek meanings while B2 and C1 target words remain in English', async () => {
+  const { ARTICLES_DATA } = await import('../data/articlesData');
+
+  const b1Words = ARTICLES_DATA.filter((a) => a.level === 'B1').flatMap((a) => a.targetVocabulary);
+  const b2Words = ARTICLES_DATA.filter((a) => a.level === 'B2').flatMap((a) => a.targetVocabulary);
+  const c1Words = ARTICLES_DATA.filter((a) => a.level === 'C1').flatMap((a) => a.targetVocabulary);
+
+  assert.equal(b1Words.length, 100);
+  // Every B1 definition is written in Uzbek (does not start with English "To " or "A " or "The ")
+  for (const item of b1Words) {
+    assert.equal(
+      /^(To |A |An |The |In a |Something |Someone |Able to |Not )/i.test(item.definition),
+      false,
+      `Expected B1 word ${item.id} (${item.word}) to be in Uzbek, got: ${item.definition}`
+    );
+  }
+
+  // B2 and C1 definitions remain in English (no Uzbek verb/suffix markers)
+  for (const item of [...b2Words, ...c1Words]) {
+    assert.ok(item.definition.length > 10);
+    assert.equal(
+      /(moq\b|bo‘l|o‘z|g‘|qilmoq)/i.test(item.definition),
+      false,
+      `Expected ${item.id} to remain in standard English definition`
+    );
+  }
+});
+
+test('buildGymExercisesForLearnedWords generates exercises strictly for learned words', async () => {
+  const { ARTICLES_DATA } = await import('../data/articlesData');
+  const { getLearnedVocabularyItems, buildGymExercisesForLearnedWords } = await import('./quizLogic');
+
+  // 1. Empty learned set returns 0 flashcards and 0 exercises
+  assert.equal(getLearnedVocabularyItems(ARTICLES_DATA, new Set(), 'ALL').length, 0);
+  assert.equal(buildGymExercisesForLearnedWords(ARTICLES_DATA, new Set(), 'ALL').length, 0);
+
+  // 2. Learning 3 specific words (2 B1, 1 C1) returns only those 3 words and 3 exercises
+  const c1WordId = ARTICLES_DATA.find((a) => a.level === 'C1')!.targetVocabulary[0].id;
+  const learnedIds = new Set(['v-b1-1', 'v-b1-5', c1WordId]);
+  const allLearnedVocab = getLearnedVocabularyItems(ARTICLES_DATA, learnedIds, 'ALL');
+  assert.equal(allLearnedVocab.length, 3);
+
+  const b1OnlyExercises = buildGymExercisesForLearnedWords(ARTICLES_DATA, learnedIds, 'B1');
+  assert.equal(b1OnlyExercises.length, 2);
+  assert.deepEqual(
+    b1OnlyExercises.map((q) => q.wordId),
+    ['v-b1-1', 'v-b1-5']
+  );
+
+  const allExercises = buildGymExercisesForLearnedWords(ARTICLES_DATA, learnedIds, 'ALL');
+  assert.equal(allExercises.length, 3);
+  for (const ex of allExercises) {
+    assert.ok(learnedIds.has(ex.wordId), `Exercise target word ${ex.wordId} must be in learnedIds`);
+    assert.equal(ex.options.length, 4);
+    assert.ok(ex.correctIndex >= 0 && ex.correctIndex < 4);
+  }
+});
+
+
+

@@ -14,6 +14,8 @@ interface WordPopupProps {
   onClose: () => void;
   isSaved: boolean;
   onToggleSave: (word: VocabularyItem) => void;
+  isLearned?: boolean;
+  onToggleLearned?: (wordId: string) => void;
 }
 
 export const WordPopup: React.FC<WordPopupProps> = ({
@@ -22,6 +24,8 @@ export const WordPopup: React.FC<WordPopupProps> = ({
   onClose,
   isSaved,
   onToggleSave,
+  isLearned = true,
+  onToggleLearned,
 }) => {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
 
@@ -78,7 +82,21 @@ export const WordPopup: React.FC<WordPopupProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1.5">
+            {onToggleLearned && (
+              <button
+                onClick={() => onToggleLearned(word.id)}
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors border ${
+                  isLearned
+                    ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100'
+                    : 'bg-stone-50 text-stone-600 border-stone-200 hover:bg-stone-100'
+                }`}
+                title={isLearned ? 'Marked as learned (included in Vocabulary Gym)' : 'Mark as learned for Vocabulary Gym'}
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>{isLearned ? 'Learned ✓' : 'Mark Learned'}</span>
+              </button>
+            )}
             <button
               onClick={() => onToggleSave(word)}
               aria-label={isSaved ? 'Remove from Vocabulary Notebook' : 'Save to Vocabulary Notebook'}
@@ -105,7 +123,7 @@ export const WordPopup: React.FC<WordPopupProps> = ({
         <div className="p-6 space-y-4">
           <div>
             <span className="text-xs font-semibold uppercase tracking-wider text-stone-600 block mb-1">
-              Definition
+              {word.cefrLevel === 'B1' ? 'Ma’nosi (O‘zbek tilida) · Uzbek Meaning' : 'Definition (English)'}
             </span>
             <p className="text-stone-900 text-sm leading-relaxed font-normal">
               {word.definition}
@@ -149,7 +167,11 @@ export const WordPopup: React.FC<WordPopupProps> = ({
 
         {/* Footer */}
         <div className="bg-stone-50 px-6 py-3 border-t border-stone-100 flex justify-between items-center text-xs text-stone-500">
-          <span>Click anywhere in text to lookup more words</span>
+          <span>
+            {isLearned
+              ? 'Added to your Learned Words in Vocabulary Gym'
+              : 'Click "Mark Learned" to practice this word in Vocabulary Gym'}
+          </span>
           <button
             onClick={onClose}
             className="px-3 py-1.5 bg-stone-900 text-white rounded-md text-xs font-medium hover:bg-stone-800 transition-colors"
@@ -161,3 +183,4 @@ export const WordPopup: React.FC<WordPopupProps> = ({
     </div>
   );
 };
+

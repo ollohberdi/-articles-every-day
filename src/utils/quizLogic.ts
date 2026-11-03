@@ -275,3 +275,213 @@ export function buildArticleShareUrl(
   }
 }
 
+export interface LearnedVocabWithMeta {
+  id: string;
+  word: string;
+  phonetic: string;
+  partOfSpeech: string;
+  definition: string;
+  cefrLevel: CEFRLevel;
+  exampleSentence: string;
+  collocations: string[];
+  synonyms?: string[];
+  antonyms?: string[];
+  articleId: string;
+  articleTitle: string;
+}
+
+export interface GymExerciseQuestion {
+  id: string;
+  wordId: string;
+  targetWord: string;
+  level: CEFRLevel;
+  articleId: string;
+  articleTitle: string;
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+}
+
+/**
+ * Extracts only the target vocabulary items that the user has learned,
+ * optionally filtered by CEFR level.
+ */
+export function getLearnedVocabularyItems<
+  TArticle extends {
+    id: string;
+    title: string;
+    level: CEFRLevel;
+    targetVocabulary: {
+      id: string;
+      word: string;
+      phonetic: string;
+      partOfSpeech: string;
+      definition: string;
+      cefrLevel: CEFRLevel;
+      exampleSentence: string;
+      collocations: string[];
+      synonyms?: string[];
+      antonyms?: string[];
+    }[];
+  }
+>(
+  articles: TArticle[],
+  learnedWordIds: Set<string> | string[],
+  levelFilter: CEFRLevel | 'ALL' = 'ALL'
+): LearnedVocabWithMeta[] {
+  const learnedSet =
+    learnedWordIds instanceof Set ? learnedWordIds : new Set(learnedWordIds);
+
+  const result: LearnedVocabWithMeta[] = [];
+
+  for (const article of articles) {
+    if (levelFilter !== 'ALL' && article.level !== levelFilter) {
+      continue;
+    }
+    for (const vocab of article.targetVocabulary) {
+      if (learnedSet.has(vocab.id)) {
+        result.push({
+          ...vocab,
+          articleId: article.id,
+          articleTitle: article.title,
+        });
+      }
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Builds Vocabulary Gym exercise questions exclusively for words the user has learned.
+ * Uses any curated multiple-choice questions for those learned words and generates
+ * definition/context multiple-choice questions for learned words without a static MC item,
+ * guaranteeing that 100% of exercises test only learned words and every learned word is practiced.
+ */
+export function buildGymExercisesForLearnedWords<
+  TArticle extends {
+    id: string;
+    title: string;
+    level: CEFRLevel;
+    targetVocabulary: {
+      id: string;
+      word: string;
+      phonetic: string;
+      partOfSpeech: string;
+      definition: string;
+      cefrLevel: CEFRLevel;
+      exampleSentence: string;
+      collocations: string[];
+    }[];
+    exercises: {
+      multipleChoice: {
+        id: string;
+        targetWord: string;
+        question: string;
+        options: string[];
+        correctIndex: number;
+        explanation: string;
+      }[];
+    };
+  }
+>(
+  articles: TArticle[],
+  learnedWordIds: Set<string> | string[],
+  levelFilter: CEFRLevel | 'ALL' = 'ALL'
+): GymExerciseQuestion[] {
+  const learnedVocab = getLearnedVocabularyItems(articles, learnedWordIds, levelFilter);
+  if (learnedVocab.length === 0) {
+    return [];
+  }
+
+  // Pool of all vocabulary definitions per level for generating distractors
+  const allVocabByLevel: Record<CEFRLevel, { id: string; word: string; definition: string }[]> = {
+    B1: [],
+    B2: [],
+    C1: [],
+  };
+  for (const article of articles) {
+    for (const v of article.targetVocabulary) {
+      allVocabByLevel[v.cefrLevel].push({
+        id: v.id,
+        word: v.word,
+        definition: v.definition,
+      });
+    }
+  }
+
+  const questions: GymExerciseQuestion[] = [];
+
+  for (let i = 0; i < learnedVocab.length; i++) {
+    const item = learnedVocab[i];
+    const sourceArticle = articles.find((a) => a.id === item.articleId);
+
+    // Check if the source article has a curated multiple-choice question for this exact learned word
+    const matchingMC = sourceArticle?.exercises.multipleChoice.find(
+      (mc) => mc.targetWord.trim().toLowerCase() === item.word.trim().toLowerCase()
+    );
+
+    if (matchingMC) {
+      questions.push({
+        id: `${matchingMC.id}-${item.id}`,
+        wordId: item.id,
+        targetWord: item.word,
+        level: item.cefrLevel,
+        articleId: item.articleId,
+        articleTitle: item.articleTitle,
+        question: matchingMC.question,
+        options: matchingMC.options,
+        correctIndex: matchingMC.correctIndex,
+        explanation:
+          item.cefrLevel === 'B1'
+            ? `Ma’nosi: ${item.definition}`
+            : matchingMC.explanation,
+      });
+    } else {
+      // Generate a deterministic definition-matching question for this learned word
+      const levelPool = allVocabByLevel[item.cefrLevel].filter((v) => v.id !== item.id);
+      const distractors: string[] = [];
+      const step = Math.max(1, Math.floor(levelPool.length / 5));
+      for (let d = 0; d < levelPool.length && distractors.length < 3; d++) {
+        const candidate = levelPool[(i * 7 + d * step) % levelPool.length];
+        if (
+          candidate &&
+          candidate.definition !== item.definition &&
+          !distractors.includes(candidate.definition)
+        ) {
+          distractors.push(candidate.definition);
+        }
+      }
+
+      const correctIndex = i % 4;
+      const options = [...distractors];
+      options.splice(correctIndex, 0, item.definition);
+
+      const promptText =
+        item.cefrLevel === 'B1'
+          ? `What is the correct Uzbek meaning of "${item.word}" (${item.partOfSpeech})?`
+          : `Which definition best matches the ${item.cefrLevel} word "${item.word}" (${item.partOfSpeech})?`;
+
+      questions.push({
+        id: `gym-gen-${item.id}`,
+        wordId: item.id,
+        targetWord: item.word,
+        level: item.cefrLevel,
+        articleId: item.articleId,
+        articleTitle: item.articleTitle,
+        question: promptText,
+        options,
+        correctIndex,
+        explanation:
+          item.cefrLevel === 'B1'
+            ? `"${item.word}" — ${item.definition} Example: "${item.exampleSentence}"`
+            : `"${item.word}" means: ${item.definition}`,
+      });
+    }
+  }
+
+  return questions;
+}
+
+

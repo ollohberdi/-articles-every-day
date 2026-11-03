@@ -9,11 +9,11 @@ import {
   Trash2,
   BookOpen,
   Search,
-  RotateCcw,
-  Sparkles,
   Download,
-  Award,
+  CloudCheck,
+  LogIn,
 } from 'lucide-react';
+import { User } from 'firebase/auth';
 import { UserSavedWord } from '../types';
 import { speakWord } from '../utils/speech';
 
@@ -22,13 +22,16 @@ interface VocabularyNotebookProps {
   onRemoveWord: (wordId: string) => void;
   onClearAll: () => void;
   onNavigateToGym: () => void;
+  currentUser: User | null;
+  onSignInWithGoogle: () => void;
 }
 
 export const VocabularyNotebook: React.FC<VocabularyNotebookProps> = ({
   savedWords,
   onRemoveWord,
-  onClearAll,
   onNavigateToGym,
+  currentUser,
+  onSignInWithGoogle,
 }) => {
   const [search, setSearch] = useState('');
   const [levelFilter, setLevelFilter] = useState<'ALL' | 'B1' | 'B2' | 'C1'>('ALL');
@@ -98,6 +101,41 @@ export const VocabularyNotebook: React.FC<VocabularyNotebookProps> = ({
         )}
       </div>
 
+      {/* Cloud Sync Banner */}
+      {currentUser ? (
+        <div className="p-4 rounded-xl bg-emerald-50/80 border border-emerald-200/80 flex items-center justify-between gap-4 text-xs sm:text-sm text-emerald-950">
+          <div className="flex items-center gap-2.5">
+            <CloudCheck className="w-5 h-5 text-emerald-700 shrink-0" />
+            <div>
+              <span className="font-semibold">
+                Synced with Google Account ({currentUser.displayName || currentUser.email})
+              </span>
+              <span className="block text-xs text-emerald-800">
+                Your saved vocabulary notebook and learned words are permanently stored in the cloud and will never be lost when you refresh or switch devices.
+              </span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="p-4 rounded-xl bg-amber-50/80 border border-amber-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs sm:text-sm text-amber-950">
+          <div>
+            <span className="font-semibold block">
+              Save your Notebook permanently with Google
+            </span>
+            <span className="text-xs text-amber-900">
+              Sign in with your Google account so your personal Vocabulary Notebook and learned words stay saved across page refreshes, browsers, and devices.
+            </span>
+          </div>
+          <button
+            onClick={onSignInWithGoogle}
+            className="px-4 py-2 bg-stone-900 hover:bg-stone-800 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shrink-0 transition-colors self-start sm:self-auto"
+          >
+            <LogIn className="w-3.5 h-3.5 text-amber-400" />
+            <span>Sign in with Google</span>
+          </button>
+        </div>
+      )}
+
       {savedWords.length === 0 ? (
         /* Empty State */
         <div className="text-center py-16 bg-white border border-stone-200 rounded-2xl p-8 max-w-lg mx-auto space-y-4">
@@ -108,7 +146,7 @@ export const VocabularyNotebook: React.FC<VocabularyNotebookProps> = ({
             Your Notebook is empty
           </h3>
           <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
-            While reading any B1, B2, or C1 article, click on highlighted vocabulary words and tap &ldquo;Save to Notebook&rdquo; to build your personalized lexical study list.
+            While reading any B1, B2, or C1 article, click on highlighted vocabulary words and tap &ldquo;Save&rdquo; to build your personalized lexical study list.
           </p>
         </div>
       ) : (

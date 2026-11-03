@@ -29,6 +29,10 @@ interface ArticleReaderProps {
   onShareArticle: (article: Article) => void;
   savedWordIds: Set<string>;
   onToggleSaveWord: (word: VocabularyItem) => void;
+  learnedWordIds: Set<string>;
+  onMarkWordLearned: (wordId: string) => void;
+  onToggleLearnedWord: (wordId: string) => void;
+  onMarkArticleWordsLearned: (article: Article) => void;
 }
 
 export const ArticleReader: React.FC<ArticleReaderProps> = ({
@@ -38,6 +42,10 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
   onShareArticle,
   savedWordIds,
   onToggleSaveWord,
+  learnedWordIds,
+  onMarkWordLearned,
+  onToggleLearnedWord,
+  onMarkArticleWordsLearned,
 }) => {
   const [selectedWord, setSelectedWord] = useState<VocabularyItem | null>(null);
   const [fontSize, setFontSize] = useState<'normal' | 'large' | 'xlarge'>('normal');
@@ -45,6 +53,11 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [speechRate, setSpeechRate] = useState<number>(1.0);
   const [readProgress, setReadProgress] = useState(0);
+
+  const handleInspectWord = (vocabItem: VocabularyItem) => {
+    setSelectedWord(vocabItem);
+    onMarkWordLearned(vocabItem.id);
+  };
 
   // Scroll to top when article opens
   useEffect(() => {
@@ -109,22 +122,27 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
 
           if (vocabItem) {
             const isSaved = savedWordIds.has(vocabItem.id);
+            const isLearned = learnedWordIds.has(vocabItem.id);
             return (
               <span
                 key={i}
                 role="button"
                 tabIndex={0}
-                onClick={() => setSelectedWord(vocabItem)}
+                onClick={() => handleInspectWord(vocabItem)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    setSelectedWord(vocabItem);
+                    handleInspectWord(vocabItem);
                   }
                 }}
                 className={`cursor-pointer inline font-semibold px-0.5 py-0.2 rounded transition-all duration-150 decoration-amber-500 underline underline-offset-4 decoration-2 hover:bg-amber-100 ${
-                  isSaved ? 'bg-amber-50 text-amber-950 font-bold' : 'text-stone-900'
+                  isSaved
+                    ? 'bg-amber-50 text-amber-950 font-bold'
+                    : isLearned
+                      ? 'bg-emerald-50/70 text-stone-900'
+                      : 'text-stone-900'
                 }`}
-                title={`Click for definition of "${vocabItem.word}" (${vocabItem.cefrLevel})`}
+                title={`Click for ${vocabItem.cefrLevel === 'B1' ? 'Uzbek meaning' : 'definition'} of "${vocabItem.word}" (${vocabItem.cefrLevel})`}
               >
                 {part}
               </span>
@@ -147,6 +165,12 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
     (article.exercises.cloze?.length || 0) +
     (article.exercises.matching?.pairs ? 1 : 0) +
     (article.exercises.wordFormation?.length || 0);
+
+  const learnedInArticleCount = article.targetVocabulary.filter((v) =>
+    learnedWordIds.has(v.id)
+  ).length;
+  const allArticleWordsLearned =
+    learnedInArticleCount === article.targetVocabulary.length;
 
   return (
     <div className="min-h-screen bg-stone-50 pb-24">
@@ -276,7 +300,7 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
           <span>{article.wordCount} words</span>
           <span aria-hidden="true">·</span>
           <span className="text-amber-800 font-medium">
-            {article.targetVocabulary.length} Target Words
+            {article.targetVocabulary.length} Target Words ({learnedInArticleCount} learned)
           </span>
         </div>
 
@@ -293,8 +317,15 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
           <div className="flex items-start gap-3">
             <Award className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
             <div className="text-xs sm:text-sm text-amber-900">
-              <span className="font-semibold block mb-0.5">{article.level} Lexical Target:</span>
-              <span>{article.cefrSummary} Click any underlined word to inspect definitions, phonetics, and audio.</span>
+              <span className="font-semibold block mb-0.5">
+                {article.level} Lexical Target {article.level === 'B1' ? '(O‘zbekcha ma’nolari bilan)' : '(English Definitions)'}:
+              </span>
+              <span>
+                {article.cefrSummary}{' '}
+                {article.level === 'B1'
+                  ? 'Click any underlined word to see its Uzbek meaning, pronunciation, and add it to your Learned Words for the Vocabulary Gym.'
+                  : 'Click any underlined word to inspect its English definition, phonetics, and add it to your Learned Words for the Vocabulary Gym.'}
+              </span>
             </div>
           </div>
           <button
@@ -323,7 +354,7 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
                     Finished reading?
                   </h3>
                   <p className="text-xs sm:text-sm text-stone-600">
-                    Test your mastery of the {article.targetVocabulary.length} target vocabulary items or download the PDF study guide.
+                    Test your mastery of the {article.targetVocabulary.length} target vocabulary items or mark them as learned for the Vocabulary Gym.
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-2.5">
@@ -360,20 +391,39 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
                 <div className="flex items-center gap-2">
                   <BookOpen className="w-4 h-4 text-stone-600" />
                   <h2 className="text-sm font-bold text-stone-900">
-                    Target Words ({article.targetVocabulary.length})
+                    Target Words ({learnedInArticleCount}/{article.targetVocabulary.length} Learned)
                   </h2>
                 </div>
                 <span className="text-xs text-stone-400 font-mono">{article.level}</span>
               </div>
 
+              <div className="mb-3 flex items-center justify-between gap-2">
+                <span className="text-xs text-stone-500">
+                  {article.level === 'B1' ? 'O‘zbekcha ma’nolari:' : 'English meanings:'}
+                </span>
+                {!allArticleWordsLearned && (
+                  <button
+                    onClick={() => onMarkArticleWordsLearned(article)}
+                    className="text-xs font-semibold text-emerald-700 hover:text-emerald-900 hover:underline"
+                  >
+                    + Mark all {article.targetVocabulary.length} learned
+                  </button>
+                )}
+              </div>
+
               <div className="space-y-2.5 max-h-[60vh] overflow-y-auto pr-1">
                 {article.targetVocabulary.map((item) => {
                   const isSaved = savedWordIds.has(item.id);
+                  const isLearned = learnedWordIds.has(item.id);
                   return (
                     <div
                       key={item.id}
-                      onClick={() => setSelectedWord(item)}
-                      className="group p-2.5 rounded-lg border border-stone-100 hover:border-amber-200 hover:bg-amber-50/50 transition-colors cursor-pointer"
+                      onClick={() => handleInspectWord(item)}
+                      className={`group p-2.5 rounded-lg border transition-colors cursor-pointer ${
+                        isLearned
+                          ? 'border-emerald-200/80 bg-emerald-50/25 hover:bg-emerald-50/60'
+                          : 'border-stone-100 hover:border-amber-200 hover:bg-amber-50/50'
+                      }`}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-baseline gap-2">
@@ -385,6 +435,21 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
                           </span>
                         </div>
                         <div className="flex items-center gap-1">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onToggleLearnedWord(item.id);
+                            }}
+                            aria-label={isLearned ? `Unmark ${item.word} as learned` : `Mark ${item.word} as learned`}
+                            className={`px-1.5 py-0.5 rounded text-[11px] font-semibold transition-colors ${
+                              isLearned
+                                ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200'
+                                : 'bg-stone-100 text-stone-500 hover:bg-stone-200 hover:text-stone-800'
+                            }`}
+                            title={isLearned ? 'Learned (in Vocabulary Gym)' : 'Mark as learned for Vocabulary Gym'}
+                          >
+                            {isLearned ? 'Learned ✓' : '+ Learn'}
+                          </button>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
@@ -433,8 +498,11 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
           onClose={() => setSelectedWord(null)}
           isSaved={savedWordIds.has(selectedWord.id)}
           onToggleSave={onToggleSaveWord}
+          isLearned={learnedWordIds.has(selectedWord.id)}
+          onToggleLearned={onToggleLearnedWord}
         />
       )}
     </div>
   );
 };
+

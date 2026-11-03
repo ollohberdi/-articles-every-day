@@ -4,6 +4,8 @@
  */
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { Navbar, ActiveView } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { ArticleCard } from './components/ArticleCard';
@@ -15,6 +17,18 @@ import { ShareArticleModal } from './components/ShareArticleModal';
 import { ARTICLES_DATA } from './data/articlesData';
 import { Article, CEFRLevel, VocabularyItem, UserSavedWord } from './types';
 import { filterArticles, resolveArticleFromLocation } from './utils/quizLogic';
+import {
+  auth,
+  db,
+  OperationType,
+  handleFirestoreError,
+  signInStudentWithGoogle,
+  signOutStudent,
+  saveWordToCloudNotebook,
+  removeWordFromCloudNotebook,
+  markWordLearnedInCloud,
+  unmarkWordLearnedInCloud,
+} from './firebase';
 import { Search } from 'lucide-react';
 
 const DEFAULT_DOCUMENT_TITLE =
@@ -26,6 +40,19 @@ export default function App() {
   const [selectedLevel, setSelectedLevel] = useState<CEFRLevel | 'ALL'>('ALL');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState<string>('');
+
+  // Firebase Auth User State
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [isAuthReady, setIsAuthReady] = useState<boolean>(false);
+
+  // Lookup map of all canonical vocabulary items by ID
+  const allVocabMap = useMemo(() => {
+    const map = new Map<string, VocabularyItem>();
+    ARTICLES_DATA.forEach((a) =>
+      a.targetVocabulary.forEach((v) => map.set(v.id, v))
+    );
+    return map;
+  }, []);
 
   // Initialize Active View from URL if present
   const [activeView, setActiveView] = useState<ActiveView>(() => {
@@ -59,7 +86,6 @@ export default function App() {
     if (typeof window === 'undefined') return;
 
     const url = new URL(window.location.href);
-    // Normalize any /article/<id> pathname back to root so query param is canonical
     url.pathname = url.pathname.replace(/\/articles?\/[^/?#]+\/?$/i, '/') || '/';
     url.hash = '';
 
@@ -114,11 +140,35 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, [articles]);
 
-  // Saved Vocabulary Notebook State (persisted in localStorage)
+  // Saved Vocabulary Notebook State (persisted in localStorage AND synced with Firestore when signed in)
   const [savedWords, setSavedWords] = useState<UserSavedWord[]>(() => {
     try {
       const stored = localStorage.getItem('lexiread_saved_words');
-      return stored ? JSON.parse(stored) : [];
+      if (!stored) return [];
+      const parsed: UserSavedWord[] = JSON.parse(stored);
+      const latestVocabMap = new Map<string, VocabularyItem>();
+      ARTICLES_DATA.forEach((a) =>
+        a.targetVocabulary.forEach((v) => latestVocabMap.set(v.id, v))
+      );
+      return parsed.map((item) => {
+        const fresh = latestVocabMap.get(item.id);
+        return fresh ? { ...item, ...fresh } : item;
+      });
+    } catch {
+      return [];
+    }
+  });
+
+  // Learned Vocabulary IDs State (persisted in localStorage AND synced with Firestore when signed in)
+  const [learnedWordIdsList, setLearnedWordIdsList] = useState<string[]>(() => {
+    try {
+      const stored = localStorage.getItem('lexiread_learned_words');
+      const fromLearned: string[] = stored ? JSON.parse(stored) : [];
+      const storedSaved = localStorage.getItem('lexiread_saved_words');
+      const fromSaved: string[] = storedSaved
+        ? (JSON.parse(storedSaved) as UserSavedWord[]).map((w) => w.id)
+        : [];
+      return Array.from(new Set([...fromLearned, ...fromSaved]));
     } catch {
       return [];
     }
@@ -132,11 +182,158 @@ export default function App() {
     }
   }, [savedWords]);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem('lexiread_learned_words', JSON.stringify(learnedWordIdsList));
+    } catch {
+      // Ignore storage errors
+    }
+  }, [learnedWordIdsList]);
+
+  // Track Firebase Auth state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      setIsAuthReady(true);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Subscribe to student's Firestore Notebook & Learned Words when authenticated
+  useEffect(() => {
+    if (!isAuthReady || !currentUser) return;
+
+    const notebookPath = `users/${currentUser.uid}/notebook`;
+    const learnedPath = `users/${currentUser.uid}/learned`;
+
+    const unsubNotebook = onSnapshot(
+      collection(db, notebookPath),
+      (snapshot) => {
+        const cloudWords: UserSavedWord[] = [];
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          const canonical = allVocabMap.get(data.wordId);
+          cloudWords.push({
+            id: data.wordId,
+            word: canonical?.word || data.word,
+            phonetic: canonical?.phonetic || data.phonetic,
+            partOfSpeech: canonical?.partOfSpeech || data.partOfSpeech,
+            definition: canonical?.definition || data.definition,
+            cefrLevel: canonical?.cefrLevel || data.cefrLevel,
+            exampleSentence: canonical?.exampleSentence || data.exampleSentence,
+            collocations: canonical?.collocations || data.collocations || [],
+            synonyms: canonical?.synonyms,
+            antonyms: canonical?.antonyms,
+            savedAt: typeof data.savedAt === 'number' ? data.savedAt : Date.now(),
+            reviewInterval: typeof data.reviewInterval === 'number' ? data.reviewInterval : 1,
+            repetitions: typeof data.repetitions === 'number' ? data.repetitions : 0,
+            nextReviewDate:
+              typeof data.nextReviewDate === 'number' ? data.nextReviewDate : Date.now() + 86400000,
+          });
+        });
+        cloudWords.sort((a, b) => b.savedAt - a.savedAt);
+        setSavedWords(cloudWords);
+      },
+      (error) => {
+        handleFirestoreError(error, OperationType.LIST, notebookPath);
+      }
+    );
+
+    const unsubLearned = onSnapshot(
+      collection(db, learnedPath),
+      (snapshot) => {
+        const ids: string[] = [];
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          if (data.wordId) ids.push(data.wordId);
+        });
+        setLearnedWordIdsList((prev) => Array.from(new Set([...prev, ...ids])));
+      },
+      (error) => {
+        handleFirestoreError(error, OperationType.LIST, learnedPath);
+      }
+    );
+
+    return () => {
+      unsubNotebook();
+      unsubLearned();
+    };
+  }, [isAuthReady, currentUser, allVocabMap]);
+
   const savedWordIds = useMemo(() => new Set(savedWords.map((w) => w.id)), [savedWords]);
+  const learnedWordIds = useMemo(() => new Set(learnedWordIdsList), [learnedWordIdsList]);
+
+  const handleSignInWithGoogle = async () => {
+    try {
+      const localSavedSnapshot = [...savedWords];
+      const localLearnedSnapshot = [...learnedWordIdsList];
+      const user = await signInStudentWithGoogle();
+      // Merge any words saved/learned locally before signing in into the student's cloud account
+      for (const word of localSavedSnapshot) {
+        await saveWordToCloudNotebook(user, word);
+      }
+      for (const wordId of localLearnedSnapshot) {
+        const vocab = allVocabMap.get(wordId);
+        if (vocab) {
+          await markWordLearnedInCloud(user, vocab);
+        }
+      }
+    } catch (err) {
+      console.error('Google Sign-In failed or was cancelled:', err);
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await signOutStudent();
+    } catch (err) {
+      console.error('Sign-Out error:', err);
+    }
+  };
+
+  const handleMarkWordLearned = (wordId: string) => {
+    setLearnedWordIdsList((prev) => (prev.includes(wordId) ? prev : [...prev, wordId]));
+    if (currentUser) {
+      const vocab = allVocabMap.get(wordId);
+      if (vocab) {
+        void markWordLearnedInCloud(currentUser, vocab);
+      }
+    }
+  };
+
+  const handleToggleLearnedWord = (wordId: string) => {
+    const isCurrentlyLearned = learnedWordIds.has(wordId);
+    setLearnedWordIdsList((prev) =>
+      prev.includes(wordId) ? prev.filter((id) => id !== wordId) : [...prev, wordId]
+    );
+    if (currentUser) {
+      if (isCurrentlyLearned) {
+        void unmarkWordLearnedInCloud(currentUser, wordId);
+      } else {
+        const vocab = allVocabMap.get(wordId);
+        if (vocab) {
+          void markWordLearnedInCloud(currentUser, vocab);
+        }
+      }
+    }
+  };
+
+  const handleMarkArticleWordsLearned = (article: Article) => {
+    const ids = article.targetVocabulary.map((v) => v.id);
+    setLearnedWordIdsList((prev) => Array.from(new Set([...prev, ...ids])));
+    if (currentUser) {
+      for (const vocab of article.targetVocabulary) {
+        void markWordLearnedInCloud(currentUser, vocab);
+      }
+    }
+  };
 
   const handleToggleSaveWord = (vocab: VocabularyItem) => {
+    const exists = savedWords.some((w) => w.id === vocab.id);
+    if (!exists) {
+      handleMarkWordLearned(vocab.id);
+    }
     setSavedWords((prev) => {
-      const exists = prev.some((w) => w.id === vocab.id);
       if (exists) {
         return prev.filter((w) => w.id !== vocab.id);
       } else {
@@ -150,14 +347,31 @@ export default function App() {
         return [newWord, ...prev];
       }
     });
+
+    if (currentUser) {
+      if (exists) {
+        void removeWordFromCloudNotebook(currentUser, vocab.id);
+      } else {
+        void saveWordToCloudNotebook(currentUser, vocab);
+      }
+    }
   };
 
   const handleRemoveSavedWord = (wordId: string) => {
     setSavedWords((prev) => prev.filter((w) => w.id !== wordId));
+    if (currentUser) {
+      void removeWordFromCloudNotebook(currentUser, wordId);
+    }
   };
 
   const handleClearAllSaved = () => {
+    const currentIds = savedWords.map((w) => w.id);
     setSavedWords([]);
+    if (currentUser) {
+      for (const id of currentIds) {
+        void removeWordFromCloudNotebook(currentUser, id);
+      }
+    }
   };
 
   // Extract unique topic categories
@@ -205,6 +419,8 @@ export default function App() {
   };
 
   const handleOpenExercises = (article: Article) => {
+    // Studying an article's exercises marks its target words as learned
+    handleMarkArticleWordsLearned(article);
     setExerciseArticle(article);
   };
 
@@ -229,6 +445,10 @@ export default function App() {
         }}
         savedWordsCount={savedWords.length}
         onStartLevelQuiz={handleStartDailyDrill}
+        currentUser={currentUser}
+        isAuthLoading={!isAuthReady}
+        onSignInWithGoogle={handleSignInWithGoogle}
+        onSignOut={handleSignOut}
       />
 
       {/* Main Body */}
@@ -241,6 +461,10 @@ export default function App() {
           onShareArticle={handleShareArticle}
           savedWordIds={savedWordIds}
           onToggleSaveWord={handleToggleSaveWord}
+          learnedWordIds={learnedWordIds}
+          onMarkWordLearned={handleMarkWordLearned}
+          onToggleLearnedWord={handleToggleLearnedWord}
+          onMarkArticleWordsLearned={handleMarkArticleWordsLearned}
         />
       ) : activeView === 'gym' ? (
         /* Dedicated Vocabulary Gym */
@@ -248,7 +472,13 @@ export default function App() {
           initialMode={gymInitialMode}
           savedWordIds={savedWordIds}
           onToggleSaveWord={handleToggleSaveWord}
+          learnedWordIds={learnedWordIds}
+          onToggleLearnedWord={handleToggleLearnedWord}
           onOpenArticle={handleOpenArticleById}
+          onBrowseLibrary={() => {
+            setActiveView('library');
+            setReadingArticle(null);
+          }}
         />
       ) : activeView === 'notebook' ? (
         /* Personal Vocabulary Notebook */
@@ -260,6 +490,8 @@ export default function App() {
             setGymInitialMode('flashcards');
             setActiveView('gym');
           }}
+          currentUser={currentUser}
+          onSignInWithGoogle={handleSignInWithGoogle}
         />
       ) : (
         /* Library View */
