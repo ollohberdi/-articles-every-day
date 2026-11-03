@@ -1254,5 +1254,162 @@ export const C1_ARTICLES: Article[] = [
         }
       ]
     }
+  },
+  {
+    id: 'c1-rewilding-trophic-cascades',
+    title: 'The Ecology of Fear: How Apex Predators Reshape Entire Landscapes',
+    subtitle: 'When wolves returned to Yellowstone and sea otters rebounded along the Pacific coast, ecologists discovered that top predators govern not just prey numbers, but the physical geography of rivers and forests.',
+    level: 'C1',
+    category: 'Environment',
+    readTime: '8 min read',
+    wordCount: 650,
+    cefrSummary: 'Uses C1 ecological systems vocabulary, causal chains, and nuanced academic-journalistic transitions.',
+    themeColor: 'emerald',
+    gradientFrom: 'from-emerald-950',
+    gradientTo: 'to-stone-900',
+    paragraphs: [
+      'For much of the twentieth century, wildlife management operated on a straightforward assumption: ecosystems were built from the bottom up. Sunlight and rainfall determined how much grass and foliage grew, plant abundance dictated the size of herbivore herds, and herbivores in turn supported a modest layer of carnivores at the top of the food chain. Viewed through this lens, apex predators such as wolves, sharks, and big cats were little more than ecological passengers—easy to remove without threatening the underlying landscape.',
+      'Only after top predators were systematically exterminated across vast stretches of North America and Europe did scientists witness what happens when herbivore populations are left unchecked. In Yellowstone National Park, where the last native grey wolf pack was killed in 1926, elk herds began to proliferate and linger all winter along fertile river valleys. Stripped of young willow, aspen, and cottonwood shoots before they could reach maturity, streamside forests vanished, riverbanks eroded into wide, shallow channels, and songbirds and beavers lost the habitats they depended upon.',
+      'When wildlife biologists reintroduced forty-one wild wolves to Yellowstone in the mid-1990s, the resulting ecological cascade surprised even veteran researchers. The wolves did not merely thin the elk population; far more importantly, they altered how the survivors behaved. Forced to remain wary of ambush in narrow canyon bottoms and dense thickets, elk started avoiding exposed riverbanks and kept moving across higher ground.',
+      'Released from relentless grazing pressure, native saplings along the valley floor began to regenerate within a few growing seasons. Taller trees shaded the water, cooling stream temperatures for native trout, while tangled root networks stabilized eroding banks. Beavers returned to harvest the fresh willow branches, building dams that created calm wetlands for amphibians, waterfowl, and aquatic insects.',
+      'Marine biologists have documented an equally striking dynamic along the North Pacific coast, where sea otters act as the linchpin of underwater kelp forests by preying on herbivorous sea urchins. Where otters thrive, towering kelp canopies sequester carbon and shelter juvenile fish; where otters disappear, urchins multiply and chew the seabed down to barren rock. Far from being disposable ornaments, apex predators are the invisible architects that hold complex ecosystems together.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'c1-rtc-1',
+        word: 'unchecked',
+        phonetic: '/ʌnˈtʃekt/',
+        partOfSpeech: 'adjective',
+        definition: 'Not controlled, restrained, or prevented from growing or spreading.',
+        cefrLevel: 'C1',
+        exampleSentence: 'Scientists witnessed what happens when herbivore populations are left unchecked.',
+        collocations: ['left unchecked', 'go unchecked', 'unchecked growth'],
+        synonyms: ['unrestrained', 'unbridled', 'uncontrolled'],
+        antonyms: ['curbed', 'regulated']
+      },
+      {
+        id: 'c1-rtc-2',
+        word: 'proliferate',
+        phonetic: '/prəˈlɪfəreɪt/',
+        partOfSpeech: 'verb',
+        definition: 'To increase rapidly in number or spread quickly.',
+        cefrLevel: 'C1',
+        exampleSentence: 'Without wolves, elk herds began to proliferate and linger all winter along river valleys.',
+        collocations: ['rapidly proliferate', 'continue to proliferate', 'allow species to proliferate'],
+        synonyms: ['multiply', 'mushroom', 'burgeon'],
+        antonyms: ['dwindle', 'diminish']
+      },
+      {
+        id: 'c1-rtc-3',
+        word: 'cascade',
+        phonetic: '/kæˈskeɪd/',
+        partOfSpeech: 'noun',
+        definition: 'A succession of stages or events in which each triggers the next, often with far-reaching effects.',
+        cefrLevel: 'C1',
+        exampleSentence: 'When biologists reintroduced wolves to Yellowstone, the resulting ecological cascade surprised researchers.',
+        collocations: ['trophic cascade', 'ecological cascade', 'trigger a cascade of'],
+        synonyms: ['chain reaction', 'ripple effect', 'sequence']
+      },
+      {
+        id: 'c1-rtc-4',
+        word: 'wary',
+        phonetic: '/ˈweəri/',
+        partOfSpeech: 'adjective',
+        definition: 'Feeling or showing caution and alertness toward possible danger or trouble.',
+        cefrLevel: 'C1',
+        exampleSentence: 'Forced to remain wary of ambush in narrow canyons, elk started avoiding exposed riverbanks.',
+        collocations: ['remain wary of', 'grow wary of', 'understandably wary'],
+        synonyms: ['cautious', 'vigilant', 'watchful'],
+        antonyms: ['heedless', 'complacent']
+      },
+      {
+        id: 'c1-rtc-5',
+        word: 'regenerate',
+        phonetic: '/rɪˈdʒenəreɪt/',
+        partOfSpeech: 'verb',
+        definition: 'To grow back, recover, or be restored to a healthy, thriving state after damage.',
+        cefrLevel: 'C1',
+        exampleSentence: 'Released from relentless grazing pressure, native saplings along the valley floor began to regenerate.',
+        collocations: ['naturally regenerate', 'help forests regenerate', 'regenerate damaged tissue'],
+        synonyms: ['recover', 'revive', 'rejuvenate'],
+        antonyms: ['degenerate', 'degrade']
+      },
+      {
+        id: 'c1-rtc-6',
+        word: 'linchpin',
+        phonetic: '/ˈlɪntʃpɪn/',
+        partOfSpeech: 'noun',
+        definition: 'A person or thing that is the most vital, central element holding a complex system together.',
+        cefrLevel: 'C1',
+        exampleSentence: 'Sea otters act as the linchpin of underwater kelp forests by preying on sea urchins.',
+        collocations: ['act as the linchpin', 'economic linchpin', 'linchpin of the ecosystem'],
+        synonyms: ['cornerstone', 'keystone', 'anchor']
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-c1-rtc-1',
+          targetWord: 'cascade',
+          question: 'Why do ecologists refer to the return of wolves in Yellowstone as a "trophic cascade"?',
+          options: [
+            'Because reintroducing a single top predator triggered a chain reaction affecting elk behavior, trees, beavers, and rivers.',
+            'Because the wolves built waterfalls along the Yellowstone River.',
+            'Because all the herbivores immediately migrated to Canada.'
+          ],
+          correctIndex: 0,
+          explanation: 'A "cascade" is a chain reaction in which one change sets off a series of interconnected downstream effects.'
+        },
+        {
+          id: 'mc-c1-rtc-2',
+          targetWord: 'linchpin',
+          question: 'What does it mean that sea otters act as the "linchpin" of Pacific kelp forests?',
+          options: [
+            'They are the essential keystone species holding the entire kelp forest ecosystem together.',
+            'They are the smallest animals living in the ocean.',
+            'They eat kelp leaves during the winter months.'
+          ],
+          correctIndex: 0,
+          explanation: 'A "linchpin" is the central, indispensable element that keeps a complex system from falling apart.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-c1-rtc-1',
+          sentenceWithBlank: 'If invasive pests are left _____, they can destroy thousands of hectares of native woodland within a decade.',
+          targetWord: 'unchecked',
+          hint: 'Not restrained or controlled',
+          options: ['unchecked', 'wary', 'ambiguous', 'seamless']
+        },
+        {
+          id: 'cl-c1-rtc-2',
+          sentenceWithBlank: 'Given enough time and protection from livestock grazing, degraded wetlands can _____ naturally without expensive engineering.',
+          targetWord: 'regenerate',
+          hint: 'Grow back and recover after damage',
+          options: ['regenerate', 'proliferate', 'stagnate', 'atrophy']
+        }
+      ],
+      matching: {
+        id: 'ma-c1-rtc-1',
+        instructions: 'Match each C1 ecology and systems vocabulary word with its definition.',
+        pairs: [
+          { id: 'p1', term: 'unchecked', match: 'Allowed to grow or spread without restraint' },
+          { id: 'p2', term: 'proliferate', match: 'Increase rapidly in number or spread quickly' },
+          { id: 'p3', term: 'wary', match: 'Cautious and alert to potential danger' },
+          { id: 'p4', term: 'linchpin', match: 'Vital element holding a complex system together' }
+        ]
+      },
+      wordFormation: [
+        {
+          id: 'wf-c1-rtc-1',
+          promptSentence: 'The rapid _____ (PROLIFERATE) of short-term holiday rentals has driven up housing costs in historic city centers.',
+          rootWord: 'PROLIFERATE',
+          correctAnswer: 'proliferation',
+          hint: 'Convert the verb into an abstract noun ending in -tion',
+          explanation: 'The noun form of "proliferate" is "proliferation".'
+        }
+      ]
+    }
   }
 ];
+

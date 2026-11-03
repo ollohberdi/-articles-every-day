@@ -112,9 +112,9 @@ test('filterArticles filters properly by CEFR level and category', () => {
   assert.equal(searchGrids[0].id, '2');
 });
 
-test('ARTICLES_DATA contains 48 graded articles across B1 (20), B2 (20), and C1 (8) with target vocabulary', async () => {
+test('ARTICLES_DATA contains 49 graded articles across B1 (20), B2 (20), and C1 (9) with target vocabulary', async () => {
   const { ARTICLES_DATA } = await import('../data/articlesData');
-  assert.equal(ARTICLES_DATA.length, 48);
+  assert.equal(ARTICLES_DATA.length, 49);
 
   const b1 = ARTICLES_DATA.filter((a) => a.level === 'B1');
   const b2 = ARTICLES_DATA.filter((a) => a.level === 'B2');
@@ -122,7 +122,7 @@ test('ARTICLES_DATA contains 48 graded articles across B1 (20), B2 (20), and C1 
 
   assert.equal(b1.length, 20);
   assert.equal(b2.length, 20);
-  assert.equal(c1.length, 8);
+  assert.equal(c1.length, 9);
 
   for (const article of ARTICLES_DATA) {
     assert.ok(article.paragraphs.length >= 4, `Article ${article.id} should have at least 4 paragraphs`);
@@ -139,8 +139,8 @@ test('ARTICLES_DATA contains 48 graded articles across B1 (20), B2 (20), and C1 
   const coreArticles = ARTICLES_DATA.filter((a) => coreCategories.has(a.category));
   const complexArticles = ARTICLES_DATA.filter((a) => !coreCategories.has(a.category));
 
-  assert.equal(coreArticles.length, 36); // 75% (~70%)
-  assert.equal(complexArticles.length, 12); // 25% (~30%)
+  assert.equal(coreArticles.length, 37);
+  assert.equal(complexArticles.length, 12);
 });
 
 test('resolveArticleFromLocation and buildArticleShareUrl resolve exact articles by ID, slug, or title', async () => {
@@ -168,7 +168,15 @@ test('resolveArticleFromLocation and buildArticleShareUrl resolve exact articles
   assert.ok(byFullTitle);
   assert.equal(byFullTitle.id, 'b1-sleep-habits');
 
-  // 4. Hash and pathname formats
+  // 4. New C1 article resolution
+  const c1Rewilding = resolveArticleFromLocation(ARTICLES_DATA, {
+    search: '?article=c1-rewilding-trophic-cascades',
+  });
+  assert.ok(c1Rewilding);
+  assert.equal(c1Rewilding.level, 'C1');
+  assert.equal(c1Rewilding.title, 'The Ecology of Fear: How Apex Predators Reshape Entire Landscapes');
+
+  // 5. Hash and pathname formats
   const byHash = resolveArticleFromLocation(ARTICLES_DATA, {
     hash: '#article=b1-sleep-habits',
   });
@@ -181,7 +189,7 @@ test('resolveArticleFromLocation and buildArticleShareUrl resolve exact articles
   assert.ok(byPathname);
   assert.equal(byPathname.id, 'b1-sleep-habits');
 
-  // 5. Share URL construction and round-trip resolution
+  // 6. Share URL construction and round-trip resolution
   const shareUrl = buildArticleShareUrl('https://example.com/?view=library', byQueryId);
   assert.equal(shareUrl, 'https://example.com/?article=b1-sleep-habits');
 
