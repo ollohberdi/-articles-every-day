@@ -1,0 +1,8 @@
+{
+  "name": "Remix LexiRead - Graded English Readers \u0026 Interactive Vocabulary (B1, B2, C1)",
+  "description": "CEFR-aligned graded reading platform featuring curated B1, B2, and C1 articles, interactive in-text vocabulary lookups, audio pronunciation, and multi-format vocabulary exercises.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
