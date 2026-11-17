@@ -2779,6 +2779,1388 @@ export const B2_ARTICLES: Article[] = [
         ]
       }
     }
+  },
+  {
+    id: 'b2-ulugh-beg-observatory-legacy',
+    title: 'Starlight Over Samarkand: How Ulugh Beg’s Observatory Mapped the Heavens',
+    subtitle: 'In the 1420s, a mathematician-king built the largest astronomical instrument in the world and measured the length of a year to within seconds.',
+    level: 'B2',
+    category: 'History & Civilizations',
+    readTime: '7 min read',
+    readingTimeMinutes: 7,
+    wordCount: 510,
+    cefrSummary: 'Scientific history, observational precision, and B2 academic vocabulary.',
+    themeColor: 'amber',
+    gradientFrom: 'from-stone-950',
+    gradientTo: 'to-amber-950',
+    heroImage: 'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'The underground marble arc of Ulugh Beg’s sextant in Samarkand allowed astronomers to measure celestial angles with unprecedented accuracy.',
+    paragraphs: [
+      'Two centuries before Galileo pointed a telescope at the night sky, a hill overlooking Samarkand hosted the most advanced scientific institute on Earth. Its founder, Ulugh Beg, was the grandson of the conqueror Timur, yet his deepest passion was not military conquest but spherical trigonometry and observational astronomy. In 1420, he invited dozens of leading mathematicians and astronomers to his capital to correct errors in ancient Greek and Arabic star tables.',
+      'Researchers soon realized that small handheld brass instruments bent slightly under their own weight, distorting measurements by fractions of a degree. To overcome this limitation, Ulugh Beg’s team carved a colossal curved trench deep into solid bedrock and lined it with polished marble plates. This forty-meter-radius arc, known as the Fakhri sextant, functioned like a giant underground protractor.',
+      'At noon each day, a beam of sunlight passed through a tiny opening in the observatory’s high dome and fell onto the graduated marble steps in the dark chamber below. By tracking the exact position of this spot of light throughout the seasons, astronomers calculated the tilt of the Earth’s axis and determined the length of the tropical year to within less than a minute of modern atomic measurements.',
+      'Working night after night for nearly two decades, the Samarkand scholars compiled the Zij-i Sultani, a comprehensive catalog listing the coordinates of nearly one thousand stars. When copies of this masterwork eventually reached Istanbul, Oxford, and Venice, its empirical rigor helped inspire the European scientific revolution.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b2-ubo-1',
+        word: 'distort',
+        partOfSpeech: 'verb',
+        phonetic: '/dɪˈstɔːt/',
+        definition: 'To twist or change the shape, appearance, or accuracy of something so that it is no longer true or exact.',
+        contextSentence: 'Researchers soon realized that small handheld brass instruments bent slightly under their own weight, distorting measurements by fractions of a degree.',
+        exampleSentence: 'Curved mirrors distort your reflection by making you look taller or wider than you really are.',
+        synonyms: ['warp', 'skew', 'misrepresent'],
+        collocations: ['distort measurements', 'distort the truth', 'distort an image'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-ubo-2',
+        word: 'overcome',
+        partOfSpeech: 'verb',
+        phonetic: '/ˌəʊvəˈkʌm/',
+        definition: 'To successfully deal with or defeat a problem, obstacle, or limitation.',
+        contextSentence: 'To overcome this limitation, Ulugh Beg’s team carved a colossal curved trench deep into solid bedrock and lined it with polished marble plates.',
+        exampleSentence: 'Engineers had to overcome severe freezing temperatures while building the mountain tunnel.',
+        synonyms: ['conquer', 'surmount', 'resolve'],
+        collocations: ['overcome a limitation', 'overcome obstacles', 'overcome fear'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-ubo-3',
+        word: 'colossal',
+        partOfSpeech: 'adjective',
+        phonetic: '/kəˈlɒsl/',
+        definition: 'Extremely large or grand in size, scale, or degree.',
+        contextSentence: 'To overcome this limitation, Ulugh Beg’s team carved a colossal curved trench deep into solid bedrock and lined it with polished marble plates.',
+        exampleSentence: 'Constructing the hydroelectric dam required a colossal amount of concrete and steel.',
+        synonyms: ['immense', 'gigantic', 'vast'],
+        collocations: ['colossal scale', 'colossal structure', 'colossal effort'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-ubo-4',
+        word: 'compile',
+        partOfSpeech: 'verb',
+        phonetic: '/kəmˈpaɪl/',
+        definition: 'To collect information from different observations or sources and arrange it into a list, book, or report.',
+        contextSentence: 'Working night after night for nearly two decades, the Samarkand scholars compiled the Zij-i Sultani, a comprehensive catalog listing the coordinates of nearly one thousand stars.',
+        exampleSentence: 'Lexicographers spend years reading newspapers and books to compile a modern dictionary.',
+        synonyms: ['assemble', 'gather', 'put together'],
+        collocations: ['compile a catalog', 'compile data', 'compile a report'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-ubo-5',
+        word: 'comprehensive',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˌkɒmprɪˈhensɪv/',
+        definition: 'Complete and including all or nearly all elements, details, or aspects of a subject.',
+        contextSentence: 'Working night after night for nearly two decades, the Samarkand scholars compiled the Zij-i Sultani, a comprehensive catalog listing the coordinates of nearly one thousand stars.',
+        exampleSentence: 'The safety inspector carried out a comprehensive review of every bridge in the province.',
+        synonyms: ['thorough', 'complete', 'all-inclusive'],
+        collocations: ['comprehensive catalog', 'comprehensive study', 'comprehensive guide'],
+        cefrLevel: 'B2'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b2-ubo-1',
+          targetWord: 'distort',
+          question: 'Why did Ulugh Beg’s astronomers stop relying on small handheld brass instruments?',
+          options: [
+            'Because small metal tools bent slightly under their own weight, distorting the accuracy of star measurements.',
+            'Because brass melted whenever sunlight touched it.',
+            'Because handheld instruments could only measure the Moon.',
+            'Because marble was lighter to carry in a pocket than brass.'
+          ],
+          correctIndex: 0,
+          explanation: 'To "distort" means to warp or alter something so that it becomes inaccurate.'
+        },
+        {
+          id: 'mc-b2-ubo-2',
+          targetWord: 'compile',
+          question: 'What did the Samarkand astronomers do over nearly two decades of nightly observations?',
+          options: [
+            'They compiled the Zij-i Sultani, gathering and organizing the coordinates of nearly a thousand stars.',
+            'They demolished the observatory to build a harbor.',
+            'They hid their findings so no other scientist could read them.'
+          ],
+          correctIndex: 0,
+          explanation: 'To "compile" means to collect and systematically arrange data into a catalog or volume.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b2-ubo-1',
+          sentenceWithBlank: 'Before buying an older house, it is wise to pay for a _____ inspection of the roof, wiring, and plumbing.',
+          targetWord: 'comprehensive',
+          hint: 'Thorough and covering all important details',
+          options: ['comprehensive', 'vulnerable', 'impulsive', 'fragile']
+        },
+        {
+          id: 'cl-b2-ubo-2',
+          sentenceWithBlank: 'With daily practice and a supportive coach, she managed to _____ her fear of speaking in public.',
+          targetWord: 'overcome',
+          hint: 'Successfully defeat or deal with a difficulty',
+          options: ['overcome', 'distort', 'stockpile', 'submerge']
+        }
+      ],
+      matching: {
+        id: 'ma-b2-ubo-1',
+        instructions: 'Match each B2 historical science word with its English definition.',
+        pairs: [
+          { id: 'p1', term: 'distort', match: 'Twist or alter something so it becomes inaccurate' },
+          { id: 'p2', term: 'overcome', match: 'Successfully deal with a problem or obstacle' },
+          { id: 'p3', term: 'compile', match: 'Gather information and arrange it into a catalog or list' },
+          { id: 'p4', term: 'comprehensive', match: 'Complete and covering nearly every detail of a subject' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b2-aral-sea-saxaul-afforestation',
+    title: 'Planting a Forest on a Seabed: How Saxaul Trees Are Healing the Aralikum Desert',
+    subtitle: 'Where fishing boats once sailed, ecologists and local communities are planting millions of drought-resistant shrubs to hold back toxic dust storms.',
+    level: 'B2',
+    category: 'Environment',
+    readTime: '7 min read',
+    readingTimeMinutes: 7,
+    wordCount: 515,
+    cefrSummary: 'Ecological restoration in Central Asia and B2 environmental cause-and-effect vocabulary.',
+    themeColor: 'emerald',
+    gradientFrom: 'from-emerald-950',
+    gradientTo: 'to-stone-900',
+    heroImage: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Hardy desert shrubs stabilize shifting sands and create sheltered micro-habitats across the dried seabed.',
+    paragraphs: [
+      'In the middle of the twentieth century, the Aral Sea was the fourth-largest inland lake on the planet, supporting thriving fishing ports and moderating the climate of Central Asia. However, after massive irrigation canals diverted the waters of the Amu Darya and Syr Darya rivers across millions of hectares of cotton fields, the sea shrank dramatically. In its place emerged the Aralikum—the world’s youngest salt desert.',
+      'As the water retreated, it left behind a crusty plain of sand mixed with salt and agricultural chemicals. Whenever fierce steppe winds swept across the exposed seabed, they lifted millions of tons of salty dust into the atmosphere, damaging crops and threatening public health hundreds of kilometers away.',
+      'While restoring the entire inland sea is impossible in the short term, forestry scientists in Uzbekistan and Kazakhstan have launched an ambitious ecological intervention. Every winter and spring, fleets of tractors and aircraft sow seeds of the black saxaul—a remarkable native desert shrub capable of thriving in salty, bone-dry soil where few other plants can survive.',
+      'As saxaul saplings take root, their deep root networks anchor the loose sand and reduce wind speed near the ground. A single mature saxaul bush can trap several tons of blowing dust around its base, gradually allowing native grasses, lizards, and birds to return to the once-barren landscape.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b2-asa-1',
+        word: 'divert',
+        partOfSpeech: 'verb',
+        phonetic: '/daɪˈvɜːt/',
+        definition: 'To cause water, traffic, or resources to change direction and flow along a different route.',
+        contextSentence: 'However, after massive irrigation canals diverted the waters of the Amu Darya and Syr Darya rivers across millions of hectares of cotton fields, the sea shrank dramatically.',
+        exampleSentence: 'Police had to divert traffic onto side streets while workers repaired the main bridge.',
+        synonyms: ['redirect', 'reroute', 'channel'],
+        collocations: ['divert water', 'divert rivers', 'divert traffic'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-asa-2',
+        word: 'retreat',
+        partOfSpeech: 'verb',
+        phonetic: '/rɪˈtriːt/',
+        definition: 'To move back or withdraw from a previous position or level.',
+        contextSentence: 'As the water retreated, it left behind a crusty plain of sand mixed with salt and agricultural chemicals.',
+        exampleSentence: 'Mountain glaciers have retreated rapidly over the past fifty years due to warmer summers.',
+        synonyms: ['recede', 'withdraw', 'pull back'],
+        collocations: ['water retreated', 'glaciers retreat', 'forced to retreat'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-asa-3',
+        word: 'intervention',
+        partOfSpeech: 'noun',
+        phonetic: '/ˌɪntəˈvenʃn/',
+        definition: 'Intentional action taken to improve a difficult situation or prevent a problem from getting worse.',
+        contextSentence: 'While restoring the entire inland sea is impossible in the short term, forestry scientists in Uzbekistan and Kazakhstan have launched an ambitious ecological intervention.',
+        exampleSentence: 'Early medical intervention can prevent minor health issues from becoming serious illnesses.',
+        synonyms: ['action', 'involvement', 'measure'],
+        collocations: ['ecological intervention', 'early intervention', 'government intervention'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-asa-4',
+        word: 'anchor',
+        partOfSpeech: 'verb',
+        phonetic: '/ˈæŋkə(r)/',
+        definition: 'To hold something firmly in place so that it cannot move or blow away.',
+        contextSentence: 'As saxaul saplings take root, their deep root networks anchor the loose sand and reduce wind speed near the ground.',
+        exampleSentence: 'Steel cables anchor the suspension bridge securely to the rocky cliffs on both sides.',
+        synonyms: ['secure', 'fasten', 'stabilize'],
+        collocations: ['anchor the sand', 'anchor firmly', 'anchor in place'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-asa-5',
+        word: 'barren',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈbærən/',
+        definition: 'Too poor, dry, or damaged to produce vegetation or support much life.',
+        contextSentence: 'A single mature saxaul bush can trap several tons of blowing dust around its base, gradually allowing native grasses, lizards, and birds to return to the once-barren landscape.',
+        exampleSentence: 'After volcanic ash weathered into rich soil, green ferns began covering the barren lava fields.',
+        synonyms: ['desolate', 'sterile', 'infertile'],
+        collocations: ['barren landscape', 'barren land', 'barren desert'],
+        cefrLevel: 'B2'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b2-asa-1',
+          targetWord: 'anchor',
+          question: 'How do saxaul shrubs stop toxic dust storms from rising off the dried seabed?',
+          options: [
+            'Their deep roots anchor the loose sand and trap blowing dust around their stems.',
+            'Their leaves release millions of liters of freshwater into the lake.',
+            'They grow tall enough to block clouds in the upper atmosphere.'
+          ],
+          correctIndex: 0,
+          explanation: 'To "anchor" something means to hold it firmly in place so it cannot shift.'
+        },
+        {
+          id: 'mc-b2-asa-2',
+          targetWord: 'divert',
+          question: 'Why did the Aral Sea shrink during the second half of the twentieth century?',
+          options: [
+            'Because huge irrigation canals diverted the rivers that fed the sea toward agricultural fields.',
+            'Because an earthquake drained the water into an underground cave.',
+            'Because local fishermen caught too many fish.'
+          ],
+          correctIndex: 0,
+          explanation: 'To "divert" a river means to change its natural course so the water flows elsewhere.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b2-asa-1',
+          sentenceWithBlank: 'By adding compost and planting clover, the farmers transformed the _____ hillside into a productive orchard.',
+          targetWord: 'barren',
+          hint: 'Unable to support plants or crops',
+          options: ['barren', 'colossal', 'comprehensive', 'lucid']
+        },
+        {
+          id: 'cl-b2-asa-2',
+          sentenceWithBlank: 'When the floodwaters finally began to _____, emergency crews inspected the damaged roads.',
+          targetWord: 'retreat',
+          hint: 'Move back or drop to a lower level',
+          options: ['retreat', 'compile', 'distort', 'stockpile']
+        }
+      ],
+      matching: {
+        id: 'ma-b2-asa-1',
+        instructions: 'Match each B2 environmental restoration term with its definition.',
+        pairs: [
+          { id: 'p1', term: 'divert', match: 'Redirect water or traffic along a different course' },
+          { id: 'p2', term: 'retreat', match: 'Move back or withdraw from a previous position' },
+          { id: 'p3', term: 'anchor', match: 'Hold loose soil or an object firmly in place' },
+          { id: 'p4', term: 'barren', match: 'Too dry or poor to support trees and crops' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b2-sodium-ion-batteries-grid',
+    title: 'Power from Table Salt: Why Sodium-Ion Batteries Are Joining the Clean Energy Grid',
+    subtitle: 'Lithium powers almost every smartphone and laptop on Earth, but a cheaper battery made from ordinary sodium could transform renewable energy storage.',
+    level: 'B2',
+    category: 'Technology & Innovation',
+    readTime: '7 min read',
+    readingTimeMinutes: 7,
+    wordCount: 505,
+    cefrSummary: 'Clean energy storage, materials chemistry, and B2 engineering vocabulary.',
+    themeColor: 'sky',
+    gradientFrom: 'from-slate-950',
+    gradientTo: 'to-sky-950',
+    heroImage: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Large stationary battery banks store solar power generated at noon so homes have electricity after sunset.',
+    paragraphs: [
+      'Over the past thirty years, lithium-ion batteries have revolutionized portable electronics and electric vehicles. Because lithium is the lightest metal on the periodic table, it packs a huge amount of energy into a compact space. However, lithium is mined in only a handful of countries, and refining it requires vast quantities of water and energy, making supply chains vulnerable to price spikes.',
+      'To build a truly sustainable electricity grid, engineers need gigantic battery banks that can store solar power during sunny afternoons and release it at night. For a stationary battery the size of a shipping container sitting next to a wind farm, being ultra-lightweight is far less important than being affordable, safe, and made from widely available materials.',
+      'Enter the sodium-ion battery. Sodium sits directly below lithium on the periodic table and behaves in a remarkably similar way chemically, yet it is more than a thousand times more abundant in the Earth’s crust and oceans. Derived from ordinary rock salt or seawater, sodium costs a fraction of the price of battery-grade lithium and eliminates the need for scarce metals like cobalt.',
+      'Furthermore, sodium-ion batteries perform reliably in freezing winter weather and pose a much lower risk of catching fire if punctured. While lithium will remain the top choice for long-range electric cars and slim smartphones, sodium batteries are rapidly becoming a practical backbone for renewable power grids worldwide.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b2-sib-1',
+        word: 'compact',
+        partOfSpeech: 'adjective',
+        phonetic: '/kəmˈpækt/',
+        definition: 'Closely and neatly packed together into a small space.',
+        contextSentence: 'Because lithium is the lightest metal on the periodic table, it packs a huge amount of energy into a compact space.',
+        exampleSentence: 'The folding bicycle is so compact that it fits easily under an office desk.',
+        synonyms: ['small', 'space-saving', 'dense'],
+        collocations: ['compact space', 'compact design', 'compact car'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-sib-2',
+        word: 'stationary',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈsteɪʃənri/',
+        definition: 'Not moving or not intended to be moved from one place to another.',
+        contextSentence: 'For a stationary battery the size of a shipping container sitting next to a wind farm, being ultra-lightweight is far less important than being affordable, safe, and made from widely available materials.',
+        exampleSentence: 'Never step off a train until it is completely stationary at the platform.',
+        synonyms: ['fixed', 'immobile', 'static'],
+        collocations: ['stationary battery', 'remain stationary', 'stationary vehicle'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-sib-3',
+        word: 'derive',
+        partOfSpeech: 'verb',
+        phonetic: '/dɪˈraɪv/',
+        definition: 'To obtain or produce a substance, idea, or word from a specific source or origin.',
+        contextSentence: 'Derived from ordinary rock salt or seawater, sodium costs a fraction of the price of battery-grade lithium and eliminates the need for scarce metals like cobalt.',
+        exampleSentence: 'The medicine aspirin was originally derived from the bark of willow trees.',
+        synonyms: ['obtain', 'extract', 'originate from'],
+        collocations: ['derived from', 'derive energy from', 'derive benefit'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-sib-4',
+        word: 'scarce',
+        partOfSpeech: 'adjective',
+        phonetic: '/skeəs/',
+        definition: 'Available only in very small quantities and difficult to find.',
+        contextSentence: 'Derived from ordinary rock salt or seawater, sodium costs a fraction of the price of battery-grade lithium and eliminates the need for scarce metals like cobalt.',
+        exampleSentence: 'Fresh green vegetables were scarce in northern towns during the winter before modern greenhouses.',
+        synonyms: ['rare', 'in short supply', 'limited'],
+        collocations: ['scarce metals', 'scarce resources', 'increasingly scarce'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-sib-5',
+        word: 'backbone',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈbækbəʊn/',
+        definition: 'The central and most important part of a system, organization, or structure that gives it strength.',
+        contextSentence: 'While lithium will remain the top choice for long-range electric cars and slim smartphones, sodium batteries are rapidly becoming a practical backbone for renewable power grids worldwide.',
+        exampleSentence: 'Family-owned farms form the backbone of the region’s agricultural economy.',
+        synonyms: ['foundation', 'core', 'mainstay'],
+        collocations: ['backbone of the system', 'form the backbone', 'economic backbone'],
+        cefrLevel: 'B2'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b2-sib-1',
+          targetWord: 'stationary',
+          question: 'Why does the extra weight of sodium-ion batteries not matter for power-grid storage?',
+          options: [
+            'Because grid batteries are stationary—they sit fixed in one place next to solar or wind farms.',
+            'Because sodium batteries float in the air like balloons.',
+            'Because grid batteries are only used once and then thrown away.'
+          ],
+          correctIndex: 0,
+          explanation: '"Stationary" means fixed in one spot and not meant to be carried around.'
+        },
+        {
+          id: 'mc-b2-sib-2',
+          targetWord: 'scarce',
+          question: 'Why are battery manufacturers looking for alternatives to lithium and cobalt?',
+          options: [
+            'Because those metals are relatively scarce and mined in only a few regions.',
+            'Because lithium cannot store electricity.',
+            'Because seawater contains no sodium.'
+          ],
+          correctIndex: 0,
+          explanation: '"Scarce" means rare or in short supply compared with demand.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b2-sib-1',
+          sentenceWithBlank: 'Many everyday English scientific terms are _____ from ancient Greek and Latin roots.',
+          targetWord: 'derived',
+          hint: 'Obtained or developed from a source',
+          options: ['derived', 'diverted', 'anchored', 'retreated']
+        },
+        {
+          id: 'cl-b2-sib-2',
+          sentenceWithBlank: 'High-speed rail lines have become the _____ of intercity travel across much of Europe and East Asia.',
+          targetWord: 'backbone',
+          hint: 'The central supporting structure of a system',
+          options: ['backbone', 'inventory', 'intervention', 'shortage']
+        }
+      ],
+      matching: {
+        id: 'ma-b2-sib-1',
+        instructions: 'Match each B2 clean-tech vocabulary word with its definition.',
+        pairs: [
+          { id: 'p1', term: 'compact', match: 'Neatly packed into a small, space-saving form' },
+          { id: 'p2', term: 'stationary', match: 'Fixed in one location and not moving' },
+          { id: 'p3', term: 'scarce', match: 'Rare and available only in small amounts' },
+          { id: 'p4', term: 'backbone', match: 'The central foundation that supports an entire system' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b2-metacognition-illusion-of-competence',
+    title: 'The Illusion of Knowing: Why Highlighting Textbooks Rarely Leads to Mastery',
+    subtitle: 'Cognitive scientists warn that feeling familiar with a page of notes is not the same as being able to recall the information in an exam.',
+    level: 'B2',
+    category: 'Psychology & Mind',
+    readTime: '7 min read',
+    readingTimeMinutes: 7,
+    wordCount: 512,
+    cefrSummary: 'Metacognition, memory retrieval strategies, and B2 cognitive psychology vocabulary.',
+    themeColor: 'indigo',
+    gradientFrom: 'from-indigo-950',
+    gradientTo: 'to-slate-900',
+    heroImage: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Closing the book and testing yourself from memory builds far stronger neural pathways than passive rereading.',
+    paragraphs: [
+      'Walk into any university library during exam week and you will see students reading the same chapter for the third or fourth time, marking nearly every sentence with bright yellow and pink highlighters. As their eyes glide smoothly over the familiar paragraphs, students experience a comforting sense of fluency. They feel certain they know the material—until they sit down in the exam hall and their mind goes blank.',
+      'Psychologists call this trap the "illusion of competence." It happens because the human brain frequently confuses recognition with retrieval. Recognizing a definition when it is sitting right in front of your eyes requires very little mental effort; retrieving that same concept from memory without any visual cues is a completely different cognitive skill.',
+      'To build durable knowledge, learners need to practice metacognition—the ability to monitor and evaluate their own understanding honestly. Instead of passively rereading notes, effective students close the book after finishing a section and attempt to explain the main ideas aloud or write down a summary from scratch.',
+      'At first, this self-testing feels slow, frustrating, and mentally demanding. Yet neuroscientists refer to this struggle as a "desirable difficulty." Every time you force your brain to reconstruct an answer from memory, even if you make a mistake and have to check the page afterward, you reinforce the neural pathways that make future recall fast and reliable.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b2-mic-1',
+        word: 'illusion',
+        partOfSpeech: 'noun',
+        phonetic: '/ɪˈluːʒn/',
+        definition: 'A false impression or belief that makes something seem true or real when it is not.',
+        contextSentence: 'Psychologists call this trap the "illusion of competence."',
+        exampleSentence: 'Mirrors on the walls gave the small café the illusion of being twice as wide.',
+        synonyms: ['misconception', 'mirage', 'false impression'],
+        collocations: ['illusion of competence', 'optical illusion', 'create the illusion'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mic-2',
+        word: 'retrieval',
+        partOfSpeech: 'noun',
+        phonetic: '/rɪˈtriːvl/',
+        definition: 'The process of finding and bringing back information stored in your memory or in a computer.',
+        contextSentence: 'It happens because the human brain frequently confuses recognition with retrieval.',
+        exampleSentence: 'Practicing flashcards strengthens memory retrieval much better than staring at a vocabulary list.',
+        synonyms: ['recall', 'recovery', 'recollection'],
+        collocations: ['memory retrieval', 'information retrieval', 'active retrieval'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mic-3',
+        word: 'evaluate',
+        partOfSpeech: 'verb',
+        phonetic: '/ɪˈvæljueɪt/',
+        definition: 'To judge or assess the quality, importance, or effectiveness of something carefully.',
+        contextSentence: 'To build durable knowledge, learners need to practice metacognition—the ability to monitor and evaluate their own understanding honestly.',
+        exampleSentence: 'After the pilot project ended, the city council met to evaluate its results.',
+        synonyms: ['assess', 'judge', 'appraise'],
+        collocations: ['evaluate understanding', 'carefully evaluate', 'evaluate performance'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mic-4',
+        word: 'passively',
+        partOfSpeech: 'adverb',
+        phonetic: '/ˈpæsɪvli/',
+        definition: 'In a way that accepts or watches what happens without taking an active part or making mental effort.',
+        contextSentence: 'Instead of passively rereading notes, effective students close the book after finishing a section and attempt to explain the main ideas aloud or write down a summary from scratch.',
+        exampleSentence: 'Listening passively to a lecture without taking notes makes it easy to forget the key points.',
+        synonyms: ['inactively', 'inertly', 'unthinkingly'],
+        collocations: ['passively reread', 'watch passively', 'sit passively'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mic-5',
+        word: 'reinforce',
+        partOfSpeech: 'verb',
+        phonetic: '/ˌriːɪnˈfɔːs/',
+        definition: 'To make a structure, habit, idea, or memory stronger by adding support or repeating practice.',
+        contextSentence: 'Every time you force your brain to reconstruct an answer from memory, even if you make a mistake and have to check the page afterward, you reinforce the neural pathways that make future recall fast and reliable.',
+        exampleSentence: 'Quizzes at the end of each article reinforce the new vocabulary you just read.',
+        synonyms: ['strengthen', 'fortify', 'consolidate'],
+        collocations: ['reinforce neural pathways', 'reinforce learning', 'reinforce a wall'],
+        cefrLevel: 'B2'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b2-mic-1',
+          targetWord: 'illusion',
+          question: 'What is the "illusion of competence" described by psychologists?',
+          options: [
+            'The false belief that you have mastered a topic simply because the text looks familiar when you reread it.',
+            'The ability to memorize an entire textbook after reading it once.',
+            'A visual trick used by artists to draw three-dimensional buildings.'
+          ],
+          correctIndex: 0,
+          explanation: 'An "illusion" is a deceptive appearance or false belief.'
+        },
+        {
+          id: 'mc-b2-mic-2',
+          targetWord: 'retrieval',
+          question: 'How does active "retrieval" differ from simple recognition?',
+          options: [
+            'Retrieval requires pulling an answer out of your own memory without looking at the page.',
+            'Retrieval means highlighting every sentence with three different colors.',
+            'Retrieval means copying definitions word for word from a dictionary.'
+          ],
+          correctIndex: 0,
+          explanation: '"Retrieval" is the act of recalling stored information from memory.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b2-mic-1',
+          sentenceWithBlank: 'Engineers used extra steel beams to _____ the old bridge before allowing heavy trucks across.',
+          targetWord: 'reinforce',
+          hint: 'Make stronger and more durable',
+          options: ['reinforce', 'distort', 'retreat', 'divert']
+        },
+        {
+          id: 'cl-b2-mic-2',
+          sentenceWithBlank: 'Good teachers use short weekly quizzes to _____ how well students have understood the lesson.',
+          targetWord: 'evaluate',
+          hint: 'Assess or judge carefully',
+          options: ['evaluate', 'compile', 'stockpile', 'overcome']
+        }
+      ],
+      matching: {
+        id: 'ma-b2-mic-1',
+        instructions: 'Match each B2 cognitive psychology term with its definition.',
+        pairs: [
+          { id: 'p1', term: 'illusion', match: 'A false impression or mistaken belief' },
+          { id: 'p2', term: 'retrieval', match: 'The act of recalling stored information from memory' },
+          { id: 'p3', term: 'evaluate', match: 'Assess or judge the quality of something carefully' },
+          { id: 'p4', term: 'reinforce', match: 'Make a memory, idea, or structure stronger' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b2-biomimicry-nature-inspired-engineering',
+    title: 'Blueprints from Evolution: How a Kingfisher’s Beak Redesigned High-Speed Trains',
+    subtitle: 'When Japanese bullet trains created deafening sonic booms inside tunnels, an engineer who watched birds found the solution.',
+    level: 'B2',
+    category: 'Science & Nature',
+    readTime: '7 min read',
+    readingTimeMinutes: 7,
+    wordCount: 508,
+    cefrSummary: 'Biomimicry, evolutionary adaptation, and B2 applied science vocabulary.',
+    themeColor: 'teal',
+    gradientFrom: 'from-teal-950',
+    gradientTo: 'to-slate-900',
+    heroImage: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'The streamlined nose cone of modern bullet trains was modeled directly on the splashless beak of the kingfisher bird.',
+    paragraphs: [
+      'In the 1990s, railway engineers in Japan faced a baffling acoustic problem. Their newest bullet trains could travel at nearly three hundred kilometers per hour, but whenever a train entered a narrow mountain tunnel, its rounded front pushed a wall of compressed air ahead of it. When that pressure wave burst out the far end of the tunnel, it produced a thunderous boom that woke residents half a kilometer away.',
+      'Fortunately, the chief engineer leading the redesign, Eiji Nakatsu, was also an avid birdwatcher. One morning, he thought about the kingfisher—a small colorful bird that dives at high speed from tree branches into rivers to catch fish, entering the denser medium of water with barely a splash.',
+      'Nakatsu’s team tested scale models of different train noses in wind tunnels and discovered that a fifteen-meter-long nose shaped like a kingfisher’s wedge-like beak sliced smoothly through tunnel air instead of compressing it. When the redesigned train entered service, it eliminated the tunnel boom, consumed fifteen percent less electricity, and traveled ten percent faster.',
+      'This approach—studying biological adaptations that have been refined over millions of years of evolution to solve human engineering challenges—is known as biomimicry. From wind turbine blades modeled on humpback whale flippers to hospital surfaces patterned after bacteria-repelling sharkskin, nature’s library continues to inspire cleaner and quieter technology.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b2-bne-1',
+        word: 'baffling',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈbæflɪŋ/',
+        definition: 'Extremely confusing or difficult to understand or solve.',
+        contextSentence: 'In the 1990s, railway engineers in Japan faced a baffling acoustic problem.',
+        exampleSentence: 'Detectives spent months investigating the baffling disappearance of the painting.',
+        synonyms: ['puzzling', 'perplexing', 'mystifying'],
+        collocations: ['baffling problem', 'baffling mystery', 'completely baffling'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-bne-2',
+        word: 'compress',
+        partOfSpeech: 'verb',
+        phonetic: '/kəmˈpres/',
+        definition: 'To press or squeeze something into a smaller space so that it becomes denser or under higher pressure.',
+        contextSentence: 'Their newest bullet trains could travel at nearly three hundred kilometers per hour, but whenever a train entered a narrow mountain tunnel, its rounded front pushed a wall of compressed air ahead of it.',
+        exampleSentence: 'Software programs can compress large video files so they are easier to send by email.',
+        synonyms: ['squeeze', 'condense', 'compact'],
+        collocations: ['compressed air', 'compress a file', 'compress gas'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-bne-3',
+        word: 'avid',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈævɪd/',
+        definition: 'Having or showing a keen interest and enthusiastic dedication to a hobby or activity.',
+        contextSentence: 'Fortunately, the chief engineer leading the redesign, Eiji Nakatsu, was also an avid birdwatcher.',
+        exampleSentence: 'As an avid reader of historical fiction, she visits the town library twice a week.',
+        synonyms: ['keen', 'enthusiastic', 'passionate'],
+        collocations: ['avid reader', 'avid birdwatcher', 'avid supporter'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-bne-4',
+        word: 'adaptation',
+        partOfSpeech: 'noun',
+        phonetic: '/ˌædæpˈteɪʃn/',
+        definition: 'A special physical feature or behavior that has evolved to help a plant or animal survive in its environment.',
+        contextSentence: 'This approach—studying biological adaptations that have been refined over millions of years of evolution to solve human engineering challenges—is known as biomimicry.',
+        exampleSentence: 'Thick white fur is a vital adaptation that keeps Arctic foxes warm and camouflaged in the snow.',
+        synonyms: ['modification', 'trait', 'evolutionary feature'],
+        collocations: ['biological adaptation', 'evolutionary adaptation', 'remarkable adaptation'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-bne-5',
+        word: 'repel',
+        partOfSpeech: 'verb',
+        phonetic: '/rɪˈpel/',
+        definition: 'To drive away, keep off, or stop a substance or pest from attaching to a surface.',
+        contextSentence: 'From wind turbine blades modeled on humpback whale flippers to hospital surfaces patterned after bacteria-repelling sharkskin, nature’s library continues to inspire cleaner and quieter technology.',
+        exampleSentence: 'This waterproof jacket is treated with a natural wax that repels rain.',
+        synonyms: ['ward off', 'keep away', 'resist'],
+        collocations: ['repel water', 'repel insects', 'repel bacteria'],
+        cefrLevel: 'B2'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b2-bne-1',
+          targetWord: 'compress',
+          question: 'What caused the loud boom when early bullet trains entered narrow tunnels?',
+          options: [
+            'The train’s rounded front compressed the air ahead of it into a high-pressure wave.',
+            'The train’s wheels struck sparks against the steel rails.',
+            'The driver sounded a giant horn inside every tunnel.'
+          ],
+          correctIndex: 0,
+          explanation: 'To "compress" air means to squeeze it into a smaller space, increasing its pressure.'
+        },
+        {
+          id: 'mc-b2-bne-2',
+          targetWord: 'adaptation',
+          question: 'In biology, what is an "adaptation"?',
+          options: [
+            'A physical feature or behavior that helps a living organism survive in its environment.',
+            'A blueprint drawn by a railway engineer.',
+            'A tunnel drilled through solid mountain rock.'
+          ],
+          correctIndex: 0,
+          explanation: 'An "adaptation" is an evolved trait suited to an organism’s habitat.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b2-bne-1',
+          sentenceWithBlank: 'Planting marigolds around tomato beds helps _____ garden pests naturally without chemical sprays.',
+          targetWord: 'repel',
+          hint: 'Keep away or drive back',
+          options: ['repel', 'compress', 'compile', 'evaluate']
+        },
+        {
+          id: 'cl-b2-bne-2',
+          sentenceWithBlank: 'My grandfather is an _____ chess player who studies classic tournament games every evening.',
+          targetWord: 'avid',
+          hint: 'Very enthusiastic and keen',
+          options: ['avid', 'barren', 'stationary', 'scarce']
+        }
+      ],
+      matching: {
+        id: 'ma-b2-bne-1',
+        instructions: 'Match each B2 biomimicry vocabulary word with its definition.',
+        pairs: [
+          { id: 'p1', term: 'baffling', match: 'Extremely puzzling and hard to explain' },
+          { id: 'p2', term: 'compress', match: 'Squeeze air or material into a smaller, denser space' },
+          { id: 'p3', term: 'avid', match: 'Showing enthusiastic interest in an activity or hobby' },
+          { id: 'p4', term: 'repel', match: 'Drive away or prevent water, pests, or bacteria from sticking' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b2-geothermal-district-heating',
+    title: 'Heat Beneath Our Feet: How Cities Are Tapping Earth’s Deep Warmth',
+    subtitle: 'Just a few kilometers below the surface, rocks stay hot all year round—offering a steady source of clean heating for entire cities.',
+    level: 'B2',
+    category: 'Environment',
+    readTime: '7 min read',
+    readingTimeMinutes: 7,
+    wordCount: 504,
+    cefrSummary: 'Geothermal district heating, urban decarbonization, and B2 energy vocabulary.',
+    themeColor: 'amber',
+    gradientFrom: 'from-stone-900',
+    gradientTo: 'to-amber-950',
+    heroImage: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Geothermal plants circulate water through deep underground rock layers to heat homes without burning gas.',
+    paragraphs: [
+      'When people think of renewable energy, they usually picture wind turbines spinning on hilltops or solar panels gleaming on roofs. Both technologies generate clean electricity, yet both share an obvious drawback: the wind does not always blow, and the sun sets every evening. Heating millions of apartments during dark, windless winter nights remains one of the hardest challenges of the clean energy transition.',
+      'Beneath the ground, however, lies an immense thermal reservoir that never turns off. Regardless of how cold the air is in January, rock layers two to three kilometers underground remain warm year-round, heated by the natural decay of minerals deep inside the Earth. For decades, Iceland has used this geothermal energy to heat ninety percent of its homes and even keep city sidewalks free of snow.',
+      'You do not need active volcanoes to harvest underground warmth. Using drilling techniques originally developed by the oil industry, cities like Munich and Paris are drilling pairs of deep wells into warm underground aquifers. One well pumps naturally hot water up to the surface, where a heat exchanger transfers its warmth into insulated pipes that run beneath neighborhood streets.',
+      'Once the water has warmed thousands of radiators and domestic hot-water tanks, the cooled water is pumped back down the second well to be reheated by the rocks in a continuous closed loop. Because the system emits virtually no carbon dioxide and occupies very little surface land, geothermal district heating is emerging as a quiet giant of urban decarbonization.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b2-gdh-1',
+        word: 'drawback',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈdrɔːbæk/',
+        definition: 'A disadvantage or negative feature that makes something less acceptable or effective.',
+        contextSentence: 'Both technologies generate clean electricity, yet both share an obvious drawback: the wind does not always blow, and the sun sets every evening.',
+        exampleSentence: 'The main drawback of living in the city center is the noise from late-night traffic.',
+        synonyms: ['disadvantage', 'downside', 'limitation'],
+        collocations: ['obvious drawback', 'main drawback', 'minor drawback'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-gdh-2',
+        word: 'reservoir',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈrezəvwɑː(r)/',
+        definition: 'A large natural or artificial supply, reserve, or lake of water, heat, or energy.',
+        contextSentence: 'Beneath the ground, however, lies an immense thermal reservoir that never turns off.',
+        exampleSentence: 'Melting mountain snow fills the reservoir that supplies drinking water to the valley.',
+        synonyms: ['store', 'reserve', 'basin'],
+        collocations: ['thermal reservoir', 'underground reservoir', 'water reservoir'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-gdh-3',
+        word: 'insulated',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈɪnsjuleɪtɪd/',
+        definition: 'Covered or protected with a material that prevents heat, cold, or sound from escaping or entering.',
+        contextSentence: 'One well pumps naturally hot water up to the surface, where a heat exchanger transfers its warmth into insulated pipes that run beneath neighborhood streets.',
+        exampleSentence: 'Well-insulated walls and double-glazed windows keep houses warm in winter and cool in summer.',
+        synonyms: ['protected', 'shielded', 'lined'],
+        collocations: ['insulated pipes', 'well-insulated home', 'insulated jacket'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-gdh-4',
+        word: 'continuous',
+        partOfSpeech: 'adjective',
+        phonetic: '/kənˈtɪnjuəs/',
+        definition: 'Happening or operating without any interruption, pause, or break.',
+        contextSentence: 'Once the water has warmed thousands of radiators and domestic hot-water tanks, the cooled water is pumped back down the second well to be reheated by the rocks in a continuous closed loop.',
+        exampleSentence: 'The hospital relies on backup generators to guarantee a continuous supply of electricity.',
+        synonyms: ['unbroken', 'constant', 'nonstop'],
+        collocations: ['continuous loop', 'continuous supply', 'continuous improvement'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-gdh-5',
+        word: 'virtually',
+        partOfSpeech: 'adverb',
+        phonetic: '/ˈvɜːtʃuəli/',
+        definition: 'Almost completely; for all practical purposes.',
+        contextSentence: 'Because the system emits virtually no carbon dioxide and occupies very little surface land, geothermal district heating is emerging as a quiet giant of urban decarbonization.',
+        exampleSentence: 'High-speed fiber cables have made delays in international video calls virtually unnoticeable.',
+        synonyms: ['nearly', 'practically', 'almost'],
+        collocations: ['virtually no', 'virtually impossible', 'virtually identical'],
+        cefrLevel: 'B2'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b2-gdh-1',
+          targetWord: 'drawback',
+          question: 'What is the main "drawback" of wind and solar energy mentioned in the first paragraph?',
+          options: [
+            'They depend on the weather and time of day, whereas heating is needed even on dark, windless nights.',
+            'They produce more carbon dioxide than coal power plants.',
+            'They only work near active volcanoes.'
+          ],
+          correctIndex: 0,
+          explanation: 'A "drawback" is a disadvantage or limitation.'
+        },
+        {
+          id: 'mc-b2-gdh-2',
+          targetWord: 'insulated',
+          question: 'Why does a geothermal district heating system use "insulated" underground pipes?',
+          options: [
+            'To keep the hot water from losing its heat as it travels beneath city streets to apartment buildings.',
+            'To allow tree roots to drink the hot water on the way.',
+            'To cool the water down to freezing before it reaches homes.'
+          ],
+          correctIndex: 0,
+          explanation: '"Insulated" pipes are wrapped in protective material that prevents heat loss.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b2-gdh-1',
+          sentenceWithBlank: 'After the new tram line opened, traffic jams on the main avenue _____ disappeared.',
+          targetWord: 'virtually',
+          hint: 'Almost completely; practically',
+          options: ['virtually', 'passively', 'temporarily', 'gradually']
+        },
+        {
+          id: 'cl-b2-gdh-2',
+          sentenceWithBlank: 'A _____ flow of cool water keeps the factory’s cutting machines from overheating.',
+          targetWord: 'continuous',
+          hint: 'Happening without stopping or interruption',
+          options: ['continuous', 'baffling', 'scarce', 'barren']
+        }
+      ],
+      matching: {
+        id: 'ma-b2-gdh-1',
+        instructions: 'Match each B2 geothermal energy word with its definition.',
+        pairs: [
+          { id: 'p1', term: 'drawback', match: 'A disadvantage or negative feature' },
+          { id: 'p2', term: 'reservoir', match: 'A large natural or artificial reserve of water or heat' },
+          { id: 'p3', term: 'insulated', match: 'Wrapped in material that prevents heat from escaping' },
+          { id: 'p4', term: 'virtually', match: 'Almost completely; practically' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b2-paradox-of-choice-consumers',
+    title: 'Too Many Options: How Endless Choice Leads to Decision Fatigue',
+    subtitle: 'We assume that having fifty varieties of jam or a hundred streaming shows makes us happier, but behavioral experiments reveal the opposite.',
+    level: 'B2',
+    category: 'Psychology & Mind',
+    readTime: '7 min read',
+    readingTimeMinutes: 7,
+    wordCount: 510,
+    cefrSummary: 'Behavioral economics, consumer decision-making, and B2 analytical vocabulary.',
+    themeColor: 'violet',
+    gradientFrom: 'from-violet-950',
+    gradientTo: 'to-stone-900',
+    heroImage: 'https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Supermarket aisles packed with dozens of nearly identical products can overwhelm shoppers rather than empower them.',
+    paragraphs: [
+      'In modern consumer societies, freedom is often equated with the number of options on a shelf. Walk into a large supermarket and you will confront twenty-eight types of toothpaste, forty brands of cereal, and dozens of olive oils. Online marketplaces multiply those numbers into the thousands. Conventional economic theory assumes that more choice is always better because it allows every individual to find their exact preference.',
+      'Yet a famous field experiment conducted by psychologists Sheena Iyengar and Mark Lepper challenged this assumption. On one Saturday at an upscale grocery store, researchers set up a tasting booth displaying twenty-four flavors of gourmet jam. On the following Saturday, the booth offered only six flavors. Although the large display attracted more curious passersby, shoppers who saw only six jars were ten times more likely to actually buy a jar.',
+      'Psychologists explain that when human beings face an overwhelming array of options, two negative reactions occur. First, comparing dozens of small differences drains mental energy, leading to decision paralysis—so people walk away empty-handed or spend an entire evening scrolling through movie menus without watching anything.',
+      'Second, even when we do make a choice from fifty options, we often feel less satisfied afterward. Our minds cannot help imagining that one of the forty-nine alternatives we rejected might have been slightly better. Setting personal limits—such as comparing no more than three options for everyday purchases—frees up time and leaves us much happier with what we choose.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b2-poc-1',
+        word: 'equate',
+        partOfSpeech: 'verb',
+        phonetic: '/ɪˈkweɪt/',
+        definition: 'To consider one thing to be the same as or equal to another thing.',
+        contextSentence: 'In modern consumer societies, freedom is often equated with the number of options on a shelf.',
+        exampleSentence: 'It is a mistake to equate a high price tag with superior durability.',
+        synonyms: ['identify', 'associate', 'treat as equal'],
+        collocations: ['equate with', 'often equated', 'mistakenly equate'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-poc-2',
+        word: 'assumption',
+        partOfSpeech: 'noun',
+        phonetic: '/əˈsʌmpʃn/',
+        definition: 'A belief or idea that is accepted as true without solid proof.',
+        contextSentence: 'Yet a famous field experiment conducted by psychologists Sheena Iyengar and Mark Lepper challenged this assumption.',
+        exampleSentence: 'Our travel plans were based on the assumption that the mountain pass would be open in May.',
+        synonyms: ['supposition', 'belief', 'premise'],
+        collocations: ['challenge an assumption', 'common assumption', 'underlying assumption'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-poc-3',
+        word: 'overwhelming',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˌəʊvəˈwelmɪŋ/',
+        definition: 'So large, intense, or confusing that it is difficult to deal with.',
+        contextSentence: 'Psychologists explain that when human beings face an overwhelming array of options, two negative reactions occur.',
+        exampleSentence: 'Moving to a huge metropolis for the first time can be an overwhelming experience.',
+        synonyms: ['staggering', 'daunting', 'excessive'],
+        collocations: ['overwhelming array', 'overwhelming majority', 'feel overwhelming'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-poc-4',
+        word: 'paralysis',
+        partOfSpeech: 'noun',
+        phonetic: '/pəˈræləsɪs/',
+        definition: 'A state of being unable to act, move, or make a decision.',
+        contextSentence: 'First, comparing dozens of small differences drains mental energy, leading to decision paralysis—so people walk away empty-handed or spend an entire evening scrolling through movie menus without watching anything.',
+        exampleSentence: 'Too many conflicting reports caused policy paralysis at the committee meeting.',
+        synonyms: ['inaction', 'standstill', 'freeze'],
+        collocations: ['decision paralysis', 'analysis paralysis', 'cause paralysis'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-poc-5',
+        word: 'reject',
+        partOfSpeech: 'verb',
+        phonetic: '/rɪˈdʒekt/',
+        definition: 'To refuse to accept, choose, or use something.',
+        contextSentence: 'Our minds cannot help imagining that one of the forty-nine alternatives we rejected might have been slightly better.',
+        exampleSentence: 'The quality control inspector rejected three batches of glass bottles because of tiny cracks.',
+        synonyms: ['turn down', 'decline', 'dismiss'],
+        collocations: ['reject an alternative', 'reject a proposal', 'firmly reject'],
+        cefrLevel: 'B2'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b2-poc-1',
+          targetWord: 'paralysis',
+          question: 'What is "decision paralysis" in the jam-tasting experiment?',
+          options: [
+            'Becoming so mentally tired from comparing twenty-four flavors that shoppers walk away without buying any jam.',
+            'Buying all twenty-four jars of jam at once.',
+            'Tasting one flavor and immediately deciding to buy ten jars.'
+          ],
+          correctIndex: 0,
+          explanation: '"Decision paralysis" is the inability to choose because the number of options is too exhausting to compare.'
+        },
+        {
+          id: 'mc-b2-poc-2',
+          targetWord: 'assumption',
+          question: 'Which "assumption" did the jam experiment challenge?',
+          options: [
+            'The belief that offering customers more choices always leads to more sales and greater satisfaction.',
+            'The idea that people enjoy eating jam on toast.',
+            'The belief that grocery stores are busier on Saturdays.'
+          ],
+          correctIndex: 0,
+          explanation: 'An "assumption" is something taken for granted as true without testing it.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b2-poc-1',
+          sentenceWithBlank: 'On her first day at the hospital, the new nurse found the number of computer forms _____.',
+          targetWord: 'overwhelming',
+          hint: 'Too much to process or handle easily',
+          options: ['overwhelming', 'insulated', 'stationary', 'compact']
+        },
+        {
+          id: 'cl-b2-poc-2',
+          sentenceWithBlank: 'Many people mistakenly _____ being busy all day with being productive.',
+          targetWord: 'equate',
+          hint: 'Consider one thing to be equal to another',
+          options: ['equate', 'repel', 'compress', 'retreat']
+        }
+      ],
+      matching: {
+        id: 'ma-b2-poc-1',
+        instructions: 'Match each B2 consumer psychology word with its definition.',
+        pairs: [
+          { id: 'p1', term: 'equate', match: 'Consider one thing to be the same as another' },
+          { id: 'p2', term: 'assumption', match: 'A belief accepted as true without proof' },
+          { id: 'p3', term: 'overwhelming', match: 'So large or intense that it is hard to cope with' },
+          { id: 'p4', term: 'paralysis', match: 'An inability to take action or make a choice' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b2-microgrids-energy-resilience',
+    title: 'Islands of Light: How Community Microgrids Keep Power Flowing During Disasters',
+    subtitle: 'When severe storms knock down long-distance transmission towers, neighborhood solar-and-battery networks can disconnect and run on their own.',
+    level: 'B2',
+    category: 'Technology & Innovation',
+    readTime: '7 min read',
+    readingTimeMinutes: 7,
+    wordCount: 506,
+    cefrSummary: 'Decentralized microgrids, infrastructure resilience, and B2 systems vocabulary.',
+    themeColor: 'sky',
+    gradientFrom: 'from-sky-950',
+    gradientTo: 'to-slate-950',
+    heroImage: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Decentralized microgrids combine rooftop solar panels and local battery storage to protect hospitals and towns from wide-scale blackouts.',
+    paragraphs: [
+      'Twentieth-century electricity networks were built around a centralized model: a few enormous coal, gas, or hydro power plants generated electricity and sent it hundreds of kilometers along high-voltage overhead wires to homes and factories. While this system worked efficiently in calm weather, it created a single point of failure. If an ice storm or wildfire knocked down one major transmission line, an entire city could plunge into darkness.',
+      'To make critical infrastructure more resilient, engineers are now dividing giant power grids into smaller, self-sufficient neighborhoods called microgrids. A typical microgrid connects a hospital, a university campus, or a small town to its own local solar arrays, wind turbines, and stationary battery banks, all managed by smart digital controllers.',
+      'Under normal conditions, a microgrid stays connected to the national grid, buying and selling electricity just like any other customer. However, the moment sensors detect a failure on the main regional network, automated switches disconnect the local neighborhood in milliseconds—a process engineers call "islanding."',
+      'Operating as an independent energy island, the microgrid keeps hospital operating rooms, water pumps, and emergency shelters running smoothly until repair crews fix the damaged highway lines. In remote mountain villages across Central Asia and island communities in the Pacific, standalone microgrids are also bringing clean, reliable twenty-four-hour electricity to places the national grid never reached.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b2-mer-1',
+        word: 'centralized',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈsentrəlaɪzd/',
+        definition: 'Controlled or produced from a single central place rather than spread across many local sites.',
+        contextSentence: 'Twentieth-century electricity networks were built around a centralized model: a few enormous coal, gas, or hydro power plants generated electricity and sent it hundreds of kilometers along high-voltage overhead wires to homes and factories.',
+        exampleSentence: 'The company replaced its centralized warehouse with five smaller regional distribution hubs.',
+        synonyms: ['concentrated', 'unified', 'consolidated'],
+        collocations: ['centralized model', 'centralized system', 'centralized control'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mer-2',
+        word: 'plunge',
+        partOfSpeech: 'verb',
+        phonetic: '/plʌndʒ/',
+        definition: 'To fall or be thrown suddenly and dramatically into a particular state or lower level.',
+        contextSentence: 'If an ice storm or wildfire knocked down one major transmission line, an entire city could plunge into darkness.',
+        exampleSentence: 'When the main fuse blew during the thunderstorm, the entire theater plunged into darkness.',
+        synonyms: ['drop', 'dive', 'descend suddenly'],
+        collocations: ['plunge into darkness', 'temperatures plunged', 'plunge into crisis'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mer-3',
+        word: 'resilient',
+        partOfSpeech: 'adjective',
+        phonetic: '/rɪˈzɪliənt/',
+        definition: 'Able to withstand or recover quickly from difficult conditions, shocks, or disruptions.',
+        contextSentence: 'To make critical infrastructure more resilient, engineers are now dividing giant power grids into smaller, self-sufficient neighborhoods called microgrids.',
+        exampleSentence: 'Planting a mix of tree species makes a forest much more resilient to pests and drought.',
+        synonyms: ['tough', 'adaptable', 'hardy'],
+        collocations: ['more resilient', 'resilient infrastructure', 'resilient community'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mer-4',
+        word: 'self-sufficient',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˌself səˈfɪʃnt/',
+        definition: 'Able to provide everything you need on your own without depending on outside help.',
+        contextSentence: 'To make critical infrastructure more resilient, engineers are now dividing giant power grids into smaller, self-sufficient neighborhoods called microgrids.',
+        exampleSentence: 'With solar panels on the roof and a deep well in the yard, the mountain cabin is completely self-sufficient.',
+        synonyms: ['independent', 'self-supporting', 'autonomous'],
+        collocations: ['self-sufficient neighborhood', 'become self-sufficient', 'self-sufficient in energy'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mer-5',
+        word: 'standalone',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈstændələʊn/',
+        definition: 'Operating independently on its own without needing to be connected to a larger system.',
+        contextSentence: 'In remote mountain villages across Central Asia and island communities in the Pacific, standalone microgrids are also bringing clean, reliable twenty-four-hour electricity to places the national grid never reached.',
+        exampleSentence: 'The dictionary app works as a standalone program even when your phone has no internet connection.',
+        synonyms: ['independent', 'self-contained', 'separate'],
+        collocations: ['standalone microgrid', 'standalone system', 'standalone building'],
+        cefrLevel: 'B2'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b2-mer-1',
+          targetWord: 'resilient',
+          question: 'Why do microgrids make a city’s power supply more "resilient"?',
+          options: [
+            'Because neighborhoods can disconnect from damaged long-distance lines and keep critical services running on local solar and battery power.',
+            'Because microgrids use taller wooden poles that never fall down.',
+            'Because microgrids stop winter storms from happening.'
+          ],
+          correctIndex: 0,
+          explanation: '"Resilient" means able to withstand shocks and continue functioning or recover quickly.'
+        },
+        {
+          id: 'mc-b2-mer-2',
+          targetWord: 'self-sufficient',
+          question: 'What happens when a microgrid switches into "islanding" mode?',
+          options: [
+            'It becomes temporarily self-sufficient, generating and managing its own electricity without outside help.',
+            'It shuts off all electricity to hospitals and water pumps.',
+            'It moves onto a ship in the middle of the ocean.'
+          ],
+          correctIndex: 0,
+          explanation: '"Self-sufficient" means able to meet one’s own needs without external support.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b2-mer-1',
+          sentenceWithBlank: 'When a falling tree branch snapped the overhead cable, the whole street _____ into darkness.',
+          targetWord: 'plunged',
+          hint: 'Fell suddenly into a state',
+          options: ['plunged', 'equated', 'evaluated', 'compiled']
+        },
+        {
+          id: 'cl-b2-mer-2',
+          sentenceWithBlank: 'Unlike older _____ computer networks where one broken server stopped the whole office, cloud systems spread data across many locations.',
+          targetWord: 'centralized',
+          hint: 'Controlled from one single center',
+          options: ['centralized', 'resilient', 'avid', 'baffling']
+        }
+      ],
+      matching: {
+        id: 'ma-b2-mer-1',
+        instructions: 'Match each B2 energy systems term with its definition.',
+        pairs: [
+          { id: 'p1', term: 'centralized', match: 'Controlled or supplied from one single central place' },
+          { id: 'p2', term: 'plunge', match: 'Fall suddenly into darkness or a lower level' },
+          { id: 'p3', term: 'resilient', match: 'Able to withstand shocks and recover quickly' },
+          { id: 'p4', term: 'self-sufficient', match: 'Able to supply one’s own needs without outside help' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b2-mycorrhizal-fungi-wood-wide-web',
+    title: 'The Underground Market: How Fungi and Trees Trade Nutrients Beneath the Forest Floor',
+    subtitle: 'Beneath every healthy woodland lies a microscopic network of fungal threads that swaps soil minerals for sugars made by trees.',
+    level: 'B2',
+    category: 'Science & Nature',
+    readTime: '7 min read',
+    readingTimeMinutes: 7,
+    wordCount: 512,
+    cefrSummary: 'Forest symbiosis, mycorrhizal networks, and B2 biological vocabulary.',
+    themeColor: 'emerald',
+    gradientFrom: 'from-emerald-950',
+    gradientTo: 'to-teal-950',
+    heroImage: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'One cubic centimeter of forest soil can contain several kilometers of microscopic fungal threads linking tree roots together.',
+    paragraphs: [
+      'When we walk through a forest, we see individual oak, pine, and birch trees standing several meters apart, seemingly competing with one another for sunlight and water. Yet if you could look beneath the fallen leaves with a microscope, you would discover that almost ninety percent of land plants are connected to vast underground fungal networks known as mycorrhizae.',
+      'Mushrooms are merely the seasonal fruit of these fungi; the main organism consists of miles of hair-thin white threads called hyphae that wrap around and penetrate tree roots. Because fungal threads are much thinner than the finest tree root, they can squeeze into tiny pores inside rocks and clay, extracting scarce phosphorus and nitrogen that trees could never reach on their own.',
+      'In return for these essential minerals, trees pay the fungi with carbon-rich sugars produced in their leaves through photosynthesis. Biologists describe this partnership as a mutually beneficial biological marketplace: a tree may deliver up to thirty percent of the sugar it manufactures down to its fungal partners in exchange for soil nutrients.',
+      'Even more remarkably, these underground networks link multiple trees together, allowing older, sun-drenched trees to transfer surplus carbon and water to shaded seedlings on the forest floor. Furthermore, when caterpillars attack one tree’s leaves, chemical warning signals travel through the fungal threads to neighboring trees, prompting them to produce bitter defensive compounds before the insects arrive.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b2-mfw-1',
+        word: 'penetrate',
+        partOfSpeech: 'verb',
+        phonetic: '/ˈpenɪtreɪt/',
+        definition: 'To pass into or go through something, especially when it is solid or tightly packed.',
+        contextSentence: 'Mushrooms are merely the seasonal fruit of these fungi; the main organism consists of miles of hair-thin white threads called hyphae that wrap around and penetrate tree roots.',
+        exampleSentence: 'Heavy rain took several hours to penetrate the dry crust of the desert soil.',
+        synonyms: ['pierce', 'enter', 'permeate'],
+        collocations: ['penetrate roots', 'penetrate deep into', 'penetrate the surface'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mfw-2',
+        word: 'extract',
+        partOfSpeech: 'verb',
+        phonetic: '/ɪkˈstrækt/',
+        definition: 'To remove, draw out, or obtain a substance from inside something else.',
+        contextSentence: 'Because fungal threads are much thinner than the finest tree root, they can squeeze into tiny pores inside rocks and clay, extracting scarce phosphorus and nitrogen that trees could never reach on their own.',
+        exampleSentence: 'Bees visit thousands of blossoms to extract sweet nectar for making honey.',
+        synonyms: ['draw out', 'obtain', 'pull out'],
+        collocations: ['extract minerals', 'extract oil', 'extract information'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mfw-3',
+        word: 'mutually',
+        partOfSpeech: 'adverb',
+        phonetic: '/ˈmjuːtʃuəli/',
+        definition: 'Felt, done, or shared by two or more parties toward each other equally.',
+        contextSentence: 'Biologists describe this partnership as a mutually beneficial biological marketplace: a tree may deliver up to thirty percent of the sugar it manufactures down to its fungal partners in exchange for soil nutrients.',
+        exampleSentence: 'The two universities signed a mutually beneficial agreement to share laboratory equipment.',
+        synonyms: ['jointly', 'reciprocally', 'equally'],
+        collocations: ['mutually beneficial', 'mutually agreed', 'mutually supportive'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mfw-4',
+        word: 'surplus',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈsɜːpləs/',
+        definition: 'An amount of something that is left over after all immediate needs have been met.',
+        contextSentence: 'Even more remarkably, these underground networks link multiple trees together, allowing older, sun-drenched trees to transfer surplus carbon and water to shaded seedlings on the forest floor.',
+        exampleSentence: 'The village solar cooperative sells its electricity surplus back to the regional power grid.',
+        synonyms: ['excess', 'leftover', 'extra supply'],
+        collocations: ['surplus carbon', 'food surplus', 'trade surplus'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-mfw-5',
+        word: 'prompt',
+        partOfSpeech: 'verb',
+        phonetic: '/prɒmpt/',
+        definition: 'To cause or encourage someone or something to take a particular action.',
+        contextSentence: 'Furthermore, when caterpillars attack one tree’s leaves, chemical warning signals travel through the fungal threads to neighboring trees, prompting them to produce bitter defensive compounds before the insects arrive.',
+        exampleSentence: 'Rising fuel prices prompted many commuters to switch from driving cars to riding electric trains.',
+        synonyms: ['trigger', 'stimulate', 'motivate'],
+        collocations: ['prompt action', 'prompt them to produce', 'prompt a review'],
+        cefrLevel: 'B2'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b2-mfw-1',
+          targetWord: 'mutually',
+          question: 'Why do biologists call the relationship between trees and mycorrhizal fungi "mutually beneficial"?',
+          options: [
+            'Because both partners gain something essential: fungi give trees soil minerals, and trees give fungi sugars.',
+            'Because fungi destroy tree roots to steal all their water.',
+            'Because trees only grow where no fungi exist.'
+          ],
+          correctIndex: 0,
+          explanation: '"Mutually beneficial" means helpful and advantageous to both sides involved.'
+        },
+        {
+          id: 'mc-b2-mfw-2',
+          targetWord: 'prompt',
+          question: 'What do chemical warning signals traveling through fungal networks "prompt" neighboring trees to do?',
+          options: [
+            'They cause neighboring trees to start producing bitter defensive chemicals before insects reach them.',
+            'They cause all the trees in the forest to drop their leaves in July.',
+            'They make the trees stop performing photosynthesis.'
+          ],
+          correctIndex: 0,
+          explanation: 'To "prompt" means to trigger or cause a response.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b2-mfw-1',
+          sentenceWithBlank: 'In years with abundant rain, farmers store their grain _____ in dry silos for future winters.',
+          targetWord: 'surplus',
+          hint: 'Amount left over after current needs are met',
+          options: ['surplus', 'paralysis', 'drawback', 'illusion']
+        },
+        {
+          id: 'cl-b2-mfw-2',
+          sentenceWithBlank: 'Cold-pressing is the best method to _____ pure olive oil without using chemical solvents.',
+          targetWord: 'extract',
+          hint: 'Draw out or obtain from a source',
+          options: ['extract', 'plunge', 'equate', 'reject']
+        }
+      ],
+      matching: {
+        id: 'ma-b2-mfw-1',
+        instructions: 'Match each B2 forest ecology word with its definition.',
+        pairs: [
+          { id: 'p1', term: 'penetrate', match: 'Pass into or squeeze through a solid material' },
+          { id: 'p2', term: 'extract', match: 'Draw out or obtain a substance from a source' },
+          { id: 'p3', term: 'surplus', match: 'An extra amount left over after needs are met' },
+          { id: 'p4', term: 'prompt', match: 'Trigger or cause someone or something to act' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b2-predictive-maintenance-smart-sensors',
+    title: 'Listening to Bridges: How Smart Sensors Spot Structural Fatigue Before Failure',
+    subtitle: 'Instead of waiting for visible cracks to appear on highway bridges or wind turbines, engineers now use vibration sensors to diagnose hidden wear early.',
+    level: 'B2',
+    category: 'Technology & Innovation',
+    readTime: '7 min read',
+    readingTimeMinutes: 7,
+    wordCount: 508,
+    cefrSummary: 'Predictive maintenance, structural engineering, and B2 technical vocabulary.',
+    themeColor: 'indigo',
+    gradientFrom: 'from-slate-900',
+    gradientTo: 'to-indigo-950',
+    heroImage: 'https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Tiny wireless sensors attached to steel beams monitor vibrations and temperature shifts twenty-four hours a day.',
+    paragraphs: [
+      'For more than a century, maintaining public infrastructure followed two basic schedules: either repair a bridge after a visible crack appeared, or shut it down at fixed calendar intervals so inspectors with binoculars and hammers could check every bolt by hand. Both approaches are expensive, and neither guarantees that a hidden internal flaw will be caught between inspections.',
+      'Every time a heavy freight train rumbles across a steel bridge or a gust of wind bends a turbine blade, the structure vibrates at a specific natural frequency—much like a plucked guitar string produces a distinct musical note. Even if a bridge looks completely intact on the outside, a microscopic crack or a loosening joint inside a support beam subtly alters that vibration pattern.',
+      'Today, civil engineers attach networks of matchbox-sized wireless sensors to bridges, tunnels, and railway tracks. Powered by tiny solar cells or the kinetic vibrations of passing traffic itself, these sensors continuously record acceleration, tilt, and strain, transmitting the data to engineers’ computers in real time.',
+      'This strategy, known as predictive maintenance, allows cities to pinpoint a weakening component months before it becomes hazardous. By replacing a single worn bearing during a scheduled two-hour overnight window, maintenance teams prevent catastrophic collapses, avoid weeks of traffic disruption, and extend the safe lifespan of aging bridges by decades.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b2-pms-1',
+        word: 'flaw',
+        partOfSpeech: 'noun',
+        phonetic: '/flɔː/',
+        definition: 'A defect, crack, or weakness in a material, structure, or plan.',
+        contextSentence: 'Both approaches are expensive, and neither guarantees that a hidden internal flaw will be caught between inspections.',
+        exampleSentence: 'X-ray scanners can detect a tiny flaw inside a jet engine turbine blade.',
+        synonyms: ['defect', 'imperfection', 'weakness'],
+        collocations: ['internal flaw', 'structural flaw', 'design flaw'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-pms-2',
+        word: 'intact',
+        partOfSpeech: 'adjective',
+        phonetic: '/ɪnˈtækt/',
+        definition: 'Complete and undamaged; not broken or harmed.',
+        contextSentence: 'Even if a bridge looks completely intact on the outside, a microscopic crack or a loosening joint inside a support beam subtly alters that vibration pattern.',
+        exampleSentence: 'Remarkably, the twelfth-century brick minaret remained intact after the earthquake.',
+        synonyms: ['undamaged', 'whole', 'unbroken'],
+        collocations: ['completely intact', 'remain intact', 'survive intact'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-pms-3',
+        word: 'subtly',
+        partOfSpeech: 'adverb',
+        phonetic: '/ˈsʌtli/',
+        definition: 'In a delicate or slight way that is difficult to notice immediately.',
+        contextSentence: 'Even if a bridge looks completely intact on the outside, a microscopic crack or a loosening joint inside a support beam subtly alters that vibration pattern.',
+        exampleSentence: 'The lighting in the gallery changes subtly throughout the afternoon to match the outdoor sky.',
+        synonyms: ['slightly', 'faintly', 'delicately'],
+        collocations: ['subtly alter', 'change subtly', 'subtly different'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-pms-4',
+        word: 'pinpoint',
+        partOfSpeech: 'verb',
+        phonetic: '/ˈpɪnpɔɪnt/',
+        definition: 'To find or identify the exact location or cause of something with high accuracy.',
+        contextSentence: 'This strategy, known as predictive maintenance, allows cities to pinpoint a weakening component months before it becomes hazardous.',
+        exampleSentence: 'Acoustic microphones helped plumbers pinpoint the exact spot where the underground water pipe was leaking.',
+        synonyms: ['locate exactly', 'identify', 'home in on'],
+        collocations: ['pinpoint the cause', 'pinpoint the location', 'pinpoint a problem'],
+        cefrLevel: 'B2'
+      },
+      {
+        id: 'v-b2-pms-5',
+        word: 'hazardous',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈhæzədəs/',
+        definition: 'Dangerous and involving a significant risk to people’s safety or health.',
+        contextSentence: 'This strategy, known as predictive maintenance, allows cities to pinpoint a weakening component months before it becomes hazardous.',
+        exampleSentence: 'Freezing rain made driving conditions along the mountain highway extremely hazardous.',
+        synonyms: ['dangerous', 'risky', 'unsafe'],
+        collocations: ['become hazardous', 'hazardous conditions', 'hazardous waste'],
+        cefrLevel: 'B2'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b2-pms-1',
+          targetWord: 'pinpoint',
+          question: 'How do vibration sensors help civil engineers maintain bridges?',
+          options: [
+            'They allow engineers to pinpoint the exact location of a weakening beam months before a visible crack appears.',
+            'They paint the bridge automatically every spring.',
+            'They stop heavy freight trains from crossing the river.'
+          ],
+          correctIndex: 0,
+          explanation: 'To "pinpoint" means to locate or identify something with exact precision.'
+        },
+        {
+          id: 'mc-b2-pms-2',
+          targetWord: 'intact',
+          question: 'What does it mean if a bridge looks "intact" on the outside?',
+          options: [
+            'It appears whole and undamaged on the surface.',
+            'It has already collapsed into the river.',
+            'It is still under construction and missing its roadway.'
+          ],
+          correctIndex: 0,
+          explanation: '"Intact" means whole and not visibly damaged.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b2-pms-1',
+          sentenceWithBlank: 'Used batteries and old paint cans should be taken to a special collection point for _____ household waste.',
+          targetWord: 'hazardous',
+          hint: 'Dangerous to safety or the environment',
+          options: ['hazardous', 'intact', 'centralized', 'standalone']
+        },
+        {
+          id: 'cl-b2-pms-2',
+          sentenceWithBlank: 'The software crash was caused by a tiny _____ in the program’s date-calculation code.',
+          targetWord: 'flaw',
+          hint: 'A defect, mistake, or weakness',
+          options: ['flaw', 'surplus', 'reservoir', 'assumption']
+        }
+      ],
+      matching: {
+        id: 'ma-b2-pms-1',
+        instructions: 'Match each B2 engineering vocabulary word with its definition.',
+        pairs: [
+          { id: 'p1', term: 'flaw', match: 'A defect, crack, or hidden weakness' },
+          { id: 'p2', term: 'intact', match: 'Whole and undamaged' },
+          { id: 'p3', term: 'pinpoint', match: 'Find or identify an exact location or cause' },
+          { id: 'p4', term: 'hazardous', match: 'Dangerous to health or physical safety' }
+        ]
+      }
+    }
   }
 ];
+
 

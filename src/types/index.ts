@@ -13,6 +13,7 @@ export interface VocabularyItem {
   definition: string;
   cefrLevel: CEFRLevel;
   exampleSentence: string;
+  contextSentence?: string;
   collocations: string[];
   synonyms: string[];
   antonyms?: string[];
@@ -80,13 +81,17 @@ export interface Article {
     | 'Neuroscience & Psychology'
     | 'Technology & Society'
     | 'Culture & Language'
-    | 'Modern Economics';
+    | 'Modern Economics'
+    | 'Philosophy & Ethics';
   readTime: string;
+  readingTimeMinutes?: number;
   wordCount: number;
   cefrSummary: string;
   themeColor: string; // Tailwind color token
   gradientFrom: string;
   gradientTo: string;
+  heroImage?: string;
+  imageCaption?: string;
   paragraphs: string[];
   targetVocabulary: VocabularyItem[];
   exercises: ArticleExercises;

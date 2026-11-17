@@ -222,7 +222,7 @@ export default function App() {
             cefrLevel: canonical?.cefrLevel || data.cefrLevel,
             exampleSentence: canonical?.exampleSentence || data.exampleSentence,
             collocations: canonical?.collocations || data.collocations || [],
-            synonyms: canonical?.synonyms,
+            synonyms: canonical?.synonyms || [],
             antonyms: canonical?.antonyms,
             savedAt: typeof data.savedAt === 'number' ? data.savedAt : Date.now(),
             reviewInterval: typeof data.reviewInterval === 'number' ? data.reviewInterval : 1,

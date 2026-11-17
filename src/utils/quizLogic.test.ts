@@ -112,17 +112,17 @@ test('filterArticles filters properly by CEFR level and category', () => {
   assert.equal(searchGrids[0].id, '2');
 });
 
-test('ARTICLES_DATA contains 49 graded articles across B1 (20), B2 (20), and C1 (9) with target vocabulary', async () => {
+test('ARTICLES_DATA contains 70 graded articles across B1 (30), B2 (30), and C1 (10) with target vocabulary', async () => {
   const { ARTICLES_DATA } = await import('../data/articlesData');
-  assert.equal(ARTICLES_DATA.length, 49);
+  assert.equal(ARTICLES_DATA.length, 70);
 
   const b1 = ARTICLES_DATA.filter((a) => a.level === 'B1');
   const b2 = ARTICLES_DATA.filter((a) => a.level === 'B2');
   const c1 = ARTICLES_DATA.filter((a) => a.level === 'C1');
 
-  assert.equal(b1.length, 20);
-  assert.equal(b2.length, 20);
-  assert.equal(c1.length, 9);
+  assert.equal(b1.length, 30);
+  assert.equal(b2.length, 30);
+  assert.equal(c1.length, 10);
 
   for (const article of ARTICLES_DATA) {
     assert.ok(article.paragraphs.length >= 4, `Article ${article.id} should have at least 4 paragraphs`);
@@ -139,7 +139,7 @@ test('ARTICLES_DATA contains 49 graded articles across B1 (20), B2 (20), and C1 
   const coreArticles = ARTICLES_DATA.filter((a) => coreCategories.has(a.category));
   const complexArticles = ARTICLES_DATA.filter((a) => !coreCategories.has(a.category));
 
-  assert.equal(coreArticles.length, 37);
+  assert.equal(coreArticles.length, 58);
   assert.equal(complexArticles.length, 12);
 });
 
@@ -210,7 +210,9 @@ test('B1 target words have Uzbek meanings while B2 and C1 target words remain in
   const b2Words = ARTICLES_DATA.filter((a) => a.level === 'B2').flatMap((a) => a.targetVocabulary);
   const c1Words = ARTICLES_DATA.filter((a) => a.level === 'C1').flatMap((a) => a.targetVocabulary);
 
-  assert.equal(b1Words.length, 100);
+  assert.equal(b1Words.length, 150);
+  assert.equal(b2Words.length, 158);
+  assert.ok(c1Words.length >= 60);
   // Every B1 definition is written in Uzbek (does not start with English "To " or "A " or "The ")
   for (const item of b1Words) {
     assert.equal(

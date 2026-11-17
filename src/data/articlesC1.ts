@@ -1410,6 +1410,168 @@ export const C1_ARTICLES: Article[] = [
         }
       ]
     }
+  },
+  {
+    id: 'c1-epistemic-humility-scientific-consensus',
+    title: 'The Architecture of Doubt: Why Scientific Consensus Thrives on Organised Scepticism',
+    subtitle: 'Far from being a monument of immutable dogma, modern science derives its authority precisely from its willingness to revise its own foundational models.',
+    level: 'C1',
+    category: 'Science & Nature',
+    readTime: '9 min read',
+    readingTimeMinutes: 9,
+    wordCount: 685,
+    cefrSummary: 'Uses C1 epistemological and academic vocabulary, concessive clauses, and formal analytical prose.',
+    themeColor: 'indigo',
+    gradientFrom: 'from-slate-950',
+    gradientTo: 'to-indigo-950',
+    heroImage: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Peer review, replication trials, and open data repositories institutionalize rigorous critique across global research laboratories.',
+    paragraphs: [
+      'In public discourse, scientific findings are frequently framed in binary terms: a hypothesis is either heralded as an indisputable breakthrough or dismissed as flawed conjecture whenever subsequent studies refine its conclusions. This expectation of immediate infallibility misunderstands the very engine of empirical inquiry. Unlike ideological systems that equate strength with permanence, science derives its epistemic authority from institutionalized fallibilism—the recognition that every model of reality is provisional and subject to revision in light of superior evidence.',
+      'The philosopher of science Karl Popper famously argued that no number of confirming observations can ever definitively prove a universal theory true, whereas a single reproducible counterexample suffices to falsify it. Consequently, the hallmark of a robust scientific claim is not that it is shielded from doubt, but that it exposes itself to the most stringent tests imaginable. When physicists spent decades attempting to detect flaws in Einstein’s general relativity through gravitational-wave interferometers and atomic clocks, their aim was not to venerate orthodoxy, but to push the theory until it broke.',
+      'Equally vital is the sociology of how individual curiosity is transmuted into collective consensus. Every individual researcher is susceptible to confirmation bias, career incentives, and methodological blind spots. What prevents these human frailties from corrupting the enterprise as a whole is what Robert Merton termed "organized skepticism": adversarial peer review, independent replication, and transparent disclosure of raw datasets. Knowledge becomes reliable not because scientists are uniquely dispassionate saints, but because the community’s norms reward those who uncover errors in prevailing paradigms.',
+      'Paradoxically, when public health officials or climate modellers update their projections as fuller datasets emerge, lay audiences sometimes interpret those adjustments as evidence of incompetence or duplicity. Bridging this communication gap requires cultivating a broader cultural appreciation for calibrated uncertainty. A discipline that candidly quantifies its margins of error and amends its prescriptions when confronted with new anomalies is demonstrating intellectual integrity, not weakness.',
+      'Ultimately, epistemic humility is the antidote to both dogmatic complacency and cynical relativism. Accepting that our current theories are approximations does not mean that all opinions are equally valid; rather, it affirms that hard-won consensus—forged through decades of surviving relentless scrutiny—remains humanity’s most trustworthy compass for navigating a complex world.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-c1-ehs-1',
+        word: 'provisional',
+        partOfSpeech: 'adjective',
+        phonetic: '/prəˈvɪʒənl/',
+        definition: 'Accepted or arranged for the present time only, and open to change or replacement when fuller evidence becomes available.',
+        contextSentence: 'Unlike ideological systems that equate strength with permanence, science derives its epistemic authority from institutionalized fallibilism—the recognition that every model of reality is provisional and subject to revision in light of superior evidence.',
+        exampleSentence: 'The archaeological team published a provisional timeline of the site while awaiting radiocarbon results from the deepest layer.',
+        synonyms: ['tentative', 'interim', 'conditional'],
+        collocations: ['provisional conclusion', 'provisional model', 'provisional agreement'],
+        cefrLevel: 'C1'
+      },
+      {
+        id: 'v-c1-ehs-2',
+        word: 'stringent',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈstrɪndʒənt/',
+        definition: 'Extremely strict, precise, and demanding, leaving no room for error or laxity.',
+        contextSentence: 'Consequently, the hallmark of a robust scientific claim is not that it is shielded from doubt, but that it exposes itself to the most stringent tests imaginable.',
+        exampleSentence: 'New aviation materials must pass stringent safety trials before they are approved for commercial aircraft.',
+        synonyms: ['rigorous', 'strict', 'exacting'],
+        collocations: ['stringent tests', 'stringent regulations', 'stringent standards'],
+        cefrLevel: 'C1'
+      },
+      {
+        id: 'v-c1-ehs-3',
+        word: 'susceptible',
+        partOfSpeech: 'adjective',
+        phonetic: '/səˈseptəbl/',
+        definition: 'Likely or liable to be influenced, harmed, or affected by a particular bias, flaw, or external factor.',
+        contextSentence: 'Every individual researcher is susceptible to confirmation bias, career incentives, and methodological blind spots.',
+        exampleSentence: 'Without double-blind controls, clinical trials are highly susceptible to observer bias.',
+        synonyms: ['prone', 'vulnerable', 'liable'],
+        collocations: ['susceptible to bias', 'highly susceptible', 'susceptible to infection'],
+        cefrLevel: 'C1'
+      },
+      {
+        id: 'v-c1-ehs-4',
+        word: 'prevailing',
+        partOfSpeech: 'adjective',
+        phonetic: '/prɪˈveɪlɪŋ/',
+        definition: 'Existing or most widely accepted at a particular time or in a particular field.',
+        contextSentence: 'Knowledge becomes reliable not because scientists are uniquely dispassionate saints, but because the community’s norms reward those who uncover errors in prevailing paradigms.',
+        exampleSentence: 'Alfred Wegener’s theory of continental drift challenged the prevailing geological orthodoxy of the early twentieth century.',
+        synonyms: ['dominant', 'current', 'predominant'],
+        collocations: ['prevailing paradigm', 'prevailing view', 'prevailing wind'],
+        cefrLevel: 'C1'
+      },
+      {
+        id: 'v-c1-ehs-5',
+        word: 'candidly',
+        partOfSpeech: 'adverb',
+        phonetic: '/ˈkændɪdli/',
+        definition: 'In an honest, straightforward, and open manner, without hiding limitations or difficulties.',
+        contextSentence: 'A discipline that candidly quantifies its margins of error and amends its prescriptions when confronted with new anomalies is demonstrating intellectual integrity, not weakness.',
+        exampleSentence: 'In the post-project review, the lead engineer spoke candidly about the software limitations they had encountered.',
+        synonyms: ['frankly', 'openly', 'honestly'],
+        collocations: ['speak candidly', 'candidly acknowledge', 'candidly admit'],
+        cefrLevel: 'C1'
+      },
+      {
+        id: 'v-c1-ehs-6',
+        word: 'scrutiny',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈskruːtəni/',
+        definition: 'Critical, thorough, and detailed examination of evidence, methods, or conduct.',
+        contextSentence: 'Accepting that our current theories are approximations does not mean that all opinions are equally valid; rather, it affirms that hard-won consensus—forged through decades of surviving relentless scrutiny—remains humanity’s most trustworthy compass for navigating a complex world.',
+        exampleSentence: 'The central bank’s inflation forecasts came under intense scrutiny from independent economists.',
+        synonyms: ['inspection', 'examination', 'analysis'],
+        collocations: ['relentless scrutiny', 'come under scrutiny', 'withstand scrutiny'],
+        cefrLevel: 'C1'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-c1-ehs-1',
+          targetWord: 'provisional',
+          question: 'Why does the author describe scientific models as "provisional"?',
+          options: [
+            'Because even well-supported models remain open to refinement or revision if stronger empirical evidence emerges.',
+            'Because scientific models are only valid for twenty-four hours after publication.',
+            'Because scientists never use mathematical equations in their research.'
+          ],
+          correctIndex: 0,
+          explanation: '"Provisional" means accepted for the present while remaining open to future revision.'
+        },
+        {
+          id: 'mc-c1-ehs-2',
+          targetWord: 'scrutiny',
+          question: 'According to the article, what makes scientific consensus reliable despite the biases of individual researchers?',
+          options: [
+            'Hypotheses must survive relentless collective scrutiny through adversarial peer review and independent replication.',
+            'Individual scientists are completely immune to career pressure or confirmation bias.',
+            'Once a paper is published, nobody is allowed to question its data.'
+          ],
+          correctIndex: 0,
+          explanation: '"Scrutiny" refers to critical, searching examination.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-c1-ehs-1',
+          sentenceWithBlank: 'Drinking water treatment plants are subject to _____ quality inspections every single day.',
+          targetWord: 'stringent',
+          hint: 'Strict, rigorous, and demanding',
+          options: ['stringent', 'provisional', 'ambiguous', 'unwitting']
+        },
+        {
+          id: 'cl-c1-ehs-2',
+          sentenceWithBlank: 'Before the invention of the microscope, the _____ medical theory held that diseases were caused by bad air.',
+          targetWord: 'prevailing',
+          hint: 'Most widely accepted at that time',
+          options: ['prevailing', 'susceptible', 'unchecked', 'wary']
+        }
+      ],
+      matching: {
+        id: 'ma-c1-ehs-1',
+        instructions: 'Match each C1 philosophy of science term with its definition.',
+        pairs: [
+          { id: 'p1', term: 'provisional', match: 'Accepted for the present but open to future revision' },
+          { id: 'p2', term: 'stringent', match: 'Extremely strict, rigorous, and demanding' },
+          { id: 'p3', term: 'susceptible', match: 'Prone or vulnerable to being influenced by something' },
+          { id: 'p4', term: 'scrutiny', match: 'Close, critical examination and inspection' }
+        ]
+      },
+      wordFormation: [
+        {
+          id: 'wf-c1-ehs-1',
+          promptSentence: 'The witness’s testimony collapsed under close _____ (SCRUTINIZE) when phone records contradicted his timeline.',
+          rootWord: 'SCRUTINIZE',
+          correctAnswer: 'scrutiny',
+          hint: 'Convert the verb into an uncountable noun ending in -y',
+          explanation: 'The noun form of "scrutinize" is "scrutiny".'
+        }
+      ]
+    }
   }
 ];
+
 

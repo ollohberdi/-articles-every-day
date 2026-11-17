@@ -335,7 +335,7 @@ export const VocabularyGym: React.FC<VocabularyGymProps> = ({
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          onToggleSaveWord(currentVocab);
+                          onToggleSaveWord(currentVocab as VocabularyItem);
                         }}
                         aria-label={savedWordIds.has(currentVocab.id) ? 'Remove word' : 'Save word'}
                         className="p-1.5 text-stone-400 hover:text-amber-600 rounded-lg hover:bg-stone-100 transition-colors"

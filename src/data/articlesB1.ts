@@ -2739,6 +2739,1407 @@ export const B1_ARTICLES: Article[] = [
         ]
       }
     }
+  },
+  {
+    id: 'b1-uzbek-silk-road-caravans',
+    title: 'Crossroads of Trade: How Caravans Connected Ancient Samarkand and Bukhara',
+    subtitle: 'Long before cargo planes and trains, camel caravans carried silk, paper, and astronomical ideas across Central Asia.',
+    level: 'B1',
+    category: 'History & Civilizations',
+    readTime: '5 min read',
+    readingTimeMinutes: 5,
+    wordCount: 410,
+    cefrSummary: 'Historical trade, Silk Road heritage, and B1 travel and commerce vocabulary.',
+    themeColor: 'amber',
+    gradientFrom: 'from-amber-900',
+    gradientTo: 'to-stone-900',
+    heroImage: 'https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Tiled madrasahs and ancient trading domes still stand in the historic centers of Samarkand and Bukhara.',
+    paragraphs: [
+      'For more than a thousand years, the cities of Samarkand and Bukhara stood at the center of the Silk Road. This famous network was not a single paved highway, but a collection of desert tracks and mountain passes linking China with the Mediterranean Sea. Every spring, long caravans of camels loaded with silk, spices, glass, and porcelain set out across the dry plains of Central Asia.',
+      'Traveling between oasis cities was dangerous and exhausting. Merchants faced sandstorms, freezing mountain nights, and severe water shortages. To protect travelers and encourage commerce, local rulers built sturdy stone inns called caravanserais along the main routes. Each inn was spaced about one day’s walk apart so traders could rest safely behind high walls.',
+      'Inside a caravanserai, merchants from Persia, India, China, and Italy fed their animals in the courtyard and slept in small rooms upstairs. As they shared evening meals, they did more than exchange goods. They also shared recipes, musical instruments, medical knowledge, and methods for making durable paper.',
+      'This constant cultural exchange turned Samarkand and Bukhara into vibrant centers of science and architecture. Even after ocean ships eventually replaced desert caravans as the main way to transport cargo, the magnificent blue domes and marketplaces of Central Asia remained lasting monuments to international cooperation.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b1-101',
+        word: 'merchant',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈmɜːtʃənt/',
+        definition: 'Savdogar, tijoratchi — tovarlarni katta miqdorda sotib olib, boshqa joylarda sotadigan kishi.',
+        contextSentence: 'Merchants faced sandstorms, freezing mountain nights, and severe water shortages.',
+        exampleSentence: 'The silk merchant traveled from Samarkand to Istanbul twice a year.',
+        synonyms: ['trader', 'dealer', 'vendor'],
+        collocations: ['wealthy merchant', 'foreign merchant', 'merchant ship'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-102',
+        word: 'commerce',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈkɒmɜːs/',
+        definition: 'Tijorat, savdo-sotiq — mamlakatlar yoki shaharlar o‘rtasida tovar va xizmatlarni sotib olish hamda sotish faoliyati.',
+        contextSentence: 'To protect travelers and encourage commerce, local rulers built sturdy stone inns called caravanserais along the main routes.',
+        exampleSentence: 'Railways and ports helped international commerce grow rapidly in the nineteenth century.',
+        synonyms: ['trade', 'business', 'traffic'],
+        collocations: ['international commerce', 'electronic commerce', 'encourage commerce'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-103',
+        word: 'sturdy',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈstɜːdi/',
+        definition: 'Baquvvat, mustahkam — kuchli qurilgan va osonlikcha sinmaydigan yoki buzilmaydigan.',
+        contextSentence: 'To protect travelers and encourage commerce, local rulers built sturdy stone inns called caravanserais along the main routes.',
+        exampleSentence: 'You need sturdy hiking boots before walking across rocky mountain trails.',
+        synonyms: ['strong', 'solid', 'robust'],
+        collocations: ['sturdy walls', 'sturdy shoes', 'sturdy table'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-104',
+        word: 'exchange',
+        partOfSpeech: 'verb',
+        phonetic: '/ɪksˈtʃeɪndʒ/',
+        definition: 'Almashmoq, ayirboshlamoq — biror narsani berib, evaziga boshqa narsa olmoq.',
+        contextSentence: 'As they shared evening meals, they did more than exchange goods.',
+        exampleSentence: 'Students from the two universities meet every Friday to exchange language tips.',
+        synonyms: ['swap', 'trade', 'share'],
+        collocations: ['exchange goods', 'exchange ideas', 'exchange currency'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-105',
+        word: 'cargo',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈkɑːɡəʊ/',
+        definition: 'Yuk — kema, samolyot, poyezd yoki karvon orqali tashiladigan tovarlar.',
+        contextSentence: 'Even after ocean ships eventually replaced desert caravans as the main way to transport cargo, the magnificent blue domes and marketplaces of Central Asia remained lasting monuments to international cooperation.',
+        exampleSentence: 'The ship arrived at the harbor carrying a heavy cargo of grain and timber.',
+        synonyms: ['freight', 'load', 'shipment'],
+        collocations: ['heavy cargo', 'transport cargo', 'cargo ship'],
+        cefrLevel: 'B1'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b1-42',
+          targetWord: 'commerce',
+          question: 'Why did local rulers build stone caravanserais along the Silk Road?',
+          options: [
+            'To protect travelers and encourage commerce between cities',
+            'To stop foreign merchants from entering the country',
+            'To store ocean ships during the winter months',
+            'To hide secret recipes from neighboring towns'
+          ],
+          correctIndex: 0,
+          explanation: '"Commerce" means trade—the buying and selling of goods across regions.'
+        },
+        {
+          id: 'mc-b1-43',
+          targetWord: 'cargo',
+          question: 'What does "cargo" refer to in the final paragraph?',
+          options: [
+            'Goods and products carried by ships, trains, or caravans',
+            'A traditional musical instrument played in Bukhara',
+            'The blue tiles used on historic domes',
+            'A map of desert water wells'
+          ],
+          correctIndex: 0,
+          explanation: '"Cargo" refers to goods transported in bulk by vehicles, ships, or pack animals.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b1-42',
+          sentenceWithBlank: 'The carpenter built a _____ oak bench that lasted in the garden for thirty years.',
+          targetWord: 'sturdy',
+          hint: 'Strong and solidly built',
+          options: ['sturdy', 'fragile', 'temporary', 'artificial']
+        },
+        {
+          id: 'cl-b1-43',
+          sentenceWithBlank: 'At the conference, scientists from twelve countries met to _____ research findings.',
+          targetWord: 'exchange',
+          hint: 'Give and receive in return',
+          options: ['exchange', 'eliminate', 'abandon', 'postpone']
+        }
+      ],
+      matching: {
+        id: 'mat-b1-21',
+        instructions: 'Match each B1 Silk Road history word with its definition:',
+        pairs: [
+          { id: 'p-b1-81', term: 'merchant', match: 'a person who buys and sells goods for trade' },
+          { id: 'p-b1-82', term: 'commerce', match: 'the activity of buying and selling on a large scale' },
+          { id: 'p-b1-83', term: 'sturdy', match: 'strongly built and not easily damaged' },
+          { id: 'p-b1-84', term: 'cargo', match: 'goods carried by a ship, aircraft, or caravan' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b1-bilingual-brain-benefits',
+    title: 'Two Languages, One Mind: How Learning a Second Language Shapes the Brain',
+    subtitle: 'Neuroscientists have found that switching between two languages strengthens attention and problem-solving skills.',
+    level: 'B1',
+    category: 'Psychology & Mind',
+    readTime: '5 min read',
+    readingTimeMinutes: 5,
+    wordCount: 405,
+    cefrSummary: 'Everyday neuroscience, language learning habits, and B1 focus vocabulary.',
+    themeColor: 'indigo',
+    gradientFrom: 'from-indigo-900',
+    gradientTo: 'to-slate-900',
+    heroImage: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Reading and practicing a second language gives the brain a daily mental workout.',
+    paragraphs: [
+      'When you learn a new language, you do much more than memorize lists of words and grammar rules. Brain scans show that speaking two languages regularly changes how different parts of the brain communicate with one another. Just as lifting weights makes your muscles stronger, switching between languages exercises the brain networks responsible for focus.',
+      'Every time a bilingual person wants to say a word, both languages become active in the mind at once. The brain must quickly select the right word in one language while holding back the other language. Because this mental selection happens hundreds of times every day, bilingual speakers become very skilled at ignoring distractions in noisy environments.',
+      'Researchers have also discovered that people who use two languages often find it easier to switch between different tasks at school or work. For example, they can move from writing an email to solving a math problem without losing their concentration. Even beginners who study a foreign language for thirty minutes a day start to see improvements in memory.',
+      'Finally, lifelong language learning protects the brain as people grow older. Medical studies suggest that adults who speak more than one language stay mentally sharp several years longer than those who only speak one. It is never too late to start learning a new language and enjoy these lasting mental rewards.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b1-106',
+        word: 'memorize',
+        partOfSpeech: 'verb',
+        phonetic: '/ˈmeməraɪz/',
+        definition: 'Yodlamoq, xotirada saqlab qolmoq — biror ma’lumotni keyinchalik yoddan aytib bera oladigan darajada o‘rganmoq.',
+        contextSentence: 'When you learn a new language, you do much more than memorize lists of words and grammar rules.',
+        exampleSentence: 'Actors have to memorize dozens of pages of dialogue before opening night.',
+        synonyms: ['learn by heart', 'remember', 'retain'],
+        collocations: ['memorize words', 'memorize a poem', 'memorize phone numbers'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-107',
+        word: 'select',
+        partOfSpeech: 'verb',
+        phonetic: '/sɪˈlekt/',
+        definition: 'Tanlamoq, saralab olmoq — bir nechta variant orasidan eng mosini yoki eng yaxshisini tanlab olmoq.',
+        contextSentence: 'The brain must quickly select the right word in one language while holding back the other language.',
+        exampleSentence: 'Please select your preferred delivery date before completing the order.',
+        synonyms: ['choose', 'pick', 'opt for'],
+        collocations: ['carefully select', 'select the right word', 'select a winner'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-108',
+        word: 'distraction',
+        partOfSpeech: 'noun',
+        phonetic: '/dɪˈstrækʃn/',
+        definition: 'Chalg‘ituvchi narsa — diqqatni jamlashga xalaqit beradigan shovqin, xabar yoki hodisa.',
+        contextSentence: 'Because this mental selection happens hundreds of times every day, bilingual speakers become very skilled at ignoring distractions in noisy environments.',
+        exampleSentence: 'Turning off phone notifications removes a major distraction while studying.',
+        synonyms: ['interruption', 'disturbance', 'interference'],
+        collocations: ['ignore distractions', 'avoid distractions', 'constant distraction'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-109',
+        word: 'concentration',
+        partOfSpeech: 'noun',
+        phonetic: '/ˌkɒnsnˈtreɪʃn/',
+        definition: 'Diqqatni jamlash, e’tibor — barcha fikr va diqqatni bitta ishga qaratish qobiliyati.',
+        contextSentence: 'For example, they can move from writing an email to solving a math problem without losing their concentration.',
+        exampleSentence: 'Playing chess requires deep concentration and patience.',
+        synonyms: ['focus', 'attention', 'attentiveness'],
+        collocations: ['lose concentration', 'deep concentration', 'improve concentration'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-110',
+        word: 'reward',
+        partOfSpeech: 'noun',
+        phonetic: '/rɪˈwɔːd/',
+        definition: 'Mukofot, samara — mehnat, harakat yoki yaxshi ish evaziga olinadigan foyda yoki rag‘bat.',
+        contextSentence: 'It is never too late to start learning a new language and enjoy these lasting mental rewards.',
+        exampleSentence: 'Seeing her students pass the exam was the greatest reward for her hard work.',
+        synonyms: ['benefit', 'prize', 'return'],
+        collocations: ['mental reward', 'financial reward', 'reap the rewards'],
+        cefrLevel: 'B1'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b1-44',
+          targetWord: 'distraction',
+          question: 'Why are bilingual speakers often good at ignoring "distractions"?',
+          options: [
+            'Because their brains practice choosing one language while blocking out the other every day',
+            'Because they always wear headphones in public places',
+            'Because they never use computers or mobile phones',
+            'Because they only study in completely dark rooms'
+          ],
+          correctIndex: 0,
+          explanation: 'A "distraction" is something that pulls your attention away from what you are doing.'
+        },
+        {
+          id: 'mc-b1-45',
+          targetWord: 'concentration',
+          question: 'What does losing your "concentration" mean?',
+          options: [
+            'Becoming unable to keep your mind focused on the task in front of you',
+            'Forgetting your house keys on the kitchen table',
+            'Speaking louder than everyone else in a room',
+            'Finishing your homework earlier than expected'
+          ],
+          correctIndex: 0,
+          explanation: '"Concentration" is the ability to direct all your mental effort toward a single activity.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b1-44',
+          sentenceWithBlank: 'Instead of trying to _____ fifty words in one night, review ten words every morning.',
+          targetWord: 'memorize',
+          hint: 'Learn so that you remember it exactly',
+          options: ['memorize', 'postpone', 'eliminate', 'rescue']
+        },
+        {
+          id: 'cl-b1-45',
+          sentenceWithBlank: 'The library is my favorite place to study because there are very few _____ there.',
+          targetWord: 'distractions',
+          hint: 'Things that take your attention away from work',
+          options: ['distractions', 'rewards', 'merchants', 'Harvests']
+        }
+      ],
+      matching: {
+        id: 'mat-b1-22',
+        instructions: 'Match each B1 psychology and learning word with its definition:',
+        pairs: [
+          { id: 'p-b1-85', term: 'memorize', match: 'learn something carefully so you can remember it later' },
+          { id: 'p-b1-86', term: 'select', match: 'choose the best option from a group' },
+          { id: 'p-b1-87', term: 'distraction', match: 'something that stops you from paying attention' },
+          { id: 'p-b1-88', term: 'reward', match: 'a benefit or prize received for hard work' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b1-solar-water-desalination',
+    title: 'Drinking the Sea: How Solar Energy Turns Saltwater into Fresh Water',
+    subtitle: 'Dry coastal towns are using sunlight to produce clean drinking water without burning fossil fuels.',
+    level: 'B1',
+    category: 'Technology & Innovation',
+    readTime: '5 min read',
+    readingTimeMinutes: 5,
+    wordCount: 412,
+    cefrSummary: 'Clean water technology, solar energy, and B1 environmental vocabulary.',
+    themeColor: 'sky',
+    gradientFrom: 'from-sky-900',
+    gradientTo: 'to-slate-900',
+    heroImage: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Solar panels along sunny coastlines provide clean electricity for modern water treatment plants.',
+    paragraphs: [
+      'Oceans cover more than seventy percent of the Earth’s surface, yet millions of people living near the coast suffer from severe freshwater shortages. Seawater contains far too much salt for humans to drink or for farmers to use on ordinary crops. For decades, removing salt from ocean water required enormous amounts of electricity produced by burning coal or gas.',
+      'Today, engineers have developed a cleaner solution by combining water treatment plants with solar power. Coastal deserts receive abundant sunshine almost every day of the year. By installing rows of solar panels next to the sea, communities can capture energy from the sun and use it to pump seawater through ultra-fine filters.',
+      'These special filters have microscopic holes that allow pure water molecules to pass through while blocking salt and minerals. A single solar-powered plant in Kenya now supplies clean drinking water to more than thirty thousand residents every day. Local families no longer have to walk for hours to collect muddy water from distant rivers.',
+      'Engineers are also finding clever ways to handle the leftover salt so it does not harm marine life when returned to the ocean. As solar equipment becomes cheaper and more efficient, sunlight-powered water plants could soon protect dry regions around the world from future droughts.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b1-111',
+        word: 'shortage',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈʃɔːtɪdʒ/',
+        definition: 'Tanqislik, yetishmovchilik — zarur bo‘lgan narsaning yetarli miqdorda bo‘lmasligi holati.',
+        contextSentence: 'Oceans cover more than seventy percent of the Earth’s surface, yet millions of people living near the coast suffer from severe freshwater shortages.',
+        exampleSentence: 'Low rainfall this spring caused a serious water shortage across the southern provinces.',
+        synonyms: ['lack', 'scarcity', 'deficiency'],
+        collocations: ['water shortage', 'food shortage', 'severe shortage'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-112',
+        word: 'abundant',
+        partOfSpeech: 'adjective',
+        phonetic: '/əˈbʌndənt/',
+        definition: 'Mo‘l-ko‘l, serob — juda ko‘p miqdorda mavjud bo‘lgan, yetarlidan ham ortiq.',
+        contextSentence: 'Coastal deserts receive abundant sunshine almost every day of the year.',
+        exampleSentence: 'Wild berries are abundant in the forest during late summer.',
+        synonyms: ['plentiful', 'ample', 'rich'],
+        collocations: ['abundant sunshine', 'abundant supply', 'abundant natural resources'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-113',
+        word: 'capture',
+        partOfSpeech: 'verb',
+        phonetic: '/ˈkæptʃə(r)/',
+        definition: 'Tutib qolmoq, yig‘ib olmoq — energiya, suv yoki yorug‘likni foydalanish maqsadida ushlab qolmoq.',
+        contextSentence: 'By installing rows of solar panels next to the sea, communities can capture energy from the sun and use it to pump seawater through ultra-fine filters.',
+        exampleSentence: 'Rainwater barrels capture water from the roof so we can water the garden later.',
+        synonyms: ['catch', 'collect', 'trap'],
+        collocations: ['capture energy', 'capture rainwater', 'capture attention'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-114',
+        word: 'resident',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈrezɪdənt/',
+        definition: 'Mahalliy aholi vakili, yashovchi — muayyan shahar, qishloq yoki hududda doimiy yashaydigan inson.',
+        contextSentence: 'A single solar-powered plant in Kenya now supplies clean drinking water to more than thirty thousand residents every day.',
+        exampleSentence: 'Local residents volunteered on Saturday to plant fifty trees in the neighborhood park.',
+        synonyms: ['inhabitant', 'citizen', 'local'],
+        collocations: ['local residents', 'city residents', 'permanent resident'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-115',
+        word: 'drought',
+        partOfSpeech: 'noun',
+        phonetic: '/draʊt/',
+        definition: 'Qurg‘oqchilik — uzoq vaqt davomida yomg‘ir yog‘masligi oqibatida suvning juda kamayib ketishi.',
+        contextSentence: 'As solar equipment becomes cheaper and more efficient, sunlight-powered water plants could soon protect dry regions around the world from future droughts.',
+        exampleSentence: 'Many farmers switched to drip irrigation to save their fruit trees during the summer drought.',
+        synonyms: ['dry spell', 'water scarcity', 'arid period'],
+        collocations: ['severe drought', 'prolonged drought', 'survive a drought'],
+        cefrLevel: 'B1'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b1-46',
+          targetWord: 'abundant',
+          question: 'Why are coastal deserts ideal locations for solar water plants?',
+          options: [
+            'Because they receive abundant sunshine—plenty of bright sunlight—almost every day',
+            'Because ocean water near deserts has no salt in it',
+            'Because it rains heavily every afternoon in the desert',
+            'Because solar panels only work in freezing temperatures'
+          ],
+          correctIndex: 0,
+          explanation: '"Abundant" means existing in very large quantities; plentiful.'
+        },
+        {
+          id: 'mc-b1-47',
+          targetWord: 'drought',
+          question: 'What is a "drought"?',
+          options: [
+            'A long period of very little or no rain that causes a lack of water',
+            'A powerful ocean wave caused by strong winds',
+            'A machine that filters salt out of seawater',
+            'A type of solar panel installed on rooftops'
+          ],
+          correctIndex: 0,
+          explanation: 'A "drought" is a prolonged period of abnormally low rainfall leading to a shortage of water.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b1-46',
+          sentenceWithBlank: 'A sudden _____ of skilled drivers caused delays on several city bus routes.',
+          targetWord: 'shortage',
+          hint: 'A situation where there is not enough of something',
+          options: ['shortage', 'reward', 'cargo', 'commerce']
+        },
+        {
+          id: 'cl-b1-47',
+          sentenceWithBlank: 'Town _____ gathered at the community hall to vote on the new bicycle lane project.',
+          targetWord: 'residents',
+          hint: 'People who live in a particular place',
+          options: ['residents', 'distractions', 'merchants', 'ancestors']
+        }
+      ],
+      matching: {
+        id: 'mat-b1-23',
+        instructions: 'Match each B1 water and energy word with its definition:',
+        pairs: [
+          { id: 'p-b1-89', term: 'shortage', match: 'a situation in which there is not enough of something needed' },
+          { id: 'p-b1-90', term: 'abundant', match: 'available in large quantities; plentiful' },
+          { id: 'p-b1-91', term: 'capture', match: 'collect and store energy or water for use' },
+          { id: 'p-b1-92', term: 'drought', match: 'a long period without rain that dries up land and rivers' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b1-migratory-birds-navigation',
+    title: 'Compasses in the Sky: How Migratory Birds Find Their Way Across Continents',
+    subtitle: 'Every autumn, millions of birds fly thousands of kilometers without getting lost—guided by the sun, stars, and Earth’s magnetic field.',
+    level: 'B1',
+    category: 'Science & Nature',
+    readTime: '5 min read',
+    readingTimeMinutes: 5,
+    wordCount: 415,
+    cefrSummary: 'Wildlife migration, natural navigation, and B1 nature vocabulary.',
+    themeColor: 'emerald',
+    gradientFrom: 'from-emerald-900',
+    gradientTo: 'to-stone-900',
+    heroImage: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Migratory birds travel along ancient sky highways connecting northern breeding grounds with warmer winter habitats.',
+    paragraphs: [
+      'Every autumn, as days grow shorter and insects disappear in northern countries, millions of birds prepare for an incredible journey. Swallows, storks, and cranes fly thousands of kilometers south to spend the winter in warmer regions where food is easy to find. Then, when spring arrives, they return to the exact same trees and rooftops where they built their nests the year before.',
+      'For centuries, scientists wondered how birds navigate across oceans and deserts without maps or road signs. Research shows that birds actually use several natural compasses at the same time. During the day, they track the position of the sun in the sky and recognize familiar landmarks such as coastlines, mountain ranges, and wide rivers.',
+      'At night, songbirds look up at the stars and orient themselves around the North Star. Even more remarkably, when thick clouds hide the sky, birds can sense the Earth’s invisible magnetic field. Special proteins inside a bird’s eyes react to magnetic lines, helping the bird tell north from south even in total darkness.',
+      'Along their journey, flocks depend on wetlands and lakes as resting stations where they can drink water and restore their energy. Protecting these natural stopover sites is essential so that migratory birds can continue completing their ancient journeys every year.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b1-116',
+        word: 'navigate',
+        partOfSpeech: 'verb',
+        phonetic: '/ˈnævɪɡeɪt/',
+        definition: 'Yo‘l topmoq, yo‘nalishni aniqlamoq — bir joydan ikkinchi joyga to‘g‘ri yo‘nalishni topib harakatlanmoq.',
+        contextSentence: 'For centuries, scientists wondered how birds navigate across oceans and deserts without maps or road signs.',
+        exampleSentence: 'Early sailors used the stars to navigate across the open ocean at night.',
+        synonyms: ['find the way', 'steer', 'guide'],
+        collocations: ['navigate across oceans', 'navigate safely', 'navigate by the stars'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-117',
+        word: 'landmark',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈlændmɑːk/',
+        definition: 'Mo‘ljal, taniqli belgi — uzoqdan ko‘rinib turadigan va yo‘lni topishga yordam beradigan tog‘, daryo yoki bino.',
+        contextSentence: 'During the day, they track the position of the sun in the sky and recognize familiar landmarks such as coastlines, mountain ranges, and wide rivers.',
+        exampleSentence: 'The old television tower is a famous landmark that can be seen from across the city.',
+        synonyms: ['guidepost', 'monument', 'marker'],
+        collocations: ['familiar landmark', 'historic landmark', 'natural landmark'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-118',
+        word: 'invisible',
+        partOfSpeech: 'adjective',
+        phonetic: '/ɪnˈvɪzəbl/',
+        definition: 'Ko‘rinmas — oddiy ko‘z bilan ko‘rib bo‘lmaydigan.',
+        contextSentence: 'Even more remarkably, when thick clouds hide the sky, birds can sense the Earth’s invisible magnetic field.',
+        exampleSentence: 'Although wind is invisible, we can see its power when tree branches bend.',
+        synonyms: ['unseen', 'imperceptible', 'hidden'],
+        collocations: ['invisible magnetic field', 'invisible to the eye', 'nearly invisible'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-119',
+        word: 'flock',
+        partOfSpeech: 'noun',
+        phonetic: '/flɒk/',
+        definition: 'Gala, poda — birgalikda uchadigan yoki oziqlanadigan qushlar (yoki qo‘ylar) to‘dasi.',
+        contextSentence: 'Along their journey, flocks depend on wetlands and lakes as resting stations where they can drink water and restore their energy.',
+        exampleSentence: 'A large flock of wild geese flew in a V-shape across the autumn sky.',
+        synonyms: ['group', 'flight', 'herd'],
+        collocations: ['flock of birds', 'migrating flock', 'large flock'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-120',
+        word: 'restore',
+        partOfSpeech: 'verb',
+        phonetic: '/rɪˈstɔː(r)/',
+        definition: 'Tiklamoq, qayta tiklamoq — yo‘qotilgan kuch, quvvat yoki avvalgi holatni qayta joyiga keltirmoq.',
+        contextSentence: 'Along their journey, flocks depend on wetlands and lakes as resting stations where they can drink water and restore their energy.',
+        exampleSentence: 'A warm meal and eight hours of sleep helped restore the hikers’ strength.',
+        synonyms: ['recover', 'renew', 'rebuild'],
+        collocations: ['restore energy', 'restore health', 'restore order'],
+        cefrLevel: 'B1'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b1-48',
+          targetWord: 'navigate',
+          question: 'How do songbirds "navigate" when thick clouds cover the sun and stars?',
+          options: [
+            'They sense the Earth’s invisible magnetic field to tell north from south',
+            'They wait on the ground until summer returns',
+            'They follow airplanes flying between airports',
+            'They only fly in circles over the same forest'
+          ],
+          correctIndex: 0,
+          explanation: 'To "navigate" means to plan and direct the course of a journey.'
+        },
+        {
+          id: 'mc-b1-49',
+          targetWord: 'landmark',
+          question: 'Which of the following is an example of a natural "landmark" mentioned in the article?',
+          options: [
+            'A mountain range or a wide river that birds recognize from the air',
+            'A magnetic protein inside a bird’s eye',
+            'A warm breeze blowing from the south',
+            'An insect hiding under tree bark'
+          ],
+          correctIndex: 0,
+          explanation: 'A "landmark" is an easily recognized feature of a landscape that helps travelers know where they are.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b1-48',
+          sentenceWithBlank: 'Bacteria and viruses are _____ without a powerful microscope.',
+          targetWord: 'invisible',
+          hint: 'Impossible to see with the naked eye',
+          options: ['invisible', 'abundant', 'sturdy', 'portable']
+        },
+        {
+          id: 'cl-b1-49',
+          sentenceWithBlank: 'Workers spent three summers planting reeds to _____ the damaged wetland.',
+          targetWord: 'restore',
+          hint: 'Bring back to a healthy condition',
+          options: ['restore', 'memorize', 'exchange', 'select']
+        }
+      ],
+      matching: {
+        id: 'mat-b1-24',
+        instructions: 'Match each B1 nature and migration word with its definition:',
+        pairs: [
+          { id: 'p-b1-93', term: 'navigate', match: 'find the right way across a long distance' },
+          { id: 'p-b1-94', term: 'landmark', match: 'a well-known mountain, river, or building that helps you know where you are' },
+          { id: 'p-b1-95', term: 'flock', match: 'a group of birds flying or feeding together' },
+          { id: 'p-b1-96', term: 'restore', match: 'bring back lost energy, health, or condition' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b1-repair-cafes-circular-economy',
+    title: 'Fix It Together: Why Neighborhood Repair Cafes Are Growing Worldwide',
+    subtitle: 'Instead of throwing away broken toasters, bicycles, and jackets, neighbors are meeting at local cafes to fix them for free.',
+    level: 'B1',
+    category: 'Environment',
+    readTime: '5 min read',
+    readingTimeMinutes: 5,
+    wordCount: 408,
+    cefrSummary: 'Community sustainability, reducing waste, and B1 household vocabulary.',
+    themeColor: 'teal',
+    gradientFrom: 'from-teal-900',
+    gradientTo: 'to-stone-900',
+    heroImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Skilled volunteers help visitors mend household appliances and electronics at community repair events.',
+    paragraphs: [
+      'In many modern homes, when a kettle stops heating or a wooden chair loses a leg, the easiest choice is to throw it in the trash and buy a new one. Every year, millions of tons of repairable household items end up in landfills simply because fixing them costs too much or people no longer know how to use basic tools.',
+      'In 2009, a journalist in Amsterdam started the first Repair Cafe to change this habit. The idea was simple: once a month, a community center sets up tables with screwdrivers, sewing machines, glue, and soldering irons. Local volunteers—including retired electricians, tailors, and mechanics—sit down with visitors to fix their broken belongings free of charge.',
+      'Unlike a normal repair shop where you drop off an item and leave, visitors at a Repair Cafe stay and help with the work. An electrician might show a student how to replace a damaged plug, or a seamstress might teach a teenager how to sew a torn backpack zipper. In this way, practical skills are passed from one generation to the next.',
+      'Today, there are more than two thousand Repair Cafes across Europe, Asia, and the Americas. By extending the life of everyday objects, these friendly gatherings save families money, reduce waste, and bring neighbors closer together over a cup of tea.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b1-121',
+        word: 'appliance',
+        partOfSpeech: 'noun',
+        phonetic: '/əˈplaɪəns/',
+        definition: 'Maishiy texnika, jihoz — uyda ovqat pishirish yoki tozalash kabi ishlar uchun ishlatiladigan elektr qurilma.',
+        contextSentence: 'Skilled volunteers help visitors mend household appliances and electronics at community repair events.',
+        exampleSentence: 'Modern kitchen appliances like washing machines and refrigerators use less electricity than older models.',
+        synonyms: ['device', 'machine', 'gadget'],
+        collocations: ['household appliance', 'kitchen appliance', 'electrical appliance'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-122',
+        word: 'landfill',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈlændfɪl/',
+        definition: 'Chiqindixona — shahar chiqindilari olib borib ko‘miladigan maxsus ajratilgan joy.',
+        contextSentence: 'Every year, millions of tons of repairable household items end up in landfills simply because fixing them costs too much or people no longer know how to use basic tools.',
+        exampleSentence: 'Recycling paper and glass keeps thousands of tons of rubbish out of the local landfill.',
+        synonyms: ['dump', 'waste site', 'rubbish tip'],
+        collocations: ['end up in a landfill', 'reduce landfill waste', 'local landfill'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-123',
+        word: 'volunteer',
+        partOfSpeech: 'noun',
+        phonetic: '/ˌvɒlənˈtɪə(r)/',
+        definition: 'Ko‘ngilli — haq olmasdan, o‘z xohishi bilan boshqalarga yoki jamiyatga yordam beradigan inson.',
+        contextSentence: 'Local volunteers—including retired electricians, tailors, and mechanics—sit down with visitors to fix their broken belongings free of charge.',
+        exampleSentence: 'More than forty volunteers helped clean the riverbank last Sunday morning.',
+        synonyms: ['helper', 'unpaid worker', 'supporter'],
+        collocations: ['local volunteer', 'skilled volunteer', 'volunteer work'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-124',
+        word: 'belongings',
+        partOfSpeech: 'noun',
+        phonetic: '/bɪˈlɒŋɪŋz/',
+        definition: 'Shaxsiy buyumlar, mol-mulk — insonga tegishli bo‘lgan ko‘chma narsa va buyumlar.',
+        contextSentence: 'Local volunteers—including retired electricians, tailors, and mechanics—sit down with visitors to fix their broken belongings free of charge.',
+        exampleSentence: 'Passengers were asked to take all their personal belongings with them when leaving the train.',
+        synonyms: ['possessions', 'items', 'things'],
+        collocations: ['personal belongings', 'broken belongings', 'pack your belongings'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-125',
+        word: 'extend',
+        partOfSpeech: 'verb',
+        phonetic: '/ɪkˈstend/',
+        definition: 'Uzaytirmoq — biror narsaning davomiyligini, xizmat muddatini yoki uzunligini oshirmoq.',
+        contextSentence: 'By extending the life of everyday objects, these friendly gatherings save families money, reduce waste, and bring neighbors closer together over a cup of tea.',
+        exampleSentence: 'Regular oil changes can extend the life of a car engine by many years.',
+        synonyms: ['lengthen', 'prolong', 'increase'],
+        collocations: ['extend the life', 'extend a deadline', 'extend a visit'],
+        cefrLevel: 'B1'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b1-50',
+          targetWord: 'volunteer',
+          question: 'How is a Repair Cafe different from a normal commercial repair shop?',
+          options: [
+            'Skilled volunteers help visitors fix their items for free and teach them how to do it',
+            'Customers must leave their items for six months and pay a high fee',
+            'Only brand-new items still in their boxes are accepted',
+            'Visitors are not allowed to watch how the repair is done'
+          ],
+          correctIndex: 0,
+          explanation: 'A "volunteer" offers their time and skills freely to help others without payment.'
+        },
+        {
+          id: 'mc-b1-51',
+          targetWord: 'extend',
+          question: 'What does "extending the life of everyday objects" mean?',
+          options: [
+            'Making household items last and work for a longer period of time',
+            'Throwing items into a landfill as quickly as possible',
+            'Painting small objects so they look bigger',
+            'Buying two of the same toaster at the supermarket'
+          ],
+          correctIndex: 0,
+          explanation: 'To "extend" the life of an object means to make it usable for longer.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b1-50',
+          sentenceWithBlank: 'Please check that you have all your personal _____ before stepping off the airport bus.',
+          targetWord: 'belongings',
+          hint: 'The things that you own and carry with you',
+          options: ['belongings', 'shortages', 'landmarks', 'flocks']
+        },
+        {
+          id: 'cl-b1-51',
+          sentenceWithBlank: 'Composting kitchen scraps keeps organic waste out of the city _____.',
+          targetWord: 'landfill',
+          hint: 'A site where rubbish is buried in the ground',
+          options: ['landfill', 'appliance', 'reward', 'concentration']
+        }
+      ],
+      matching: {
+        id: 'mat-b1-25',
+        instructions: 'Match each B1 sustainability word with its definition:',
+        pairs: [
+          { id: 'p-b1-97', term: 'appliance', match: 'a machine such as a toaster or kettle used in the home' },
+          { id: 'p-b1-98', term: 'landfill', match: 'a place where waste materials are buried under the ground' },
+          { id: 'p-b1-99', term: 'volunteer', match: 'someone who works to help the community without being paid' },
+          { id: 'p-b1-100', term: 'extend', match: 'make something last longer or become larger' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b1-history-of-paper-samarkand',
+    title: 'From Mulberry Bark to Books: How Samarkand Paper Changed World History',
+    subtitle: 'For centuries, the finest paper in the world was handmade in water-powered mills along the Siyob River in Samarkand.',
+    level: 'B1',
+    category: 'History & Civilizations',
+    readTime: '5 min read',
+    readingTimeMinutes: 5,
+    wordCount: 414,
+    cefrSummary: 'Samarkand craftsmanship, history of books, and B1 cultural vocabulary.',
+    themeColor: 'amber',
+    gradientFrom: 'from-stone-900',
+    gradientTo: 'to-amber-900',
+    heroImage: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Traditional artisans in Konigil village near Samarkand still produce smooth, long-lasting paper from mulberry bark.',
+    paragraphs: [
+      'Before paper became common across the world, recording knowledge was expensive and difficult. In ancient Egypt, scribes wrote on fragile papyrus reeds, while European monks copied books onto parchment made from animal skins. A single parchment book could require the skins of more than a hundred sheep, making books rare treasures that only kings and wealthy libraries could afford.',
+      'In the eighth century, artisans in Samarkand learned the craft of papermaking from Chinese craftsmen and improved it using local materials. Instead of bamboo, Samarkand papermakers boiled the soft inner bark of mulberry trees and used water-powered wooden hammers along the Siyob River to beat the fibers into a smooth pulp.',
+      'After lifting thin sheets of pulp on mesh screens and drying them in the sun, craftsmen polished each sheet with a smooth agate stone. This special polishing technique prevented ink from soaking in too deeply, giving Samarkand paper a silky surface that lasted for centuries without turning yellow or tearing.',
+      'Thanks to abundant and affordable Samarkand paper, scholars across Central Asia and the Middle East wrote thousands of books on mathematics, astronomy, medicine, and poetry. Soon, this papermaking knowledge spread to Spain and Italy, laying the foundation for modern printing and public education worldwide.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b1-126',
+        word: 'fragile',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈfrædʒaɪl/',
+        definition: 'Mo‘rt, nozik — osonlikcha sinadigan, yirtiladigan yoki shikastlanadigan.',
+        contextSentence: 'In ancient Egypt, scribes wrote on fragile papyrus reeds, while European monks copied books onto parchment made from animal skins.',
+        exampleSentence: 'The museum keeps fragile glass bowls inside locked display cases.',
+        synonyms: ['delicate', 'breakable', 'weak'],
+        collocations: ['fragile glass', 'fragile paper', 'fragile ecosystem'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-127',
+        word: 'afford',
+        partOfSpeech: 'verb',
+        phonetic: '/əˈfɔːd/',
+        definition: 'Qurbi yetmoq, sotib olishga imkoni bo‘lmoq — biror narsani sotib olish uchun yetarli pulga ega bo‘lmoq.',
+        contextSentence: 'A single parchment book could require the skins of more than a hundred sheep, making books rare treasures that only kings and wealthy libraries could afford.',
+        exampleSentence: 'When laptops became cheaper, many more students could afford to buy one for college.',
+        synonyms: ['pay for', 'manage financially', 'bear the cost'],
+        collocations: ['can afford', 'hardly afford', 'afford to buy'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-128',
+        word: 'artisan',
+        partOfSpeech: 'noun',
+        phonetic: '/ˌɑːtɪˈzæn/',
+        definition: 'Hunarmand, usta — qo‘l mehnati bilan sifatli buyumlar yasaydigan mohir usta.',
+        contextSentence: 'In the eighth century, artisans in Samarkand learned the craft of papermaking from Chinese craftsmen and improved it using local materials.',
+        exampleSentence: 'Local artisans in Rishtan are famous for painting beautiful blue ceramic plates by hand.',
+        synonyms: ['craftsperson', 'maker', 'skilled worker'],
+        collocations: ['skilled artisan', 'local artisan', 'traditional artisan'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-129',
+        word: 'surface',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈsɜːfɪs/',
+        definition: 'Yuza, sirt — biror narsaning ustki yoki tashqi qismi.',
+        contextSentence: 'This special polishing technique prevented ink from soaking in too deeply, giving Samarkand paper a silky surface that lasted for centuries without turning yellow or tearing.',
+        exampleSentence: 'Wipe the wooden surface of the desk with a dry cloth after painting.',
+        synonyms: ['top', 'outside', 'exterior'],
+        collocations: ['smooth surface', 'silky surface', 'Earth’s surface'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-130',
+        word: 'foundation',
+        partOfSpeech: 'noun',
+        phonetic: '/faʊnˈdeɪʃn/',
+        definition: 'Poydevor, asos — keyingi rivojlanish, bino yoki g‘oya tayanadigan eng asosiy negiz.',
+        contextSentence: 'Soon, this papermaking knowledge spread to Spain and Italy, laying the foundation for modern printing and public education worldwide.',
+        exampleSentence: 'Strong reading habits in primary school build a solid foundation for lifelong learning.',
+        synonyms: ['basis', 'groundwork', 'base'],
+        collocations: ['lay the foundation', 'solid foundation', 'strong foundation'],
+        cefrLevel: 'B1'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b1-52',
+          targetWord: 'afford',
+          question: 'Why could only kings and wealthy libraries "afford" books made of parchment?',
+          options: [
+            'Because making a single parchment book required the skins of over a hundred sheep, making it extremely expensive',
+            'Because sheep only lived in one small village in Europe',
+            'Because nobody knew how to read before the nineteenth century',
+            'Because parchment melted whenever it touched water'
+          ],
+          correctIndex: 0,
+          explanation: 'To "afford" something means to have enough money to pay for it.'
+        },
+        {
+          id: 'mc-b1-53',
+          targetWord: 'surface',
+          question: 'Why did Samarkand artisans polish each sheet of paper with a smooth stone?',
+          options: [
+            'To give the paper a smooth, silky surface so ink would not soak in too deeply',
+            'To make the paper heavier than stone',
+            'To turn the paper dark blue',
+            'To break the paper into tiny pieces'
+          ],
+          correctIndex: 0,
+          explanation: 'The "surface" is the flat outer layer of the paper where ink is written.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b1-52',
+          sentenceWithBlank: 'The box was marked "_____" because it contained antique porcelain teacups.',
+          targetWord: 'fragile',
+          hint: 'Easily broken or damaged',
+          options: ['fragile', 'sturdy', 'abundant', 'invisible']
+        },
+        {
+          id: 'cl-b1-53',
+          sentenceWithBlank: 'Al-Khwarizmi’s treatises on algebra laid the _____ for modern computer science.',
+          targetWord: 'foundation',
+          hint: 'The base on which something new develops',
+          options: ['foundation', 'landfill', 'distraction', 'shortage']
+        }
+      ],
+      matching: {
+        id: 'mat-b1-26',
+        instructions: 'Match each B1 history and craft word with its definition:',
+        pairs: [
+          { id: 'p-b1-101', term: 'fragile', match: 'delicate and easily broken or torn' },
+          { id: 'p-b1-102', term: 'afford', match: 'have enough money to buy or pay for something' },
+          { id: 'p-b1-103', term: 'artisan', match: 'a skilled craftsperson who makes things by hand' },
+          { id: 'p-b1-104', term: 'foundation', match: 'the basic idea or structure from which something grows' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b1-body-clock-circadian-rhythm',
+    title: 'Your Internal Clock: Why Morning Sunlight Helps You Sleep Better at Night',
+    subtitle: 'Inside every human brain is a twenty-four-hour timer that controls energy, hunger, and sleep—and natural light sets it.',
+    level: 'B1',
+    category: 'Science & Nature',
+    readTime: '5 min read',
+    readingTimeMinutes: 5,
+    wordCount: 406,
+    cefrSummary: 'Circadian rhythms, healthy daily routines, and B1 health vocabulary.',
+    themeColor: 'amber',
+    gradientFrom: 'from-amber-950',
+    gradientTo: 'to-slate-900',
+    heroImage: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Spending fifteen minutes outside in the morning sunlight signals the brain that the day has begun.',
+    paragraphs: [
+      'Have you ever noticed that you feel hungry at almost the same hour every day, or that your eyes grow heavy at a regular time each night? This happens because your body follows an internal twenty-four-hour schedule known as the circadian rhythm. Even without a wristwatch, a tiny group of cells inside your brain keeps track of day and night.',
+      'To stay accurate, this internal clock relies on external signals from the environment, especially natural sunlight. When bright morning light enters your eyes, it sends a clear signal to your brain to stop producing sleep hormones and increase your body temperature and alertness. Even on a cloudy morning, outdoor daylight is much brighter than indoor office lamps.',
+      'Furthermore, stepping outside for fifteen minutes shortly after waking up starts a countdown timer in your brain. About fourteen to sixteen hours after seeing morning light, your body naturally begins releasing melatonin, the hormone that helps you fall asleep smoothly at night.',
+      'On the other hand, staring at bright phone or laptop screens late at night confuses the brain into thinking it is still daytime. By getting natural light in the morning and dimming indoor lights an hour before bed, you can keep your body clock balanced and wake up feeling refreshed.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b1-131',
+        word: 'internal',
+        partOfSpeech: 'adjective',
+        phonetic: '/ɪnˈtɜːnl/',
+        definition: 'Ichki — tana, tashkilot yoki biror narsaning ichida joylashgan yoki sodir bo‘ladigan.',
+        contextSentence: 'This happens because your body follows an internal twenty-four-hour schedule known as the circadian rhythm.',
+        exampleSentence: 'Mammals can keep their internal body temperature steady even in winter.',
+        synonyms: ['inner', 'inside', 'interior'],
+        collocations: ['internal clock', 'internal organs', 'internal temperature'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-132',
+        word: 'signal',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈsɪɡnəl/',
+        definition: 'Belgi, ishora — biror xabar beruvchi yoki harakat boshlashga undovchi tovush, yorug‘lik yoki axborot.',
+        contextSentence: 'When bright morning light enters your eyes, it sends a clear signal to your brain to stop producing sleep hormones and increase your body temperature and alertness.',
+        exampleSentence: 'When the referee blew the whistle, it was the signal for the match to begin.',
+        synonyms: ['sign', 'cue', 'message'],
+        collocations: ['clear signal', 'send a signal', 'traffic signal'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-133',
+        word: 'alertness',
+        partOfSpeech: 'noun',
+        phonetic: '/əˈlɜːtnəs/',
+        definition: 'Tetiklik, hushyorlik — uyg‘oq, diqqatli va tez fikrlashga tayyor bo‘lish holati.',
+        contextSentence: 'When bright morning light enters your eyes, it sends a clear signal to your brain to stop producing sleep hormones and increase your body temperature and alertness.',
+        exampleSentence: 'A short walk in the fresh air improved the driver’s alertness during the long trip.',
+        synonyms: ['wakefulness', 'sharpness', 'attentiveness'],
+        collocations: ['mental alertness', 'increase alertness', 'high alertness'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-134',
+        word: 'confuse',
+        partOfSpeech: 'verb',
+        phonetic: '/kənˈfjuːz/',
+        definition: 'Chalg‘itmoq, adashtirmoq — tushunishni qiyinlashtirmoq yoki noto‘g‘ri xulosaga olib kelmoq.',
+        contextSentence: 'On the other hand, staring at bright phone or laptop screens late at night confuses the brain into thinking it is still daytime.',
+        exampleSentence: 'The two twin brothers look so similar that they often confuse their teachers.',
+        synonyms: ['puzzle', 'mislead', 'mix up'],
+        collocations: ['confuse the brain', 'easily confused', 'confuse visitors'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-135',
+        word: 'refreshed',
+        partOfSpeech: 'adjective',
+        phonetic: '/rɪˈfreʃt/',
+        definition: 'Tetiklashgan, dam olgan — uyqu yoki hordiqdan keyin o‘zini yangi kuchga to‘lgan his qiladigan.',
+        contextSentence: 'By getting natural light in the morning and dimming indoor lights an hour before bed, you can keep your body clock balanced and wake up feeling refreshed.',
+        exampleSentence: 'After a cool shower and a glass of water, the runners felt completely refreshed.',
+        synonyms: ['rested', 'energized', 'revived'],
+        collocations: ['feel refreshed', 'wake up refreshed', 'completely refreshed'],
+        cefrLevel: 'B1'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b1-54',
+          targetWord: 'signal',
+          question: 'What "signal" does bright morning sunlight send to your brain?',
+          options: [
+            'It tells the brain to stop making sleep hormones and increase daytime alertness',
+            'It tells the body to go back to sleep immediately',
+            'It makes your internal clock run backward',
+            'It lowers your body temperature for hibernation'
+          ],
+          correctIndex: 0,
+          explanation: 'A "signal" is a message or cue that triggers a specific response.'
+        },
+        {
+          id: 'mc-b1-55',
+          targetWord: 'confuse',
+          question: 'Why does looking at bright screens late at night "confuse" the brain?',
+          options: [
+            'The bright light tricks the brain into thinking it is still daytime',
+            'The screen makes the room too cold to sleep',
+            'Phones absorb all the oxygen in the bedroom',
+            'Screens turn off the sun the next morning'
+          ],
+          correctIndex: 0,
+          explanation: 'To "confuse" means to cause something to react wrongly by giving misleading information.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b1-54',
+          sentenceWithBlank: 'After sleeping well in the quiet mountain cabin, everyone woke up feeling _____.',
+          targetWord: 'refreshed',
+          hint: 'Full of energy again after resting',
+          options: ['refreshed', 'fragile', 'invisible', 'temporary']
+        },
+        {
+          id: 'cl-b1-55',
+          sentenceWithBlank: 'Drinking enough water during exams helps students maintain their mental _____.',
+          targetWord: 'alertness',
+          hint: 'The state of being awake and able to think quickly',
+          options: ['alertness', 'shortage', 'landfill', 'cargo']
+        }
+      ],
+      matching: {
+        id: 'mat-b1-27',
+        instructions: 'Match each B1 health and body-clock word with its definition:',
+        pairs: [
+          { id: 'p-b1-105', term: 'internal', match: 'located or happening inside the body' },
+          { id: 'p-b1-106', term: 'signal', match: 'a sign or message that tells the brain to act' },
+          { id: 'p-b1-107', term: 'alertness', match: 'being fully awake and paying close attention' },
+          { id: 'p-b1-108', term: 'refreshed', match: 'feeling rested and full of new energy' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b1-sponge-cities-flood-control',
+    title: 'Sponge Cities: How Urban Parks and Rain Gardens Prevent Flooding',
+    subtitle: 'Instead of covering every street in concrete, modern cities are using soil, trees, and ponds to soak up heavy rain.',
+    level: 'B1',
+    category: 'Environment',
+    readTime: '5 min read',
+    readingTimeMinutes: 5,
+    wordCount: 410,
+    cefrSummary: 'Green urban planning, flood prevention, and B1 environment vocabulary.',
+    themeColor: 'emerald',
+    gradientFrom: 'from-emerald-950',
+    gradientTo: 'to-teal-900',
+    heroImage: 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Green parks and sunken rain gardens absorb stormwater during heavy downpours and store it for dry months.',
+    paragraphs: [
+      'In most big cities, roads, parking lots, and sidewalks are covered with hard concrete and asphalt. When a heavy rainstorm hits, water cannot sink into the ground. Instead, millions of liters of rainwater rush across the streets at once, overwhelming underground pipes and causing dangerous floods.',
+      'To solve this problem, urban planners in China, Europe, and North America are redesigning neighborhoods as "sponge cities." Just like a kitchen sponge absorbs spilled water on a table, a sponge city uses natural landscapes to soak up rain where it falls. Concrete pavements are replaced with porous bricks that let water trickle down into the soil below.',
+      'Designers also build sunken rain gardens along roadsides and turn empty lots into small wetlands filled with native plants. During a storm, these green spaces hold excess rainwater and slow down its movement. At the same time, plant roots and layers of sand naturally filter out street dust and oil before the water reaches local rivers.',
+      'Later, during hot summer weeks, the stored water evaporates slowly from the soil and trees, cooling down the surrounding neighborhood. Sponge cities prove that working with nature is often smarter and safer than fighting against it.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b1-136',
+        word: 'absorb',
+        partOfSpeech: 'verb',
+        phonetic: '/əbˈzɔːb/',
+        definition: 'Shimib olmoq, o‘ziga tortmoq — suyuqlik, issiqlik yoki energiyani o‘z ichiga singdirib olmoq.',
+        contextSentence: 'Just like a kitchen sponge absorbs spilled water on a table, a sponge city uses natural landscapes to soak up rain where it falls.',
+        exampleSentence: 'Dry soil and tree roots absorb rainwater much faster than hard pavement.',
+        synonyms: ['soak up', 'take in', 'sponge up'],
+        collocations: ['absorb water', 'absorb heat', 'absorb shock'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-137',
+        word: 'pavement',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈpeɪvmənt/',
+        definition: 'Yo‘lak, asfalt qoplama — piyodalar yurishi yoki transport harakati uchun tosh va asfalt yotqizilgan qattiq yo‘l.',
+        contextSentence: 'Concrete pavements are replaced with porous bricks that let water trickle down into the soil below.',
+        exampleSentence: 'Cafes placed small tables and chairs along the wide pavement in front of the square.',
+        synonyms: ['sidewalk', 'footpath', 'road surface'],
+        collocations: ['concrete pavement', 'wet pavement', 'walk on the pavement'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-138',
+        word: 'excess',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈekses/',
+        definition: 'Ortiqcha, me’yordan ko‘p — keragidan yoki odatdagidan ko‘proq bo‘lgan miqdor.',
+        contextSentence: 'During a storm, these green spaces hold excess rainwater and slow down its movement.',
+        exampleSentence: 'Airlines charge an extra fee if passengers carry excess baggage.',
+        synonyms: ['extra', 'surplus', 'leftover'],
+        collocations: ['excess water', 'excess weight', 'remove excess'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-139',
+        word: 'evaporate',
+        partOfSpeech: 'verb',
+        phonetic: '/ɪˈvæpəreɪt/',
+        definition: 'Bug‘lanmoq — suyuqlikning issiqlik ta’sirida bug‘ga aylanib havoga ko‘tarilishi.',
+        contextSentence: 'Later, during hot summer weeks, the stored water evaporates slowly from the soil and trees, cooling down the surrounding neighborhood.',
+        exampleSentence: 'Puddles on the playground evaporate quickly when the afternoon sun comes out.',
+        synonyms: ['vaporize', 'dry up', 'turn to steam'],
+        collocations: ['evaporate quickly', 'water evaporates', 'evaporate into the air'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-140',
+        word: 'surrounding',
+        partOfSpeech: 'adjective',
+        phonetic: '/səˈraʊndɪŋ/',
+        definition: 'Atrofdagi, tevarak-atrofdagi — biror joyning yaqinida va atrofida joylashgan.',
+        contextSentence: 'Later, during hot summer weeks, the stored water evaporates slowly from the soil and trees, cooling down the surrounding neighborhood.',
+        exampleSentence: 'From the top of the hill, visitors can see the lake and the surrounding mountains.',
+        synonyms: ['nearby', 'neighboring', 'adjacent'],
+        collocations: ['surrounding neighborhood', 'surrounding area', 'surrounding countryside'],
+        cefrLevel: 'B1'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b1-56',
+          targetWord: 'absorb',
+          question: 'Why are these green urban designs called "sponge cities"?',
+          options: [
+            'Because their parks, soil, and special bricks absorb rainwater just like a sponge',
+            'Because all the buildings are made of soft yellow rubber',
+            'Because they are built on the bottom of the ocean',
+            'Because residents wash the streets with soap every morning'
+          ],
+          correctIndex: 0,
+          explanation: 'To "absorb" means to soak up liquid easily.'
+        },
+        {
+          id: 'mc-b1-57',
+          targetWord: 'evaporate',
+          question: 'How does stored rainwater help cool down a sponge city during hot summer weeks?',
+          options: [
+            'It evaporates slowly from the soil and trees, lowering the air temperature',
+            'It freezes into solid blocks of ice on the streets',
+            'It pushes hot air into underground pipes',
+            'It turns the concrete pavements white'
+          ],
+          correctIndex: 0,
+          explanation: 'When water "evaporates" (turns from liquid into vapor), it cools the surrounding air.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b1-56',
+          sentenceWithBlank: 'Use a paper towel to blot any _____ oil from the top of the soup.',
+          targetWord: 'excess',
+          hint: 'More than what is needed or usual',
+          options: ['excess', 'internal', 'fragile', 'sturdy']
+        },
+        {
+          id: 'cl-b1-57',
+          sentenceWithBlank: 'Farmers from the _____ villages bring fresh melons and apricots to the city market every morning.',
+          targetWord: 'surrounding',
+          hint: 'Located all around a place',
+          options: ['surrounding', 'invisible', 'refreshed', 'abundant']
+        }
+      ],
+      matching: {
+        id: 'mat-b1-28',
+        instructions: 'Match each B1 urban environment word with its definition:',
+        pairs: [
+          { id: 'p-b1-109', term: 'absorb', match: 'soak up liquid or take in energy' },
+          { id: 'p-b1-110', term: 'pavement', match: 'the hard surface of a sidewalk or road' },
+          { id: 'p-b1-111', term: 'excess', match: 'an amount that is more than necessary' },
+          { id: 'p-b1-112', term: 'evaporate', match: 'change from liquid water into invisible vapor' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b1-parallax-how-we-measure-stars',
+    title: 'Measuring the Stars: How Astronomers Know How Far Away Distant Suns Are',
+    subtitle: 'No spacecraft has ever visited another star, yet scientists can measure their distance using simple geometry and a clever visual trick.',
+    level: 'B1',
+    category: 'Science & Nature',
+    readTime: '5 min read',
+    readingTimeMinutes: 5,
+    wordCount: 412,
+    cefrSummary: 'Observational astronomy, measuring star distances, and B1 science vocabulary.',
+    themeColor: 'indigo',
+    gradientFrom: 'from-slate-950',
+    gradientTo: 'to-indigo-900',
+    heroImage: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Observatories capture images of the night sky six months apart to measure the tiny shift of nearby stars.',
+    paragraphs: [
+      'When you look up at the night sky, all the stars appear to be painted on the inside of a flat dark bowl. In reality, some stars are relatively close neighbors, while others are thousands of times farther away. Since we cannot stretch a measuring tape across space, how do astronomers calculate the exact distance to a star?',
+      'You can test their main method right now by holding one finger in front of your nose. Close your left eye and look at your finger against the wall behind it; then switch eyes. Your finger appears to jump from side to side against the background wall, even though you did not move your hand. Move your finger farther away from your face, and that jump becomes much smaller.',
+      'Astronomers use this exact effect, called parallax, on a giant scale. Instead of blinking two eyes a few centimeters apart, they take a photograph of a star in January and another photograph in July, when the Earth has traveled to the opposite side of the Sun. By measuring the tiny angle that the star shifts against faraway background galaxies, scientists can calculate its distance using school geometry.',
+      'Throughout history, observatories—including the famous fifteenth-century observatory of Ulugh Beg in Samarkand—measured the angles of stars with remarkable precision. Today, space telescopes measure the positions of over a billion stars, creating an accurate three-dimensional map of our galaxy.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b1-141',
+        word: 'calculate',
+        partOfSpeech: 'verb',
+        phonetic: '/ˈkælkjuleɪt/',
+        definition: 'Hisoblamoq, hisob-kitob qilmoq — matematik amallar va o‘lchovlar yordamida aniq miqdorni topmoq.',
+        contextSentence: 'Since we cannot stretch a measuring tape across space, how do astronomers calculate the exact distance to a star?',
+        exampleSentence: 'Engineers calculate how much weight a bridge can safely support before construction begins.',
+        synonyms: ['compute', 'work out', 'measure'],
+        collocations: ['calculate the distance', 'calculate the cost', 'accurately calculate'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-142',
+        word: 'background',
+        partOfSpeech: 'noun',
+        phonetic: '/ˈbækɡraʊnd/',
+        definition: 'Orqa fon, orqa plan — asosiy narsaning orqasida ko‘rinib turadigan manzara yoki qism.',
+        contextSentence: 'Your finger appears to jump from side to side against the background wall, even though you did not move your hand.',
+        exampleSentence: 'In the family photo, snow-covered mountains can be seen in the background.',
+        synonyms: ['backdrop', 'distance', 'rear'],
+        collocations: ['in the background', 'background galaxies', 'against the background'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-143',
+        word: 'opposite',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˈɒpəzɪt/',
+        definition: 'Qarama-qarshi, ro‘paradagi — boshqa tomonda yoki teskari yo‘nalishda joylashgan.',
+        contextSentence: 'Instead of blinking two eyes a few centimeters apart, they take a photograph of a star in January and another photograph in July, when the Earth has traveled to the opposite side of the Sun.',
+        exampleSentence: 'The library and the post office stand on opposite sides of the main street.',
+        synonyms: ['facing', 'contrary', 'reverse'],
+        collocations: ['opposite side', 'opposite direction', 'completely opposite'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-144',
+        word: 'shift',
+        partOfSpeech: 'verb',
+        phonetic: '/ʃɪft/',
+        definition: 'Siljimoq, o‘rnini o‘zgartirmoq — bir joydan yoki holatdan biroz boshqa tomonga ko‘chmoq.',
+        contextSentence: 'By measuring the tiny angle that the star shifts against faraway background galaxies, scientists can calculate its distance using school geometry.',
+        exampleSentence: 'Desert sand dunes slowly shift their position whenever strong winds blow.',
+        synonyms: ['move', 'slide', 'change position'],
+        collocations: ['shift position', 'slightly shift', 'shift direction'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-145',
+        word: 'precision',
+        partOfSpeech: 'noun',
+        phonetic: '/prɪˈsɪʒn/',
+        definition: 'Aniqlik, juda yuqori aniqlik — xatosiz va nihoyatda sinchkovlik bilan bajarilgan o‘lchov yoki ish.',
+        contextSentence: 'Throughout history, observatories—including the famous fifteenth-century observatory of Ulugh Beg in Samarkand—measured the angles of stars with remarkable precision.',
+        exampleSentence: 'Watchmakers assemble tiny gears with great precision.',
+        synonyms: ['accuracy', 'exactness', 'care'],
+        collocations: ['remarkable precision', 'great precision', 'measure with precision'],
+        cefrLevel: 'B1'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b1-58',
+          targetWord: 'opposite',
+          question: 'Why do astronomers take one photo of a star in January and another in July?',
+          options: [
+            'Because in six months the Earth moves to the opposite side of the Sun, giving two wide viewpoints',
+            'Because stars only shine during January and July',
+            'Because telescopes freeze during the spring and autumn months',
+            'Because the Sun turns off for one week every July'
+          ],
+          correctIndex: 0,
+          explanation: '"Opposite" means located across from something on the other side.'
+        },
+        {
+          id: 'mc-b1-59',
+          targetWord: 'precision',
+          question: 'What was Ulugh Beg’s fifteenth-century observatory in Samarkand famous for?',
+          options: [
+            'Measuring the angles and positions of stars with remarkable precision (accuracy)',
+            'Launching the first artificial satellite into orbit',
+            'Building glass microscopes to study ocean bacteria',
+            'Predicting volcanic eruptions in South America'
+          ],
+          correctIndex: 0,
+          explanation: '"Precision" is the quality of being exact and accurate in measurement.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b1-58',
+          sentenceWithBlank: 'Can you _____ how many hours it will take to drive 360 kilometers at 90 kilometers per hour?',
+          targetWord: 'calculate',
+          hint: 'Find the answer using numbers and math',
+          options: ['calculate', 'absorb', 'confuse', 'evaporate']
+        },
+        {
+          id: 'cl-b1-59',
+          sentenceWithBlank: 'If you look closely at the painting, you can see a small sailboat in the _____.',
+          targetWord: 'background',
+          hint: 'The part of a picture behind the main objects',
+          options: ['background', 'pavement', 'appliance', 'foundation']
+        }
+      ],
+      matching: {
+        id: 'mat-b1-29',
+        instructions: 'Match each B1 astronomy and measurement word with its definition:',
+        pairs: [
+          { id: 'p-b1-113', term: 'calculate', match: 'work out a number or distance using mathematics' },
+          { id: 'p-b1-114', term: 'background', match: 'the part of a view or scene behind the main objects' },
+          { id: 'p-b1-115', term: 'shift', match: 'move slightly from one position to another' },
+          { id: 'p-b1-116', term: 'precision', match: 'the quality of being exact and accurate' }
+        ]
+      }
+    }
+  },
+  {
+    id: 'b1-psychology-of-habit-stacking',
+    title: 'Small Steps, Big Changes: How "Habit Stacking" Makes New Routines Stick',
+    subtitle: 'Psychologists say the easiest way to build a new daily habit is to attach it to something you already do automatically.',
+    level: 'B1',
+    category: 'Psychology & Mind',
+    readTime: '5 min read',
+    readingTimeMinutes: 5,
+    wordCount: 408,
+    cefrSummary: 'Building daily study habits, behavioral psychology, and B1 self-improvement vocabulary.',
+    themeColor: 'violet',
+    gradientFrom: 'from-violet-950',
+    gradientTo: 'to-slate-900',
+    heroImage: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1200&q=80',
+    imageCaption: 'Linking five minutes of vocabulary review to your morning tea turns learning into an automatic daily routine.',
+    paragraphs: [
+      'At the start of a new year or school semester, many people set ambitious goals. Someone might promise to read for an hour every evening, exercise five times a week, or learn thirty new English words a day. Sadly, within two or three weeks, most of these big plans fade away when work gets busy or motivation drops.',
+      'Behavioral psychologists explain that relying on willpower alone rarely works for long. Instead, the secret to lasting change is to start tiny and connect your new habit to an existing routine that you already do every day without thinking. Researchers call this simple method "habit stacking."',
+      'Every morning and evening, your brain follows automatic chains of behavior, such as brushing your teeth, boiling water for tea, or putting on your shoes. To use habit stacking, you simply link a two-minute action to one of those solid anchors. For example: "After I pour my morning cup of tea, I will review five English flashcards in my notebook."',
+      'Because the first action is already automatic, it acts as a natural reminder for the new behavior. Once a small habit becomes effortless, you can gradually increase the time you spend on it. Over a full year, five consistent minutes every single day achieves far more than an occasional burst of effort.'
+    ],
+    targetVocabulary: [
+      {
+        id: 'v-b1-146',
+        word: 'ambitious',
+        partOfSpeech: 'adjective',
+        phonetic: '/æmˈbɪʃəs/',
+        definition: 'Ulkan maqsadli, katta rejali — erishish uchun ko‘p kuch va mehnat talab qiladigan.',
+        contextSentence: 'At the start of a new year or school semester, many people set ambitious goals.',
+        exampleSentence: 'The city announced an ambitious plan to plant one million trees in five years.',
+        synonyms: ['bold', 'challenging', 'grand'],
+        collocations: ['ambitious goal', 'ambitious project', 'ambitious student'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-147',
+        word: 'motivation',
+        partOfSpeech: 'noun',
+        phonetic: '/ˌməʊtɪˈveɪʃn/',
+        definition: 'Motivatsiya, ishtiyoq — biror ishni bajarishga bo‘lgan ichki xohish va intilish.',
+        contextSentence: 'Sadly, within two or three weeks, most of these big plans fade away when work gets busy or motivation drops.',
+        exampleSentence: 'Studying with a friend helped keep his motivation high throughout the course.',
+        synonyms: ['drive', 'enthusiasm', 'inspiration'],
+        collocations: ['lose motivation', 'strong motivation', 'increase motivation'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-148',
+        word: 'automatic',
+        partOfSpeech: 'adjective',
+        phonetic: '/ˌɔːtəˈmætɪk/',
+        definition: 'Avtomatik, o‘z-o‘zidan bajariladigan — uzoq o‘ylanmasdan, odat bo‘lib qolgani uchun beixtiyor bajariladigan.',
+        contextSentence: 'Every morning and evening, your brain follows automatic chains of behavior, such as brushing your teeth, boiling water for tea, or putting on your shoes.',
+        exampleSentence: 'After years of practice, shifting gears in a car becomes completely automatic.',
+        synonyms: ['habitual', 'natural', 'unconscious'],
+        collocations: ['automatic habit', 'become automatic', 'automatic response'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-149',
+        word: 'reminder',
+        partOfSpeech: 'noun',
+        phonetic: '/rɪˈmaɪndə(r)/',
+        definition: 'Eslatma — bajarilishi kerak bo‘lgan ishni yodga soladigan xabar, belgi yoki hodisa.',
+        contextSentence: 'Because the first action is already automatic, it acts as a natural reminder for the new behavior.',
+        exampleSentence: 'She left her umbrella by the front door as a reminder to take it to work.',
+        synonyms: ['prompt', 'cue', 'note'],
+        collocations: ['natural reminder', 'helpful reminder', 'daily reminder'],
+        cefrLevel: 'B1'
+      },
+      {
+        id: 'v-b1-150',
+        word: 'gradually',
+        partOfSpeech: 'adverb',
+        phonetic: '/ˈɡrædʒuəli/',
+        definition: 'Asta-sekin, bosqichma-bosqich — birdaniga emas, vaqt o‘tishi bilan oz-ozdan o‘zgarib boradigan tarzda.',
+        contextSentence: 'Once a small habit becomes effortless, you can gradually increase the time you spend on it.',
+        exampleSentence: 'After recovering from his knee injury, the runner gradually increased his distance each week.',
+        synonyms: ['step by step', 'little by little', 'slowly'],
+        collocations: ['gradually increase', 'gradually improve', 'change gradually'],
+        cefrLevel: 'B1'
+      }
+    ],
+    exercises: {
+      multipleChoice: [
+        {
+          id: 'mc-b1-60',
+          targetWord: 'reminder',
+          question: 'How does "habit stacking" help you remember to do a new habit?',
+          options: [
+            'An existing daily action—like pouring morning tea—acts as a natural reminder to start the new habit',
+            'You hire someone to call your phone every ten minutes',
+            'You only practice the habit once a year on your birthday',
+            'You wait until you have three free hours on the weekend'
+          ],
+          correctIndex: 0,
+          explanation: 'A "reminder" is something that causes you to remember to do an action.'
+        },
+        {
+          id: 'mc-b1-61',
+          targetWord: 'gradually',
+          question: 'What does the article recommend doing once a tiny two-minute habit becomes easy?',
+          options: [
+            'Gradually increase the time you spend on it step by step',
+            'Stop doing the habit immediately',
+            'Try to study for ten hours without sleeping',
+            'Delete all the words from your vocabulary notebook'
+          ],
+          correctIndex: 0,
+          explanation: '"Gradually" means slowly and steadily over a period of time.'
+        }
+      ],
+      cloze: [
+        {
+          id: 'cl-b1-60',
+          sentenceWithBlank: 'In spring, the days _____ become warmer and longer as summer approaches.',
+          targetWord: 'gradually',
+          hint: 'Slowly, little by little over time',
+          options: ['gradually', 'temporarily', 'effortlessly', 'mistakenly']
+        },
+        {
+          id: 'cl-b1-61',
+          sentenceWithBlank: 'Setting clear weekly goals helped the team keep their _____ high all winter.',
+          targetWord: 'motivation',
+          hint: 'Eagerness and willingness to do something',
+          options: ['motivation', 'precision', 'pavement', 'shortage']
+        }
+      ],
+      matching: {
+        id: 'mat-b1-30',
+        instructions: 'Match each B1 habit and psychology word with its definition:',
+        pairs: [
+          { id: 'p-b1-117', term: 'ambitious', match: 'requiring a lot of effort and aiming for a big result' },
+          { id: 'p-b1-118', term: 'motivation', match: 'the inner drive and enthusiasm to achieve a goal' },
+          { id: 'p-b1-119', term: 'reminder', match: 'something that helps you remember to do a task' },
+          { id: 'p-b1-120', term: 'gradually', match: 'slowly and step by step over a period of time' }
+        ]
+      }
+    }
   }
 ];
+
 
