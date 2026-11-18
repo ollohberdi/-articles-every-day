@@ -191,7 +191,7 @@ service cloud.firestore {
     // Collection: /users/{userId}
     match /users/{userId} {
       allow get: if (isOwner(userId) || isAdmin()) && isValidId(userId);
-      allow list: if isAdmin() && existing().userId is string;
+      allow list: if isAdmin();
 
       allow create: if isVerifiedOwner(userId) &&
         isValidId(userId) &&
@@ -211,8 +211,8 @@ service cloud.firestore {
 
       // Subcollection: /users/{userId}/notebook/{wordId}
       match /notebook/{wordId} {
-        allow get: if isOwner(userId) && isValidId(userId) && isValidId(wordId) && existing().userId == request.auth.uid;
-        allow list: if isOwner(userId) && existing().userId == request.auth.uid;
+        allow get: if isOwner(userId) && isValidId(userId) && isValidId(wordId);
+        allow list: if isOwner(userId);
 
         allow create: if isVerifiedOwner(userId) &&
           isValidId(userId) &&
@@ -248,8 +248,8 @@ service cloud.firestore {
 
       // Subcollection: /users/{userId}/learned/{wordId}
       match /learned/{wordId} {
-        allow get: if isOwner(userId) && isValidId(userId) && isValidId(wordId) && existing().userId == request.auth.uid;
-        allow list: if isOwner(userId) && existing().userId == request.auth.uid;
+        allow get: if isOwner(userId) && isValidId(userId) && isValidId(wordId);
+        allow list: if isOwner(userId);
 
         allow create: if isVerifiedOwner(userId) &&
           isValidId(userId) &&
@@ -272,9 +272,13 @@ service cloud.firestore {
     match /subscriptions/{emailKey} {
       allow get: if isValidId(emailKey) && (
         isAdmin() ||
-        (isVerifiedUser() && (resource == null || existing().studentEmail == request.auth.token.email))
+        (isVerifiedUser() && (
+          resource == null ||
+          existing().studentEmail == request.auth.token.email ||
+          emailKey == 'uid-' + request.auth.uid
+        ))
       );
-      allow list: if isAdmin() && existing().emailKey is string;
+      allow list: if isAdmin();
 
       allow create: if isAdmin() &&
         isValidId(emailKey) &&

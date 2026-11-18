@@ -42,6 +42,7 @@ import {
   handleFirestoreError,
   signInStudentWithGoogle,
   signOutStudent,
+  ensureStudentProfileDoc,
   saveWordToCloudNotebook,
   removeWordFromCloudNotebook,
   markWordLearnedInCloud,
@@ -289,6 +290,9 @@ export default function App() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
       setIsAuthReady(true);
+      if (user) {
+        void ensureStudentProfileDoc(user);
+      }
     });
     return () => unsubscribe();
   }, []);
@@ -378,42 +382,82 @@ export default function App() {
     );
 
     let unsubMySub = () => {};
-    if (currentUser.email && currentUser.emailVerified) {
-      const emailKey = emailToSubscriptionKey(currentUser.email);
-      const subPath = `subscriptions/${emailKey}`;
-      unsubMySub = onSnapshot(
-        doc(db, 'subscriptions', emailKey),
+    let unsubMyUidSub = () => {};
+    let emailSubDoc: StudentSubscription | null = null;
+    let uidSubDoc: StudentSubscription | null = null;
+
+    const syncCombinedSub = () => {
+      const best =
+        emailSubDoc && uidSubDoc
+          ? emailSubDoc.proUntil >= uidSubDoc.proUntil
+            ? emailSubDoc
+            : uidSubDoc
+          : emailSubDoc || uidSubDoc;
+      setMySubscription(best);
+
+      if (pendingDeepLinkArticle) {
+        const unlocked =
+          isAdminUser(currentUser) || Boolean(best && best.proUntil > Date.now());
+        if (unlocked) {
+          setReadingArticle(pendingDeepLinkArticle);
+          setUpgradeModalArticle(null);
+        } else {
+          setUpgradeModalArticle(pendingDeepLinkArticle);
+        }
+        setPendingDeepLinkArticle(null);
+      }
+    };
+
+    if (currentUser.emailVerified) {
+      if (currentUser.email) {
+        const emailKey = emailToSubscriptionKey(currentUser.email);
+        const subPath = `subscriptions/${emailKey}`;
+        unsubMySub = onSnapshot(
+          doc(db, 'subscriptions', emailKey),
+          (snap) => {
+            if (snap.exists()) {
+              const data = snap.data();
+              emailSubDoc = {
+                emailKey: data.emailKey,
+                studentEmail: data.studentEmail,
+                studentName: data.studentName,
+                proUntil: typeof data.proUntil === 'number' ? data.proUntil : 0,
+                planLabel: data.planLabel || 'Monthly Pro',
+                updatedByEmail: data.updatedByEmail || '',
+              };
+            } else {
+              emailSubDoc = null;
+            }
+            syncCombinedSub();
+          },
+          (error) => {
+            handleFirestoreError(error, OperationType.GET, subPath);
+          }
+        );
+      }
+
+      const uidKey = emailToSubscriptionKey(`uid:${currentUser.uid}`);
+      const uidSubPath = `subscriptions/${uidKey}`;
+      unsubMyUidSub = onSnapshot(
+        doc(db, 'subscriptions', uidKey),
         (snap) => {
           if (snap.exists()) {
             const data = snap.data();
-            setMySubscription({
+            uidSubDoc = {
               emailKey: data.emailKey,
               studentEmail: data.studentEmail,
               studentName: data.studentName,
               proUntil: typeof data.proUntil === 'number' ? data.proUntil : 0,
               planLabel: data.planLabel || 'Monthly Pro',
               updatedByEmail: data.updatedByEmail || '',
-            });
+            };
           } else {
-            setMySubscription(null);
+            uidSubDoc = null;
           }
-          if (pendingDeepLinkArticle) {
-            const unlocked =
-              isAdminUser(currentUser) ||
-              (snap.exists() &&
-                typeof snap.data().proUntil === 'number' &&
-                snap.data().proUntil > Date.now());
-            if (unlocked) {
-              setReadingArticle(pendingDeepLinkArticle);
-              setUpgradeModalArticle(null);
-            } else {
-              setUpgradeModalArticle(pendingDeepLinkArticle);
-            }
-            setPendingDeepLinkArticle(null);
-          }
+          syncCombinedSub();
         },
         (error) => {
-          handleFirestoreError(error, OperationType.GET, subPath);
+          handleFirestoreError(error, OperationType.GET, uidSubPath);
         }
       );
     }
@@ -422,6 +466,7 @@ export default function App() {
       unsubNotebook();
       unsubLearned();
       unsubMySub();
+      unsubMyUidSub();
     };
   }, [isAuthReady, currentUser, allVocabMap, pendingDeepLinkArticle]);
 

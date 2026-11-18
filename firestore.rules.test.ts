@@ -30,10 +30,9 @@ test('Firestore rules enforce all 8 pillars, admin-only subscription controls, a
   assert.ok(rules.includes('isValidStudentSubscription(incoming(), emailKey)'));
   assert.ok(rules.includes('isValidSubscriptionSettings(incoming(), settingId)'));
 
-  // 6. Query Enforcer on list
-  assert.ok(rules.includes('allow list: if isOwner(userId) && existing().userId == request.auth.uid;'));
-  assert.ok(rules.includes('allow list: if isAdmin() && existing().userId is string;'));
-  assert.ok(rules.includes('allow list: if isAdmin() && existing().emailKey is string;'));
+  // 6. Strict Owner & Admin List Access
+  assert.ok(rules.includes('allow list: if isOwner(userId);'));
+  assert.ok(rules.includes('allow list: if isAdmin();'));
 
   // 7. Temporal integrity
   assert.ok(rules.includes('incoming().createdAt == request.time'));

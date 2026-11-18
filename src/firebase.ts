@@ -17,6 +17,7 @@ import {
   getDoc,
   getDocFromServer,
   setDoc,
+  updateDoc,
   deleteDoc,
   writeBatch,
   serverTimestamp,
@@ -29,6 +30,15 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
+googleProvider.addScope('email');
+googleProvider.addScope('profile');
+
+export function extractUserEmail(user: User | null | undefined): string {
+  if (!user) return '';
+  if (user.email) return user.email.trim().toLowerCase();
+  const providerEmail = user.providerData?.find((p) => p?.email)?.email;
+  return (providerEmail || '').trim().toLowerCase();
+}
 
 export const DEFAULT_SUBSCRIPTION_SETTINGS: SubscriptionSettings = {
   settingId: 'subscription',
@@ -115,7 +125,7 @@ function truncateString(val: string, maxLen: number, fallback = 'Student'): stri
 
 /**
  * Ensures the student's parent `/users/{userId}` document exists in Firestore
- * and keeps their Google email synced so the Admin Panel can list registered students.
+ * and keeps their Google email synced so the Admin Panel can list all registered Google users.
  */
 export async function ensureStudentProfileDoc(user: User): Promise<void> {
   const userId = sanitizeId(user.uid);
@@ -124,11 +134,11 @@ export async function ensureStudentProfileDoc(user: User): Promise<void> {
 
   try {
     const existingSnap = await getDoc(userRef);
+    const cleanEmail = extractUserEmail(user).slice(0, 160);
     const displayName = truncateString(
-      user.displayName || user.email?.split('@')[0] || 'Student',
+      user.displayName || cleanEmail.split('@')[0] || 'Student',
       120
     );
-    const cleanEmail = (user.email || '').trim().toLowerCase().slice(0, 160);
     const photoURL = (user.photoURL || '').slice(0, 500);
 
     if (!existingSnap.exists()) {
@@ -145,15 +155,17 @@ export async function ensureStudentProfileDoc(user: User): Promise<void> {
       await setDoc(userRef, payload);
     } else {
       const existingData = existingSnap.data();
-      if (cleanEmail.length >= 3 && existingData.email !== cleanEmail) {
-        await setDoc(userRef, {
-          userId: existingData.userId,
-          displayName: existingData.displayName || displayName,
-          email: cleanEmail,
-          photoURL: existingData.photoURL ?? photoURL,
-          createdAt: existingData.createdAt,
+      const needsEmailUpdate = cleanEmail.length >= 3 && existingData.email !== cleanEmail;
+      const needsNameUpdate = displayName && existingData.displayName !== displayName;
+      if (needsEmailUpdate || needsNameUpdate) {
+        const updates: Record<string, unknown> = {
+          displayName: displayName || existingData.displayName || 'Student',
           updatedAt: serverTimestamp(),
-        });
+        };
+        if (cleanEmail.length >= 3) {
+          updates.email = cleanEmail;
+        }
+        await updateDoc(userRef, updates);
       }
     }
   } catch (error) {
@@ -291,17 +303,21 @@ export async function unmarkWordLearnedInCloud(
 }
 
 /**
- * Admin-only: Grants or extends Pro access for a student by their Gmail address.
+ * Admin-only: Grants or extends Pro access for a student by their Gmail address or Google UID (uid:<userId>).
  */
 export async function grantStudentProByEmail(
   adminUser: User,
-  rawStudentEmail: string,
+  rawStudentIdentifier: string,
   rawStudentName: string,
   durationDays: number,
   planLabel: string
 ): Promise<void> {
-  const cleanEmail = rawStudentEmail.trim().toLowerCase().slice(0, 160);
-  const emailKey = emailToSubscriptionKey(cleanEmail);
+  const trimmed = rawStudentIdentifier.trim();
+  const isUid = trimmed.startsWith('uid:');
+  const cleanIdentifier = isUid
+    ? trimmed.slice(0, 160)
+    : trimmed.toLowerCase().slice(0, 160);
+  const emailKey = emailToSubscriptionKey(cleanIdentifier);
   const subRef = doc(db, 'subscriptions', emailKey);
   const path = `subscriptions/${emailKey}`;
 
@@ -316,15 +332,15 @@ export async function grantStudentProByEmail(
         : now;
     const proUntil = baseTime + Math.max(1, durationDays) * 86400000;
     const studentName = truncateString(
-      rawStudentName || cleanEmail.split('@')[0] || 'Student',
+      rawStudentName || (isUid ? 'Google Student' : cleanIdentifier.split('@')[0]) || 'Student',
       120
     );
-    const updatedByEmail = (adminUser.email || '').trim().toLowerCase().slice(0, 160);
+    const updatedByEmail = extractUserEmail(adminUser).slice(0, 160);
 
     if (!existingSnap.exists()) {
       await setDoc(subRef, {
         emailKey,
-        studentEmail: cleanEmail,
+        studentEmail: cleanIdentifier,
         studentName,
         proUntil,
         planLabel: truncateString(planLabel, 60, 'Monthly Pro'),
@@ -351,11 +367,12 @@ export async function grantStudentProByEmail(
 }
 
 /**
- * Admin-only: Revokes Pro access for a student by their Gmail address.
+ * Admin-only: Revokes Pro access for a student by their Gmail address or Google UID (uid:<userId>).
  */
-export async function revokeStudentProByEmail(rawStudentEmail: string): Promise<void> {
-  const cleanEmail = rawStudentEmail.trim().toLowerCase();
-  const emailKey = emailToSubscriptionKey(cleanEmail);
+export async function revokeStudentProByEmail(rawStudentIdentifier: string): Promise<void> {
+  const trimmed = rawStudentIdentifier.trim();
+  const cleanIdentifier = trimmed.startsWith('uid:') ? trimmed : trimmed.toLowerCase();
+  const emailKey = emailToSubscriptionKey(cleanIdentifier);
   const subRef = doc(db, 'subscriptions', emailKey);
   const path = `subscriptions/${emailKey}`;
 

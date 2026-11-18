@@ -512,7 +512,12 @@ export function isAdminUser(
  * matching ^[a-zA-Z0-9_\-]+$ (1..128 chars).
  */
 export function emailToSubscriptionKey(rawEmail: string): string {
-  const clean = (rawEmail || '').trim().toLowerCase();
+  const trimmed = (rawEmail || '').trim();
+  if (trimmed.startsWith('uid:')) {
+    const rawUid = trimmed.slice(4).trim().replace(/[^a-zA-Z0-9_-]/g, '-');
+    return `uid-${rawUid || 'unknown'}`.slice(0, 128);
+  }
+  const clean = trimmed.toLowerCase();
   if (!clean) return 'unknown-email';
   const replaced = clean
     .replace(/@/g, '-at-')
