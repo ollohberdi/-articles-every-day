@@ -101,14 +101,14 @@ export const ShareArticleModal: React.FC<ShareArticleModalProps> = ({ article, o
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/60 backdrop-blur-xs animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 overflow-y-auto overscroll-contain flex items-start sm:items-center justify-center p-3 sm:p-4 bg-stone-950/60 backdrop-blur-xs animate-in fade-in duration-150"
       role="dialog"
       aria-modal="true"
       aria-labelledby="share-article-title"
       onClick={onClose}
     >
       <div
-        className="bg-white border border-stone-200 rounded-2xl max-w-lg w-full p-6 shadow-xl space-y-5"
+        className="bg-white border border-stone-200 rounded-2xl max-w-lg w-full my-auto max-h-[calc(100dvh-1.5rem)] overflow-y-auto p-5 sm:p-6 shadow-xl space-y-5"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
