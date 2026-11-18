@@ -4,22 +4,41 @@
  */
 
 import React from 'react';
-import { ArrowRight, Trees, Brain, Cpu, Landmark, Scale, CheckCircle2, Download, FlaskConical, Share2 } from 'lucide-react';
+import {
+  ArrowRight,
+  Trees,
+  Brain,
+  Cpu,
+  Landmark,
+  Scale,
+  CheckCircle2,
+  Download,
+  FlaskConical,
+  Share2,
+  Lock,
+  Sparkles,
+} from 'lucide-react';
 import { Article } from '../types';
 import { downloadArticleAsPDF } from '../utils/pdfExport';
 
 interface ArticleCardProps {
   article: Article;
+  isProArticle?: boolean;
+  isLocked?: boolean;
   onSelect: (article: Article) => void;
   onOpenExercises: (article: Article) => void;
   onShareArticle: (article: Article) => void;
+  onSelectLocked?: (article: Article) => void;
 }
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({
   article,
+  isProArticle = false,
+  isLocked = false,
   onSelect,
   onOpenExercises,
   onShareArticle,
+  onSelectLocked,
 }) => {
   const getCategoryIcon = () => {
     switch (article.category) {
@@ -48,9 +67,35 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
     (article.exercises.matching?.pairs ? 1 : 0) +
     (article.exercises.wordFormation?.length || 0);
 
+  const handleCardClick = () => {
+    if (isLocked && onSelectLocked) {
+      onSelectLocked(article);
+      return;
+    }
+    onSelect(article);
+  };
+
+  const handleExercisesClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isLocked && onSelectLocked) {
+      onSelectLocked(article);
+      return;
+    }
+    onOpenExercises(article);
+  };
+
+  const handlePdfClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isLocked && onSelectLocked) {
+      onSelectLocked(article);
+      return;
+    }
+    downloadArticleAsPDF(article);
+  };
+
   return (
     <div
-      onClick={() => onSelect(article)}
+      onClick={handleCardClick}
       className="group bg-white rounded-2xl border border-stone-200/80 shadow-xs hover:shadow-lg hover:border-stone-300 transition-all duration-200 overflow-hidden flex flex-col justify-between cursor-pointer"
     >
       <div>
@@ -65,9 +110,29 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           />
 
           <div className="flex items-center justify-between relative z-10">
-            <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white text-stone-900 shadow-xs">
-              {article.level}
-            </span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-white text-stone-900 shadow-xs">
+                {article.level}
+              </span>
+              {isProArticle ? (
+                isLocked ? (
+                  <span className="inline-flex items-center gap-1 text-2xs font-bold px-2.5 py-0.5 rounded-full bg-amber-400 text-stone-950 shadow-xs">
+                    <Lock className="w-2.5 h-2.5" />
+                    <span>Pro</span>
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1 text-2xs font-bold px-2.5 py-0.5 rounded-full bg-amber-400/25 text-amber-100 border border-amber-300/35 backdrop-blur-xs">
+                    <Sparkles className="w-2.5 h-2.5" />
+                    <span>Pro</span>
+                  </span>
+                )
+              ) : (
+                <span className="text-2xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/25 text-emerald-100 border border-emerald-300/30 backdrop-blur-xs">
+                  Free
+                </span>
+              )}
+            </div>
+
             <div className="flex items-center gap-1.5">
               <button
                 onClick={(e) => {
@@ -81,12 +146,13 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
                 <Share2 className="w-4 h-4" />
               </button>
               <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  downloadArticleAsPDF(article);
-                }}
+                onClick={handlePdfClick}
                 aria-label={`Download PDF for ${article.title}`}
-                title="Download PDF with article & vocabulary"
+                title={
+                  isLocked
+                    ? 'Upgrade to Pro to download PDF study sheets'
+                    : 'Download PDF with article & vocabulary'
+                }
                 className="p-2 rounded-xl bg-white/10 hover:bg-white/25 backdrop-blur-md border border-white/20 text-white transition-colors"
               >
                 <Download className="w-4 h-4" />
@@ -160,10 +226,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
       <div className="p-5 pt-0 flex items-center justify-between gap-2 border-t border-stone-100 mt-4">
         <div className="flex items-center gap-2.5">
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpenExercises(article);
-            }}
+            onClick={handleExercisesClick}
             className="text-xs font-semibold text-stone-600 hover:text-stone-950 transition-colors py-2 flex items-center gap-1"
           >
             <CheckCircle2 className="w-3.5 h-3.5 text-amber-600" />
@@ -171,12 +234,13 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           </button>
           <span className="text-stone-300" aria-hidden="true">·</span>
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              downloadArticleAsPDF(article);
-            }}
+            onClick={handlePdfClick}
             className="text-xs font-semibold text-stone-500 hover:text-stone-900 transition-colors py-2 flex items-center gap-1"
-            title="Download PDF with article and target vocabulary"
+            title={
+              isLocked
+                ? 'Upgrade to Pro to download PDF study sheets'
+                : 'Download PDF with article and target vocabulary'
+            }
           >
             <Download className="w-3.5 h-3.5" />
             <span>PDF</span>
@@ -195,10 +259,17 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           </button>
         </div>
 
-        <div className="flex items-center gap-1 text-xs font-bold text-stone-900 group-hover:text-amber-700 group-hover:translate-x-1 transition-all">
-          <span>Read</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </div>
+        {isLocked ? (
+          <div className="flex items-center gap-1 text-xs font-bold text-amber-800 group-hover:text-amber-950 transition-all">
+            <Lock className="w-3.5 h-3.5" />
+            <span>Pro</span>
+          </div>
+        ) : (
+          <div className="flex items-center gap-1 text-xs font-bold text-stone-900 group-hover:text-amber-700 group-hover:translate-x-1 transition-all">
+            <span>Read</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
   "entities": {
     "UserProfile": {
       "title": "UserProfile",
-      "description": "Student profile associated with a Google account (non-PII display metadata).",
+      "description": "Student profile associated with a Google account.",
       "type": "object",
       "properties": {
         "userId": {
@@ -17,6 +17,12 @@
           "description": "Student display name from Google account.",
           "minLength": 1,
           "maxLength": 120
+        },
+        "email": {
+          "type": "string",
+          "description": "Lowercase Google email address of the student (visible only to owner and admin).",
+          "minLength": 3,
+          "maxLength": 160
         },
         "photoURL": {
           "type": "string",
@@ -171,12 +177,118 @@
         }
       },
       "required": ["wordId", "userId", "cefrLevel", "createdAt"]
+    },
+    "StudentSubscription": {
+      "title": "StudentSubscription",
+      "description": "Pro subscription status managed by the Admin (ollohberdiinfo@gmail.com) and keyed by normalized student email.",
+      "type": "object",
+      "properties": {
+        "emailKey": {
+          "type": "string",
+          "description": "Normalized email key matching document ID.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "studentEmail": {
+          "type": "string",
+          "description": "Lowercase Google email address of the student.",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "studentName": {
+          "type": "string",
+          "description": "Display name or label for the student.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "proUntil": {
+          "type": "number",
+          "description": "Epoch milliseconds when Pro subscription expires (0 if revoked)."
+        },
+        "planLabel": {
+          "type": "string",
+          "description": "Human-readable subscription tier label (e.g., 30 Days Pro).",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "updatedByEmail": {
+          "type": "string",
+          "description": "Admin email that last updated the subscription.",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the subscription record was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the subscription record was last updated."
+        }
+      },
+      "required": [
+        "emailKey",
+        "studentEmail",
+        "studentName",
+        "proUntil",
+        "planLabel",
+        "updatedByEmail",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "SubscriptionSettings": {
+      "title": "SubscriptionSettings",
+      "description": "Public subscription pricing and Telegram contact instructions managed by the Admin.",
+      "type": "object",
+      "properties": {
+        "settingId": {
+          "type": "string",
+          "description": "Configuration document ID (e.g., subscription).",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "monthlyPriceText": {
+          "type": "string",
+          "description": "Displayed monthly subscription price (e.g., 39,000 UZS / month).",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "telegramUsername": {
+          "type": "string",
+          "description": "Admin Telegram username or handle (e.g., @ollohberdi).",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "paymentInstructions": {
+          "type": "string",
+          "description": "Instructions shown in the Pro Upgrade modal.",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when settings were last updated."
+        }
+      },
+      "required": [
+        "settingId",
+        "monthlyPriceText",
+        "telegramUsername",
+        "paymentInstructions",
+        "updatedAt"
+      ]
     }
   },
   "firestore": {
     "/users/{userId}": {
       "schema": { "$ref": "#/entities/UserProfile" },
-      "description": "Stores each student's non-PII Google profile metadata."
+      "description": "Stores each student's Google profile metadata (readable only by owner or admin)."
     },
     "/users/{userId}/notebook/{wordId}": {
       "schema": { "$ref": "#/entities/NotebookWord" },
@@ -185,6 +297,14 @@
     "/users/{userId}/learned/{wordId}": {
       "schema": { "$ref": "#/entities/LearnedWord" },
       "description": "Subcollection storing each student's learned vocabulary word IDs for the Vocabulary Gym."
+    },
+    "/subscriptions/{emailKey}": {
+      "schema": { "$ref": "#/entities/StudentSubscription" },
+      "description": "Stores Pro subscription expiration timestamps per student email, writable exclusively by admin ollohberdiinfo@gmail.com."
+    },
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/SubscriptionSettings" },
+      "description": "Stores public Pro subscription pricing and Telegram contact details, writable exclusively by admin ollohberdiinfo@gmail.com."
     }
   }
 }

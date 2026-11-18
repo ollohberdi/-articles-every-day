@@ -5,7 +5,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, doc, onSnapshot } from 'firebase/firestore';
 import { Navbar, ActiveView } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { ArticleCard } from './components/ArticleCard';
@@ -14,12 +14,30 @@ import { VocabularyExercises } from './components/VocabularyExercises';
 import { VocabularyGym } from './components/VocabularyGym';
 import { VocabularyNotebook } from './components/VocabularyNotebook';
 import { ShareArticleModal } from './components/ShareArticleModal';
+import { ProUpgradeModal } from './components/ProUpgradeModal';
+import { AdminDashboard } from './components/AdminDashboard';
 import { ARTICLES_DATA } from './data/articlesData';
-import { Article, CEFRLevel, VocabularyItem, UserSavedWord } from './types';
-import { filterArticles, resolveArticleFromLocation } from './utils/quizLogic';
+import {
+  Article,
+  CEFRLevel,
+  VocabularyItem,
+  UserSavedWord,
+  StudentSubscription,
+  SubscriptionSettings,
+  RegisteredStudentProfile,
+} from './types';
+import {
+  filterArticles,
+  resolveArticleFromLocation,
+  computeFreeArticleIds,
+  isArticleUnlocked,
+  isAdminUser,
+  emailToSubscriptionKey,
+} from './utils/quizLogic';
 import {
   auth,
   db,
+  DEFAULT_SUBSCRIPTION_SETTINGS,
   OperationType,
   handleFirestoreError,
   signInStudentWithGoogle,
@@ -28,6 +46,9 @@ import {
   removeWordFromCloudNotebook,
   markWordLearnedInCloud,
   unmarkWordLearnedInCloud,
+  grantStudentProByEmail,
+  revokeStudentProByEmail,
+  saveSubscriptionSettingsToCloud,
 } from './firebase';
 import { Search } from 'lucide-react';
 
@@ -44,6 +65,28 @@ export default function App() {
   // Firebase Auth User State
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [isAuthReady, setIsAuthReady] = useState<boolean>(false);
+
+  // Subscription & Admin State
+  const [subscriptionSettings, setSubscriptionSettings] = useState<SubscriptionSettings>(
+    DEFAULT_SUBSCRIPTION_SETTINGS
+  );
+  const [mySubscription, setMySubscription] = useState<StudentSubscription | null>(null);
+  const [registeredUsers, setRegisteredUsers] = useState<RegisteredStudentProfile[]>([]);
+  const [allSubscriptions, setAllSubscriptions] = useState<StudentSubscription[]>([]);
+  const [upgradeModalArticle, setUpgradeModalArticle] = useState<Article | null>(null);
+
+  // First 10 articles in each level (B1, B2, C1) are Free; remaining articles require Pro
+  const freeArticleIds = useMemo(() => computeFreeArticleIds(articles, 10), [articles]);
+
+  // Strict check: only ollohberdiinfo@gmail.com (verified Google account) is Admin
+  const isAdmin = useMemo(() => isAdminUser(currentUser), [currentUser]);
+
+  // Active Pro access: either Admin or active subscription with proUntil > now
+  const hasProAccess = useMemo(() => {
+    if (isAdmin) return true;
+    if (!mySubscription) return false;
+    return mySubscription.proUntil > Date.now();
+  }, [isAdmin, mySubscription]);
 
   // Lookup map of all canonical vocabulary items by ID
   const allVocabMap = useMemo(() => {
@@ -68,18 +111,60 @@ export default function App() {
   // Initialize Reading Article synchronously from URL (?article=..., #article=..., or /article/...)
   const [readingArticle, setReadingArticle] = useState<Article | null>(() => {
     if (typeof window === 'undefined') return null;
-    return resolveArticleFromLocation(ARTICLES_DATA, {
+    const initial = resolveArticleFromLocation(ARTICLES_DATA, {
       search: window.location.search,
       pathname: window.location.pathname,
       hash: window.location.hash,
     });
+    const initialFreeSet = computeFreeArticleIds(ARTICLES_DATA, 10);
+    if (initial && initialFreeSet.has(initial.id)) {
+      return initial;
+    }
+    return null;
+  });
+
+  // If URL had a deep link to a Pro article, hold it until we know whether the user has Pro access
+  const [pendingDeepLinkArticle, setPendingDeepLinkArticle] = useState<Article | null>(() => {
+    if (typeof window === 'undefined') return null;
+    const initial = resolveArticleFromLocation(ARTICLES_DATA, {
+      search: window.location.search,
+      pathname: window.location.pathname,
+      hash: window.location.hash,
+    });
+    const initialFreeSet = computeFreeArticleIds(ARTICLES_DATA, 10);
+    if (initial && !initialFreeSet.has(initial.id)) {
+      return initial;
+    }
+    return null;
   });
 
   const [exerciseArticle, setExerciseArticle] = useState<Article | null>(null);
   const [sharingArticle, setSharingArticle] = useState<Article | null>(null);
 
   // Vocabulary Gym Initial Mode
-  const [gymInitialMode, setGymInitialMode] = useState<'flashcards' | 'speedQuiz' | 'matrix'>('flashcards');
+  const [gymInitialMode, setGymInitialMode] = useState<'flashcards' | 'speedQuiz' | 'matrix'>(
+    'flashcards'
+  );
+
+  // Resolve pending Pro deep link once Auth & Subscription status are loaded
+  useEffect(() => {
+    if (!pendingDeepLinkArticle || !isAuthReady) return;
+    if (isArticleUnlocked(pendingDeepLinkArticle.id, freeArticleIds, hasProAccess)) {
+      setReadingArticle(pendingDeepLinkArticle);
+      setUpgradeModalArticle(null);
+      setPendingDeepLinkArticle(null);
+    } else if (!currentUser) {
+      setUpgradeModalArticle(pendingDeepLinkArticle);
+      setPendingDeepLinkArticle(null);
+    }
+  }, [pendingDeepLinkArticle, isAuthReady, freeArticleIds, hasProAccess, currentUser]);
+
+  // Ensure non-admin users can never stay on the 'admin' view
+  useEffect(() => {
+    if (activeView === 'admin' && !isAdmin) {
+      setActiveView('library');
+    }
+  }, [activeView, isAdmin]);
 
   // Synchronize URL and Document Title with active article / view
   useEffect(() => {
@@ -105,7 +190,11 @@ export default function App() {
     const currentRelativeUrl = `${window.location.pathname}${window.location.search}${window.location.hash}`;
 
     if (targetRelativeUrl !== currentRelativeUrl) {
-      window.history.pushState({ articleId: readingArticle?.id ?? null, view: activeView }, '', targetRelativeUrl);
+      window.history.pushState(
+        { articleId: readingArticle?.id ?? null, view: activeView },
+        '',
+        targetRelativeUrl
+      );
     }
   }, [readingArticle, activeView]);
 
@@ -121,8 +210,13 @@ export default function App() {
       });
 
       if (matchedArticle) {
-        setReadingArticle(matchedArticle);
-        setActiveView('library');
+        if (isArticleUnlocked(matchedArticle.id, freeArticleIds, hasProAccess)) {
+          setReadingArticle(matchedArticle);
+          setActiveView('library');
+        } else {
+          setReadingArticle(null);
+          setUpgradeModalArticle(matchedArticle);
+        }
         return;
       }
 
@@ -138,7 +232,7 @@ export default function App() {
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, [articles]);
+  }, [articles, freeArticleIds, hasProAccess]);
 
   // Saved Vocabulary Notebook State (persisted in localStorage AND synced with Firestore when signed in)
   const [savedWords, setSavedWords] = useState<UserSavedWord[]>(() => {
@@ -199,9 +293,38 @@ export default function App() {
     return () => unsubscribe();
   }, []);
 
-  // Subscribe to student's Firestore Notebook & Learned Words when authenticated
+  // Listen to public `/settings/subscription` document
   useEffect(() => {
-    if (!isAuthReady || !currentUser) return;
+    const settingRef = doc(db, 'settings', 'subscription');
+    const unsubSettings = onSnapshot(
+      settingRef,
+      (snap) => {
+        if (snap.exists()) {
+          const data = snap.data();
+          setSubscriptionSettings({
+            settingId: 'subscription',
+            monthlyPriceText:
+              data.monthlyPriceText || DEFAULT_SUBSCRIPTION_SETTINGS.monthlyPriceText,
+            telegramUsername:
+              data.telegramUsername || DEFAULT_SUBSCRIPTION_SETTINGS.telegramUsername,
+            paymentInstructions:
+              data.paymentInstructions || DEFAULT_SUBSCRIPTION_SETTINGS.paymentInstructions,
+          });
+        }
+      },
+      () => {
+        // Fallback silently to default settings if not created yet
+      }
+    );
+    return () => unsubSettings();
+  }, []);
+
+  // Subscribe to student's Firestore Notebook, Learned Words, and Pro Subscription when authenticated
+  useEffect(() => {
+    if (!isAuthReady || !currentUser) {
+      setMySubscription(null);
+      return;
+    }
 
     const notebookPath = `users/${currentUser.uid}/notebook`;
     const learnedPath = `users/${currentUser.uid}/learned`;
@@ -254,11 +377,109 @@ export default function App() {
       }
     );
 
+    let unsubMySub = () => {};
+    if (currentUser.email && currentUser.emailVerified) {
+      const emailKey = emailToSubscriptionKey(currentUser.email);
+      const subPath = `subscriptions/${emailKey}`;
+      unsubMySub = onSnapshot(
+        doc(db, 'subscriptions', emailKey),
+        (snap) => {
+          if (snap.exists()) {
+            const data = snap.data();
+            setMySubscription({
+              emailKey: data.emailKey,
+              studentEmail: data.studentEmail,
+              studentName: data.studentName,
+              proUntil: typeof data.proUntil === 'number' ? data.proUntil : 0,
+              planLabel: data.planLabel || 'Monthly Pro',
+              updatedByEmail: data.updatedByEmail || '',
+            });
+          } else {
+            setMySubscription(null);
+          }
+          if (pendingDeepLinkArticle) {
+            const unlocked =
+              isAdminUser(currentUser) ||
+              (snap.exists() &&
+                typeof snap.data().proUntil === 'number' &&
+                snap.data().proUntil > Date.now());
+            if (unlocked) {
+              setReadingArticle(pendingDeepLinkArticle);
+              setUpgradeModalArticle(null);
+            } else {
+              setUpgradeModalArticle(pendingDeepLinkArticle);
+            }
+            setPendingDeepLinkArticle(null);
+          }
+        },
+        (error) => {
+          handleFirestoreError(error, OperationType.GET, subPath);
+        }
+      );
+    }
+
     return () => {
       unsubNotebook();
       unsubLearned();
+      unsubMySub();
     };
-  }, [isAuthReady, currentUser, allVocabMap]);
+  }, [isAuthReady, currentUser, allVocabMap, pendingDeepLinkArticle]);
+
+  // Subscribe to all Registered Users & Subscriptions strictly when signed in as Admin (ollohberdiinfo@gmail.com)
+  useEffect(() => {
+    if (!isAuthReady || !isAdmin) {
+      setRegisteredUsers([]);
+      setAllSubscriptions([]);
+      return;
+    }
+
+    const unsubUsers = onSnapshot(
+      collection(db, 'users'),
+      (snapshot) => {
+        const list: RegisteredStudentProfile[] = [];
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          list.push({
+            userId: data.userId,
+            displayName: data.displayName || 'Student',
+            email: data.email,
+            photoURL: data.photoURL,
+          });
+        });
+        setRegisteredUsers(list);
+      },
+      (error) => {
+        handleFirestoreError(error, OperationType.LIST, 'users');
+      }
+    );
+
+    const unsubSubs = onSnapshot(
+      collection(db, 'subscriptions'),
+      (snapshot) => {
+        const list: StudentSubscription[] = [];
+        snapshot.forEach((docSnap) => {
+          const data = docSnap.data();
+          list.push({
+            emailKey: data.emailKey,
+            studentEmail: data.studentEmail,
+            studentName: data.studentName || 'Student',
+            proUntil: typeof data.proUntil === 'number' ? data.proUntil : 0,
+            planLabel: data.planLabel || 'Monthly Pro',
+            updatedByEmail: data.updatedByEmail || '',
+          });
+        });
+        setAllSubscriptions(list);
+      },
+      (error) => {
+        handleFirestoreError(error, OperationType.LIST, 'subscriptions');
+      }
+    );
+
+    return () => {
+      unsubUsers();
+      unsubSubs();
+    };
+  }, [isAuthReady, isAdmin]);
 
   const savedWordIds = useMemo(() => new Set(savedWords.map((w) => w.id)), [savedWords]);
   const learnedWordIds = useMemo(() => new Set(learnedWordIdsList), [learnedWordIdsList]);
@@ -429,20 +650,32 @@ export default function App() {
     return filteredArticles.reduce((sum, article) => sum + article.targetVocabulary.length, 0);
   }, [filteredArticles]);
 
-  // Navigation handlers
+  // Navigation handlers with Pro lock enforcement
   const handleOpenArticle = (article: Article) => {
+    if (!isArticleUnlocked(article.id, freeArticleIds, hasProAccess)) {
+      setUpgradeModalArticle(article);
+      return;
+    }
     setReadingArticle(article);
   };
 
   const handleOpenArticleById = (articleId: string) => {
     const target = articles.find((a) => a.id === articleId);
     if (target) {
+      if (!isArticleUnlocked(target.id, freeArticleIds, hasProAccess)) {
+        setUpgradeModalArticle(target);
+        return;
+      }
       setActiveView('library');
       setReadingArticle(target);
     }
   };
 
   const handleOpenExercises = (article: Article) => {
+    if (!isArticleUnlocked(article.id, freeArticleIds, hasProAccess)) {
+      setUpgradeModalArticle(article);
+      return;
+    }
     // Studying an article's exercises marks its target words as learned
     handleMarkArticleWordsLearned(article);
     setExerciseArticle(article);
@@ -458,12 +691,34 @@ export default function App() {
     setActiveView('gym');
   };
 
+  // Admin mutation handlers
+  const handleAdminGrantPro = async (
+    studentEmail: string,
+    studentName: string,
+    durationDays: number,
+    planLabel: string
+  ) => {
+    if (!currentUser || !isAdmin) return;
+    await grantStudentProByEmail(currentUser, studentEmail, studentName, durationDays, planLabel);
+  };
+
+  const handleAdminRevokePro = async (studentEmail: string) => {
+    if (!currentUser || !isAdmin) return;
+    await revokeStudentProByEmail(studentEmail);
+  };
+
+  const handleAdminSaveSettings = async (settings: Omit<SubscriptionSettings, 'settingId'>) => {
+    if (!currentUser || !isAdmin) return;
+    await saveSubscriptionSettingsToCloud(settings);
+  };
+
   return (
     <div className="min-h-screen bg-stone-50 flex flex-col font-sans text-stone-900 selection:bg-amber-200">
       {/* Primary Navigation Bar (Top Bar Contract) */}
       <Navbar
         activeView={activeView}
         onNavigate={(view) => {
+          if (view === 'admin' && !isAdmin) return;
           setActiveView(view);
           setReadingArticle(null);
         }}
@@ -471,6 +726,8 @@ export default function App() {
         onStartLevelQuiz={handleStartDailyDrill}
         currentUser={currentUser}
         isAuthLoading={!isAuthReady}
+        isAdmin={isAdmin}
+        hasProAccess={hasProAccess}
         onSignInWithGoogle={handleSignInWithGoogle}
         onSignOut={handleSignOut}
       />
@@ -507,6 +764,18 @@ export default function App() {
           onMarkWordLearned={handleMarkWordLearned}
           onToggleLearnedWord={handleToggleLearnedWord}
           onMarkArticleWordsLearned={handleMarkArticleWordsLearned}
+        />
+      ) : activeView === 'admin' && isAdmin ? (
+        /* Admin Panel: strictly rendered ONLY for ollohberdiinfo@gmail.com */
+        <AdminDashboard
+          currentUser={currentUser}
+          registeredUsers={registeredUsers}
+          subscriptions={allSubscriptions}
+          subscriptionSettings={subscriptionSettings}
+          onGrantPro={handleAdminGrantPro}
+          onRevokePro={handleAdminRevokePro}
+          onSaveSettings={handleAdminSaveSettings}
+          onBackToLibrary={() => setActiveView('library')}
         />
       ) : activeView === 'gym' ? (
         /* Dedicated Vocabulary Gym */
@@ -556,15 +825,22 @@ export default function App() {
           <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10">
             {filteredArticles.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredArticles.map((article) => (
-                  <ArticleCard
-                    key={article.id}
-                    article={article}
-                    onSelect={handleOpenArticle}
-                    onOpenExercises={handleOpenExercises}
-                    onShareArticle={handleShareArticle}
-                  />
-                ))}
+                {filteredArticles.map((article) => {
+                  const isProArticle = !freeArticleIds.has(article.id);
+                  const isLocked = !isArticleUnlocked(article.id, freeArticleIds, hasProAccess);
+                  return (
+                    <ArticleCard
+                      key={article.id}
+                      article={article}
+                      isProArticle={isProArticle}
+                      isLocked={isLocked}
+                      onSelect={handleOpenArticle}
+                      onOpenExercises={handleOpenExercises}
+                      onShareArticle={handleShareArticle}
+                      onSelectLocked={(lockedArticle) => setUpgradeModalArticle(lockedArticle)}
+                    />
+                  );
+                })}
               </div>
             ) : (
               /* Empty Search / Filter State */
@@ -588,7 +864,7 @@ export default function App() {
                     }}
                     className="px-4 py-2 bg-stone-900 text-white rounded-xl text-xs font-semibold hover:bg-stone-800 transition-colors"
                   >
-                    Reset Search & Filters
+                    Reset Search &amp; Filters
                   </button>
                 </div>
               </div>
@@ -613,11 +889,22 @@ export default function App() {
         onClose={() => setSharingArticle(null)}
       />
 
+      {/* Pro Subscription Upgrade Modal */}
+      <ProUpgradeModal
+        article={upgradeModalArticle}
+        onClose={() => setUpgradeModalArticle(null)}
+        currentUser={currentUser}
+        onSignInWithGoogle={handleSignInWithGoogle}
+        subscriptionSettings={subscriptionSettings}
+      />
+
       {/* Clean Footer */}
       <footer className="border-t border-stone-200/80 bg-white py-8 px-4 sm:px-6 text-xs text-stone-500">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="font-serif font-bold text-stone-900 text-sm">Articles ED (Every day)</span>
+            <span className="font-serif font-bold text-stone-900 text-sm">
+              Articles ED (Every day)
+            </span>
             <span>·</span>
             <span>Graded English Readers for B1, B2, and C1 Learners</span>
           </div>

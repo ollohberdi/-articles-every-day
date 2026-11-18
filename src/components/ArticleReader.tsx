@@ -16,6 +16,8 @@ import {
   Award,
   Download,
   Share2,
+  MessageSquare,
+  Lightbulb,
 } from 'lucide-react';
 import { Article, VocabularyItem } from '../types';
 import { WordPopup } from './WordPopup';
@@ -53,15 +55,43 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [speechRate, setSpeechRate] = useState<number>(1.0);
   const [readProgress, setReadProgress] = useState(0);
+  const [practicedQuestionIds, setPracticedQuestionIds] = useState<Set<string>>(new Set());
+  const [openTipIds, setOpenTipIds] = useState<Set<string>>(new Set());
 
   const handleInspectWord = (vocabItem: VocabularyItem) => {
     setSelectedWord(vocabItem);
     onMarkWordLearned(vocabItem.id);
   };
 
+  const togglePracticedQuestion = (questionId: string) => {
+    setPracticedQuestionIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(questionId)) {
+        next.delete(questionId);
+      } else {
+        next.add(questionId);
+      }
+      return next;
+    });
+  };
+
+  const toggleSpeakingTip = (questionId: string) => {
+    setOpenTipIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(questionId)) {
+        next.delete(questionId);
+      } else {
+        next.add(questionId);
+      }
+      return next;
+    });
+  };
+
   // Scroll to top when article opens
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    setPracticedQuestionIds(new Set());
+    setOpenTipIds(new Set());
     return () => {
       stopSpeech();
     };
@@ -345,6 +375,131 @@ export const ArticleReader: React.FC<ArticleReaderProps> = ({
             }`}
           >
             {article.paragraphs.map((p, idx) => renderParagraphWithVocabulary(p, idx))}
+
+            {/* Speaking & Discussion Questions Section (when available) */}
+            {article.speakingQuestions && article.speakingQuestions.length > 0 && (
+              <section
+                aria-label="Speaking and Discussion Questions"
+                className="mt-12 pt-8 border-t border-stone-200 font-sans"
+              >
+                <div className="bg-white border border-stone-200 rounded-xl p-6 shadow-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 mb-5 border-b border-stone-100">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-lg bg-amber-100/80 text-amber-800 flex items-center justify-center shrink-0">
+                        <MessageSquare className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <h3 className="font-serif text-lg font-bold text-stone-900">
+                          Speaking &amp; Discussion ({article.speakingQuestions.length} Questions)
+                        </h3>
+                        <p className="text-xs text-stone-500">
+                          Answer aloud in 30–60 seconds using the suggested target vocabulary words.
+                        </p>
+                      </div>
+                    </div>
+                    <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md self-start sm:self-center">
+                      {practicedQuestionIds.size}/{article.speakingQuestions.length} Practiced
+                    </span>
+                  </div>
+
+                  <div className="space-y-4">
+                    {article.speakingQuestions.map((sq, index) => {
+                      const isPracticed = practicedQuestionIds.has(sq.id);
+                      const isTipOpen = openTipIds.has(sq.id);
+                      return (
+                        <div
+                          key={sq.id}
+                          className={`p-4 rounded-xl border transition-colors ${
+                            isPracticed
+                              ? 'bg-emerald-50/30 border-emerald-200/80'
+                              : 'bg-stone-50/70 border-stone-200/80'
+                          }`}
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex items-start gap-3">
+                              <span className="w-6 h-6 rounded-md bg-stone-900 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                                {index + 1}
+                              </span>
+                              <p className="text-sm sm:text-base font-medium text-stone-900 leading-snug">
+                                {sq.question}
+                              </p>
+                            </div>
+                            <button
+                              onClick={() => speakWord(sq.question)}
+                              className="p-1.5 text-stone-400 hover:text-stone-800 hover:bg-stone-200/60 rounded-lg transition-colors shrink-0"
+                              title="Listen to speaking question"
+                              aria-label={`Listen to question ${index + 1}`}
+                            >
+                              <Volume2 className="w-4 h-4" />
+                            </button>
+                          </div>
+
+                          <div className="mt-3 pl-9 flex flex-wrap items-center justify-between gap-3">
+                            {/* Suggested Target Words to Use */}
+                            <div className="flex flex-wrap items-center gap-1.5">
+                              <span className="text-xs text-stone-500 font-medium mr-1">
+                                Try to use:
+                              </span>
+                              {sq.targetWords.map((tw) => {
+                                const matchedVocab = article.targetVocabulary.find(
+                                  (v) => v.word.toLowerCase() === tw.toLowerCase()
+                                );
+                                return (
+                                  <button
+                                    key={tw}
+                                    type="button"
+                                    onClick={() => matchedVocab && handleInspectWord(matchedVocab)}
+                                    className="text-xs font-semibold px-2 py-0.5 rounded bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100 transition-colors"
+                                    title={
+                                      matchedVocab
+                                        ? `${matchedVocab.word}: ${matchedVocab.definition}`
+                                        : tw
+                                    }
+                                  >
+                                    {tw}
+                                  </button>
+                                );
+                              })}
+                            </div>
+
+                            {/* Speaking Tip & Mark Practiced Controls */}
+                            <div className="flex items-center gap-2">
+                              {sq.speakingTip && (
+                                <button
+                                  type="button"
+                                  onClick={() => toggleSpeakingTip(sq.id)}
+                                  className="text-xs font-medium text-amber-800 hover:text-amber-950 flex items-center gap-1 px-2 py-1 rounded hover:bg-amber-100/50 transition-colors"
+                                >
+                                  <Lightbulb className="w-3.5 h-3.5" />
+                                  <span>{isTipOpen ? 'Hide Starter' : 'Sentence Starter'}</span>
+                                </button>
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => togglePracticedQuestion(sq.id)}
+                                className={`text-xs font-semibold px-2.5 py-1 rounded-md border transition-colors ${
+                                  isPracticed
+                                    ? 'bg-emerald-600 text-white border-emerald-600 hover:bg-emerald-700'
+                                    : 'bg-white text-stone-700 border-stone-300 hover:bg-stone-100'
+                                }`}
+                              >
+                                {isPracticed ? 'Practiced ✓' : 'Mark Practiced'}
+                              </button>
+                            </div>
+                          </div>
+
+                          {sq.speakingTip && isTipOpen && (
+                            <div className="mt-3 ml-9 p-3 rounded-lg bg-amber-50/70 border border-amber-200/70 text-xs sm:text-sm text-amber-950">
+                              {sq.speakingTip}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </section>
+            )}
 
             {/* Bottom Actions inside Article */}
             <div className="mt-12 pt-8 border-t border-stone-200">

@@ -263,5 +263,58 @@ test('buildGymExercisesForLearnedWords generates exercises strictly for learned 
   }
 });
 
+test('computeFreeArticleIds unlocks only the first 10 articles per level and isAdminUser restricts admin strictly to ollohberdiinfo@gmail.com', async () => {
+  const { ARTICLES_DATA } = await import('../data/articlesData');
+  const {
+    isAdminUser,
+    emailToSubscriptionKey,
+    computeFreeArticleIds,
+    isArticleUnlocked,
+  } = await import('./quizLogic');
+
+  // 1. Admin visibility check: strictly ollohberdiinfo@gmail.com with verified email
+  assert.equal(isAdminUser(null), false);
+  assert.equal(isAdminUser(undefined), false);
+  assert.equal(isAdminUser({ email: 'student@gmail.com', emailVerified: true }), false);
+  assert.equal(isAdminUser({ email: 'ollohberdiinfo@gmail.com', emailVerified: false }), false);
+  assert.equal(isAdminUser({ email: 'ollohberdiinfo@gmail.com', emailVerified: true }), true);
+  assert.equal(isAdminUser({ email: 'OLLOHBERDIINFO@GMAIL.COM', emailVerified: true }), true);
+
+  // 2. Email to Firestore key formatting
+  const subKey = emailToSubscriptionKey('Student.One@gmail.com');
+  assert.equal(subKey, 'student-dot-one-at-gmail-dot-com');
+  assert.match(subKey, /^[a-zA-Z0-9_-]+$/);
+
+  // 3. First 10 per level are Free (10 B1 + 10 B2 + 10 C1 = 30 Free; remaining 40 are Pro)
+  const freeIds = computeFreeArticleIds(ARTICLES_DATA, 10);
+  assert.equal(freeIds.size, 30);
+
+  const b1Articles = ARTICLES_DATA.filter((a) => a.level === 'B1');
+  const b2Articles = ARTICLES_DATA.filter((a) => a.level === 'B2');
+  const c1Articles = ARTICLES_DATA.filter((a) => a.level === 'C1');
+
+  // First 10 B1 are free, #11..#30 B1 are locked for non-Pro
+  for (let i = 0; i < b1Articles.length; i++) {
+    const expectedFree = i < 10;
+    assert.equal(isArticleUnlocked(b1Articles[i].id, freeIds, false), expectedFree);
+    assert.equal(isArticleUnlocked(b1Articles[i].id, freeIds, true), true);
+  }
+
+  // First 10 B2 are free, #11..#30 B2 are locked for non-Pro
+  for (let i = 0; i < b2Articles.length; i++) {
+    const expectedFree = i < 10;
+    assert.equal(isArticleUnlocked(b2Articles[i].id, freeIds, false), expectedFree);
+    assert.equal(isArticleUnlocked(b2Articles[i].id, freeIds, true), true);
+  }
+
+  // All 10 C1 articles are within the first 10 of C1, so they are free
+  for (let i = 0; i < c1Articles.length; i++) {
+    assert.equal(isArticleUnlocked(c1Articles[i].id, freeIds, false), true);
+  }
+});
+
+
+
+
 
 

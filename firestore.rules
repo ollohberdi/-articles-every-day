@@ -23,6 +23,11 @@ service cloud.firestore {
       return isVerifiedUser() && request.auth.uid == userId;
     }
 
+    // Bootstrapped Admin: exclusively ollohberdiinfo@gmail.com with verified Google email
+    function isAdmin() {
+      return isVerifiedUser() && request.auth.token.email == 'ollohberdiinfo@gmail.com';
+    }
+
     function isValidId(id) {
       return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
     }
@@ -43,13 +48,14 @@ service cloud.firestore {
     // Validation Blueprint: UserProfile (/users/{userId})
     function isValidUserProfile(data, userId) {
       return data.keys().hasAll(['userId', 'displayName', 'createdAt', 'updatedAt']) &&
-        data.keys().hasOnly(['userId', 'displayName', 'photoURL', 'createdAt', 'updatedAt']) &&
+        data.keys().hasOnly(['userId', 'displayName', 'email', 'photoURL', 'createdAt', 'updatedAt']) &&
         data.userId == userId &&
         data.userId == request.auth.uid &&
         isValidId(data.userId) &&
         data.displayName is string &&
         data.displayName.size() >= 1 &&
         data.displayName.size() <= 120 &&
+        (!('email' in data) || (data.email is string && data.email.size() >= 3 && data.email.size() <= 160)) &&
         (!('photoURL' in data) || (data.photoURL is string && data.photoURL.size() <= 500)) &&
         data.createdAt is timestamp &&
         data.updatedAt is timestamp;
@@ -125,10 +131,67 @@ service cloud.firestore {
         data.createdAt is timestamp;
     }
 
+    // Validation Blueprint: StudentSubscription (/subscriptions/{emailKey})
+    function isValidStudentSubscription(data, emailKey) {
+      return data.keys().hasAll([
+          'emailKey',
+          'studentEmail',
+          'studentName',
+          'proUntil',
+          'planLabel',
+          'updatedByEmail',
+          'createdAt',
+          'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'emailKey',
+          'studentEmail',
+          'studentName',
+          'proUntil',
+          'planLabel',
+          'updatedByEmail',
+          'createdAt',
+          'updatedAt'
+        ]) &&
+        data.emailKey == emailKey &&
+        isValidId(data.emailKey) &&
+        data.studentEmail is string && data.studentEmail.size() >= 3 && data.studentEmail.size() <= 160 &&
+        data.studentName is string && data.studentName.size() >= 1 && data.studentName.size() <= 120 &&
+        data.proUntil is number && data.proUntil >= 0 &&
+        data.planLabel is string && data.planLabel.size() >= 1 && data.planLabel.size() <= 60 &&
+        data.updatedByEmail is string && data.updatedByEmail == request.auth.token.email && data.updatedByEmail.size() <= 160 &&
+        data.createdAt is timestamp &&
+        data.updatedAt is timestamp;
+    }
+
+    // Validation Blueprint: SubscriptionSettings (/settings/{settingId})
+    function isValidSubscriptionSettings(data, settingId) {
+      return data.keys().hasAll([
+          'settingId',
+          'monthlyPriceText',
+          'telegramUsername',
+          'paymentInstructions',
+          'updatedAt'
+        ]) &&
+        data.keys().hasOnly([
+          'settingId',
+          'monthlyPriceText',
+          'telegramUsername',
+          'paymentInstructions',
+          'updatedAt'
+        ]) &&
+        data.settingId == settingId &&
+        isValidId(data.settingId) &&
+        data.monthlyPriceText is string && data.monthlyPriceText.size() >= 1 && data.monthlyPriceText.size() <= 80 &&
+        data.telegramUsername is string && data.telegramUsername.size() >= 1 && data.telegramUsername.size() <= 80 &&
+        data.paymentInstructions is string && data.paymentInstructions.size() >= 1 && data.paymentInstructions.size() <= 500 &&
+        data.updatedAt is timestamp;
+    }
+
     // Collection: /users/{userId}
     match /users/{userId} {
-      allow get: if isOwner(userId) && isValidId(userId);
-      allow list: if false;
+      allow get: if (isOwner(userId) || isAdmin()) && isValidId(userId);
+      allow list: if isAdmin() && existing().userId is string;
 
       allow create: if isVerifiedOwner(userId) &&
         isValidId(userId) &&
@@ -142,7 +205,7 @@ service cloud.firestore {
         incoming().userId == existing().userId &&
         incoming().createdAt == existing().createdAt &&
         incoming().updatedAt == request.time &&
-        incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'photoURL', 'updatedAt']);
+        incoming().diff(existing()).affectedKeys().hasOnly(['displayName', 'email', 'photoURL', 'updatedAt']);
 
       allow delete: if false;
 
@@ -203,6 +266,63 @@ service cloud.firestore {
           existing().userId == request.auth.uid &&
           parentUserExists(userId);
       }
+    }
+
+    // Collection: /subscriptions/{emailKey}
+    match /subscriptions/{emailKey} {
+      allow get: if isValidId(emailKey) && (
+        isAdmin() ||
+        (isVerifiedUser() && (resource == null || existing().studentEmail == request.auth.token.email))
+      );
+      allow list: if isAdmin() && existing().emailKey is string;
+
+      allow create: if isAdmin() &&
+        isValidId(emailKey) &&
+        isValidStudentSubscription(incoming(), emailKey) &&
+        incoming().createdAt == request.time &&
+        incoming().updatedAt == request.time;
+
+      allow update: if isAdmin() &&
+        isValidId(emailKey) &&
+        isValidStudentSubscription(incoming(), emailKey) &&
+        incoming().emailKey == existing().emailKey &&
+        incoming().studentEmail == existing().studentEmail &&
+        incoming().createdAt == existing().createdAt &&
+        incoming().updatedAt == request.time &&
+        incoming().diff(existing()).affectedKeys().hasOnly([
+          'studentName',
+          'proUntil',
+          'planLabel',
+          'updatedByEmail',
+          'updatedAt'
+        ]);
+
+      allow delete: if isAdmin() && isValidId(emailKey);
+    }
+
+    // Collection: /settings/{settingId}
+    match /settings/{settingId} {
+      allow get: if isValidId(settingId);
+      allow list: if false;
+
+      allow create: if isAdmin() &&
+        isValidId(settingId) &&
+        isValidSubscriptionSettings(incoming(), settingId) &&
+        incoming().updatedAt == request.time;
+
+      allow update: if isAdmin() &&
+        isValidId(settingId) &&
+        isValidSubscriptionSettings(incoming(), settingId) &&
+        incoming().settingId == existing().settingId &&
+        incoming().updatedAt == request.time &&
+        incoming().diff(existing()).affectedKeys().hasOnly([
+          'monthlyPriceText',
+          'telegramUsername',
+          'paymentInstructions',
+          'updatedAt'
+        ]);
+
+      allow delete: if false;
     }
   }
 }

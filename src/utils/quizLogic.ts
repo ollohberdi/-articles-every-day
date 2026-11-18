@@ -484,4 +484,77 @@ export function buildGymExercisesForLearnedWords<
   return questions;
 }
 
+/**
+ * Exclusive Admin Gmail address authorized to view and use the Admin Panel
+ */
+export const ADMIN_EMAIL = 'ollohberdiinfo@gmail.com';
+
+/**
+ * Number of free articles unlocked in each CEFR level (B1, B2, C1) without a subscription
+ */
+export const FREE_ARTICLES_PER_LEVEL = 10;
+
+/**
+ * Checks whether the current user is the authorized administrator (ollohberdiinfo@gmail.com)
+ * Requires a verified Google account with exact email match.
+ */
+export function isAdminUser(
+  user: { email?: string | null; emailVerified?: boolean } | null | undefined
+): boolean {
+  if (!user || !user.email || user.emailVerified !== true) {
+    return false;
+  }
+  return user.email.trim().toLowerCase() === ADMIN_EMAIL;
+}
+
+/**
+ * Converts a student Gmail address into a deterministic, Firestore-safe document ID
+ * matching ^[a-zA-Z0-9_\-]+$ (1..128 chars).
+ */
+export function emailToSubscriptionKey(rawEmail: string): string {
+  const clean = (rawEmail || '').trim().toLowerCase();
+  if (!clean) return 'unknown-email';
+  const replaced = clean
+    .replace(/@/g, '-at-')
+    .replace(/\./g, '-dot-')
+    .replace(/[^a-z0-9_-]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  return (replaced || 'unknown-email').slice(0, 128);
+}
+
+/**
+ * Computes the Set of article IDs that are Free (the first N articles in each CEFR level: B1, B2, C1).
+ * Any article not in this set is a Pro article requiring an active subscription.
+ */
+export function computeFreeArticleIds<T extends { id: string; level: CEFRLevel }>(
+  articles: T[],
+  freePerLevel: number = FREE_ARTICLES_PER_LEVEL
+): Set<string> {
+  const counts: Record<CEFRLevel, number> = { B1: 0, B2: 0, C1: 0 };
+  const freeIds = new Set<string>();
+
+  for (const article of articles) {
+    if (counts[article.level] < freePerLevel) {
+      freeIds.add(article.id);
+      counts[article.level] += 1;
+    }
+  }
+
+  return freeIds;
+}
+
+/**
+ * Returns true if the user can open/read/practice the given article.
+ * Admins and active Pro subscribers can access all articles; free users can access the first 10 per level.
+ */
+export function isArticleUnlocked(
+  articleId: string,
+  freeArticleIds: Set<string>,
+  hasProAccess: boolean
+): boolean {
+  if (hasProAccess) return true;
+  return freeArticleIds.has(articleId);
+}
+
 

@@ -145,6 +145,46 @@ export function downloadArticleAsPDF(article: Article): void {
     y += 4;
   });
 
+  // --- Speaking & Discussion Questions Section (when available) ---
+  if (article.speakingQuestions && article.speakingQuestions.length > 0) {
+    y += 4;
+    checkPageBreak(30);
+
+    doc.setDrawColor(214, 211, 209);
+    doc.line(margin, y, pageWidth - margin, y);
+    y += 8;
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(13);
+    doc.setTextColor(28, 25, 23);
+    doc.text(
+      `Speaking & Discussion (${article.speakingQuestions.length} Questions - ${article.level})`,
+      margin,
+      y
+    );
+    y += 7;
+
+    article.speakingQuestions.forEach((sq, index) => {
+      const qLines = doc.splitTextToSize(`${index + 1}. ${sq.question}`, contentWidth - 4);
+      const targetLine = `Try to use: ${sq.targetWords.join(', ')}`;
+      const blockHeight = qLines.length * 5 + 10;
+
+      checkPageBreak(blockHeight);
+
+      doc.setFont('times', 'normal');
+      doc.setFontSize(11);
+      doc.setTextColor(28, 25, 23);
+      doc.text(qLines, margin, y);
+      y += qLines.length * 5 + 1;
+
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(180, 83, 9);
+      doc.text(targetLine, margin + 4, y);
+      y += 7;
+    });
+  }
+
   // --- Footer on each page ---
   const totalPages = doc.getNumberOfPages();
   for (let i = 1; i <= totalPages; i++) {

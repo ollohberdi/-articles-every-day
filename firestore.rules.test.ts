@@ -7,14 +7,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-test('Firestore rules enforce all 8 pillars and reject Dirty Dozen payloads', () => {
+test('Firestore rules enforce all 8 pillars, admin-only subscription controls, and reject Dirty Dozen payloads', () => {
   const rules = fs.readFileSync('firestore.rules', 'utf8');
 
   // 1. Global Safety Net catch-all
   assert.ok(rules.includes('match /{document=**} {\n      allow read, write: if false;\n    }'));
 
-  // 2. Verified Google user requirement
+  // 2. Verified Google user requirement & strict admin email check
   assert.ok(rules.includes('request.auth.token.email_verified == true'));
+  assert.ok(rules.includes("isVerifiedUser() && request.auth.token.email == 'ollohberdiinfo@gmail.com'"));
 
   // 3. Path variable hardening
   assert.ok(rules.includes("id.matches('^[a-zA-Z0-9_\\\\-]+$')"));
@@ -26,9 +27,13 @@ test('Firestore rules enforce all 8 pillars and reject Dirty Dozen payloads', ()
   assert.ok(rules.includes('isValidUserProfile(incoming(), userId)'));
   assert.ok(rules.includes('isValidNotebookWord(incoming(), userId, wordId)'));
   assert.ok(rules.includes('isValidLearnedWord(incoming(), userId, wordId)'));
+  assert.ok(rules.includes('isValidStudentSubscription(incoming(), emailKey)'));
+  assert.ok(rules.includes('isValidSubscriptionSettings(incoming(), settingId)'));
 
   // 6. Query Enforcer on list
   assert.ok(rules.includes('allow list: if isOwner(userId) && existing().userId == request.auth.uid;'));
+  assert.ok(rules.includes('allow list: if isAdmin() && existing().userId is string;'));
+  assert.ok(rules.includes('allow list: if isAdmin() && existing().emailKey is string;'));
 
   // 7. Temporal integrity
   assert.ok(rules.includes('incoming().createdAt == request.time'));

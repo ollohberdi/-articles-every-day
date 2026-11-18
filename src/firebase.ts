@@ -22,12 +22,21 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 import firebaseConfig from '../firebase-applet-config.json';
-import { UserSavedWord, VocabularyItem } from './types';
+import { SubscriptionSettings, UserSavedWord, VocabularyItem } from './types';
+import { emailToSubscriptionKey } from './utils/quizLogic';
 
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
+
+export const DEFAULT_SUBSCRIPTION_SETTINGS: SubscriptionSettings = {
+  settingId: 'subscription',
+  monthlyPriceText: '39,000 UZS / month',
+  telegramUsername: '@ollohberdi',
+  paymentInstructions:
+    'Sign in with your Google account, then message the admin on Telegram with your Gmail address to activate full Pro access to all 70+ graded articles, interactive exercises, and printable PDF study sheets.',
+};
 
 export enum OperationType {
   CREATE = 'create',
@@ -105,7 +114,8 @@ function truncateString(val: string, maxLen: number, fallback = 'Student'): stri
 }
 
 /**
- * Ensures the student's parent `/users/{userId}` document exists in Firestore.
+ * Ensures the student's parent `/users/{userId}` document exists in Firestore
+ * and keeps their Google email synced so the Admin Panel can list registered students.
  */
 export async function ensureStudentProfileDoc(user: User): Promise<void> {
   const userId = sanitizeId(user.uid);
@@ -118,16 +128,33 @@ export async function ensureStudentProfileDoc(user: User): Promise<void> {
       user.displayName || user.email?.split('@')[0] || 'Student',
       120
     );
+    const cleanEmail = (user.email || '').trim().toLowerCase().slice(0, 160);
     const photoURL = (user.photoURL || '').slice(0, 500);
 
     if (!existingSnap.exists()) {
-      await setDoc(userRef, {
+      const payload: Record<string, unknown> = {
         userId,
         displayName,
         photoURL,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
-      });
+      };
+      if (cleanEmail.length >= 3) {
+        payload.email = cleanEmail;
+      }
+      await setDoc(userRef, payload);
+    } else {
+      const existingData = existingSnap.data();
+      if (cleanEmail.length >= 3 && existingData.email !== cleanEmail) {
+        await setDoc(userRef, {
+          userId: existingData.userId,
+          displayName: existingData.displayName || displayName,
+          email: cleanEmail,
+          photoURL: existingData.photoURL ?? photoURL,
+          createdAt: existingData.createdAt,
+          updatedAt: serverTimestamp(),
+        });
+      }
     }
   } catch (error) {
     handleFirestoreError(error, OperationType.WRITE, path);
@@ -264,6 +291,109 @@ export async function unmarkWordLearnedInCloud(
 }
 
 /**
+ * Admin-only: Grants or extends Pro access for a student by their Gmail address.
+ */
+export async function grantStudentProByEmail(
+  adminUser: User,
+  rawStudentEmail: string,
+  rawStudentName: string,
+  durationDays: number,
+  planLabel: string
+): Promise<void> {
+  const cleanEmail = rawStudentEmail.trim().toLowerCase().slice(0, 160);
+  const emailKey = emailToSubscriptionKey(cleanEmail);
+  const subRef = doc(db, 'subscriptions', emailKey);
+  const path = `subscriptions/${emailKey}`;
+
+  try {
+    const existingSnap = await getDoc(subRef);
+    const now = Date.now();
+    const baseTime =
+      existingSnap.exists() &&
+      typeof existingSnap.data().proUntil === 'number' &&
+      existingSnap.data().proUntil > now
+        ? existingSnap.data().proUntil
+        : now;
+    const proUntil = baseTime + Math.max(1, durationDays) * 86400000;
+    const studentName = truncateString(
+      rawStudentName || cleanEmail.split('@')[0] || 'Student',
+      120
+    );
+    const updatedByEmail = (adminUser.email || '').trim().toLowerCase().slice(0, 160);
+
+    if (!existingSnap.exists()) {
+      await setDoc(subRef, {
+        emailKey,
+        studentEmail: cleanEmail,
+        studentName,
+        proUntil,
+        planLabel: truncateString(planLabel, 60, 'Monthly Pro'),
+        updatedByEmail,
+        createdAt: serverTimestamp(),
+        updatedAt: serverTimestamp(),
+      });
+    } else {
+      const existingData = existingSnap.data();
+      await setDoc(subRef, {
+        emailKey: existingData.emailKey,
+        studentEmail: existingData.studentEmail,
+        studentName,
+        proUntil,
+        planLabel: truncateString(planLabel, 60, 'Monthly Pro'),
+        updatedByEmail,
+        createdAt: existingData.createdAt,
+        updatedAt: serverTimestamp(),
+      });
+    }
+  } catch (error) {
+    handleFirestoreError(error, OperationType.WRITE, path);
+  }
+}
+
+/**
+ * Admin-only: Revokes Pro access for a student by their Gmail address.
+ */
+export async function revokeStudentProByEmail(rawStudentEmail: string): Promise<void> {
+  const cleanEmail = rawStudentEmail.trim().toLowerCase();
+  const emailKey = emailToSubscriptionKey(cleanEmail);
+  const subRef = doc(db, 'subscriptions', emailKey);
+  const path = `subscriptions/${emailKey}`;
+
+  try {
+    await deleteDoc(subRef);
+  } catch (error) {
+    handleFirestoreError(error, OperationType.DELETE, path);
+  }
+}
+
+/**
+ * Admin-only: Updates the public subscription price & Telegram instructions in `/settings/subscription`.
+ */
+export async function saveSubscriptionSettingsToCloud(
+  settings: Omit<SubscriptionSettings, 'settingId'>
+): Promise<void> {
+  const settingId = 'subscription';
+  const settingRef = doc(db, 'settings', settingId);
+  const path = `settings/${settingId}`;
+
+  try {
+    await setDoc(settingRef, {
+      settingId,
+      monthlyPriceText: truncateString(settings.monthlyPriceText, 80, '39,000 UZS / month'),
+      telegramUsername: truncateString(settings.telegramUsername, 80, '@ollohberdi'),
+      paymentInstructions: truncateString(
+        settings.paymentInstructions,
+        500,
+        DEFAULT_SUBSCRIPTION_SETTINGS.paymentInstructions
+      ),
+      updatedAt: serverTimestamp(),
+    });
+  } catch (error) {
+    handleFirestoreError(error, OperationType.WRITE, path);
+  }
+}
+
+/**
  * Signs the student in with Google Popup.
  */
 export async function signInStudentWithGoogle(): Promise<User> {
@@ -278,3 +408,4 @@ export async function signInStudentWithGoogle(): Promise<User> {
 export async function signOutStudent(): Promise<void> {
   await firebaseSignOut(auth);
 }
+

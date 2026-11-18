@@ -66,6 +66,13 @@ export interface ArticleExercises {
   wordFormation?: WordFormationExercise[];
 }
 
+export interface SpeakingQuestion {
+  id: string;
+  question: string;
+  targetWords: string[];
+  speakingTip?: string;
+}
+
 export interface Article {
   id: string;
   title: string;
@@ -94,6 +101,7 @@ export interface Article {
   imageCaption?: string;
   paragraphs: string[];
   targetVocabulary: VocabularyItem[];
+  speakingQuestions?: SpeakingQuestion[];
   exercises: ArticleExercises;
 }
 
@@ -103,3 +111,27 @@ export interface UserSavedWord extends VocabularyItem {
   repetitions: number;
   nextReviewDate: number;
 }
+
+export interface StudentSubscription {
+  emailKey: string;
+  studentEmail: string;
+  studentName: string;
+  proUntil: number; // epoch ms
+  planLabel: string;
+  updatedByEmail: string;
+}
+
+export interface SubscriptionSettings {
+  settingId: string;
+  monthlyPriceText: string;
+  telegramUsername: string;
+  paymentInstructions: string;
+}
+
+export interface RegisteredStudentProfile {
+  userId: string;
+  displayName: string;
+  email?: string;
+  photoURL?: string;
+}
+
