@@ -16,17 +16,24 @@ import {
   CheckCircle2,
   ArrowLeft,
   CloudCheck,
+  FileDown,
+  BookOpen,
 } from 'lucide-react';
 import { User } from 'firebase/auth';
 import {
+  Article,
+  CEFRLevel,
   RegisteredStudentProfile,
   StudentSubscription,
   SubscriptionSettings,
 } from '../types';
 import { ADMIN_EMAIL, isAdminUser } from '../utils/quizLogic';
+import { ARTICLES_DATA } from '../data/articlesData';
+import { downloadLevelArticlesAsPDF } from '../utils/pdfExport';
 
 interface AdminDashboardProps {
   currentUser: User | null;
+  articles?: Article[];
   registeredUsers: RegisteredStudentProfile[];
   subscriptions: StudentSubscription[];
   subscriptionSettings: SubscriptionSettings;
@@ -56,6 +63,7 @@ interface DirectoryEntry {
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   currentUser,
+  articles = ARTICLES_DATA,
   registeredUsers,
   subscriptions,
   subscriptionSettings,
@@ -331,6 +339,20 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     }
   };
 
+  const b1Count = useMemo(() => articles.filter((a) => a.level === 'B1').length, [articles]);
+  const b2Count = useMemo(() => articles.filter((a) => a.level === 'B2').length, [articles]);
+  const c1Count = useMemo(() => articles.filter((a) => a.level === 'C1').length, [articles]);
+
+  const handleDownloadLevelPDF = (
+    level: CEFRLevel | 'ALL',
+    tier: 'ALL' | 'FREE' | 'PRO' = 'ALL'
+  ) => {
+    downloadLevelArticlesAsPDF(articles, level, tier);
+    const levelLabel = level === 'ALL' ? `All Levels (${articles.length} articles)` : `Level ${level}`;
+    const tierLabel = tier === 'ALL' ? 'Complete Collection' : tier === 'FREE' ? 'Free Tier (10)' : 'Pro Collection';
+    showToast(`Downloaded ${levelLabel} — ${tierLabel} PDF Book.`);
+  };
+
   return (
     <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Top Header */}
@@ -409,6 +431,176 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         </div>
       </div>
 
+      {/* Admin Exclusive Section: Download All Articles by Level (B1, B2, C1, or All) */}
+      <section className="bg-white p-6 rounded-3xl border border-stone-200/90 shadow-xs space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 rounded-xl bg-amber-100 text-amber-900">
+              <FileDown className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="font-serif text-lg font-bold text-stone-900">
+                  Download All Articles by Level (PDF Books)
+                </h2>
+                <span className="px-2 py-0.5 rounded-md bg-stone-900 text-amber-300 text-2xs font-bold uppercase tracking-wider">
+                  Only for You
+                </span>
+              </div>
+              <p className="text-xs text-stone-500">
+                Download a complete, print-ready PDF book containing every article, table of
+                contents, and full vocabulary list for B1, B2, C1, or the entire library.
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => handleDownloadLevelPDF('ALL', 'ALL')}
+            className="self-start sm:self-center px-4 py-2.5 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-semibold flex items-center gap-2 shadow-2xs transition-colors shrink-0"
+          >
+            <FileDown className="w-4 h-4 text-amber-400" />
+            <span>Download All {articles.length} Articles (B1 + B2 + C1)</span>
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* B1 Card */}
+          <div className="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-200/80 flex flex-col justify-between gap-3">
+            <div className="space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-emerald-700 text-white text-xs font-bold">
+                  <BookOpen className="w-3.5 h-3.5" />
+                  <span>Level B1</span>
+                </span>
+                <span className="text-xs font-semibold text-emerald-900">
+                  {b1Count} Articles · {b1Count * 5} Words
+                </span>
+              </div>
+              <h3 className="font-serif font-bold text-base text-stone-900 pt-1">
+                B1 Intermediate Complete Book
+              </h3>
+              <p className="text-xs text-stone-600 leading-relaxed">
+                Includes all {b1Count} B1 articles with full texts and Uzbek target vocabulary
+                definitions.
+              </p>
+            </div>
+
+            <div className="space-y-2 pt-1">
+              <button
+                type="button"
+                onClick={() => handleDownloadLevelPDF('B1', 'ALL')}
+                className="w-full py-2.5 px-3.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors shadow-2xs"
+              >
+                <FileDown className="w-4 h-4" />
+                <span>Download All {b1Count} B1 Articles (PDF)</span>
+              </button>
+              <div className="grid grid-cols-2 gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => handleDownloadLevelPDF('B1', 'FREE')}
+                  className="py-1.5 px-2.5 rounded-lg bg-white hover:bg-emerald-100/70 text-emerald-900 border border-emerald-200 text-2xs font-semibold transition-colors"
+                >
+                  Free 10 B1 Only
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDownloadLevelPDF('B1', 'PRO')}
+                  className="py-1.5 px-2.5 rounded-lg bg-white hover:bg-emerald-100/70 text-emerald-900 border border-emerald-200 text-2xs font-semibold transition-colors"
+                >
+                  Pro {Math.max(0, b1Count - 10)} B1 Only
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* B2 Card */}
+          <div className="p-4 rounded-2xl bg-amber-50/60 border border-amber-200/80 flex flex-col justify-between gap-3">
+            <div className="space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-amber-700 text-white text-xs font-bold">
+                  <BookOpen className="w-3.5 h-3.5" />
+                  <span>Level B2</span>
+                </span>
+                <span className="text-xs font-semibold text-amber-900">
+                  {b2Count} Articles · 308 Words
+                </span>
+              </div>
+              <h3 className="font-serif font-bold text-base text-stone-900 pt-1">
+                B2 Upper-Intermediate Complete Book
+              </h3>
+              <p className="text-xs text-stone-600 leading-relaxed">
+                Includes all {b2Count} B2 articles with full texts, English definitions, and
+                academic collocations.
+              </p>
+            </div>
+
+            <div className="space-y-2 pt-1">
+              <button
+                type="button"
+                onClick={() => handleDownloadLevelPDF('B2', 'ALL')}
+                className="w-full py-2.5 px-3.5 rounded-xl bg-amber-800 hover:bg-amber-900 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors shadow-2xs"
+              >
+                <FileDown className="w-4 h-4" />
+                <span>Download All {b2Count} B2 Articles (PDF)</span>
+              </button>
+              <div className="grid grid-cols-2 gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => handleDownloadLevelPDF('B2', 'FREE')}
+                  className="py-1.5 px-2.5 rounded-lg bg-white hover:bg-amber-100/70 text-amber-900 border border-amber-200 text-2xs font-semibold transition-colors"
+                >
+                  Free 10 B2 Only
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleDownloadLevelPDF('B2', 'PRO')}
+                  className="py-1.5 px-2.5 rounded-lg bg-white hover:bg-amber-100/70 text-amber-900 border border-amber-200 text-2xs font-semibold transition-colors"
+                >
+                  Pro {Math.max(0, b2Count - 10)} B2 Only
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* C1 Card */}
+          <div className="p-4 rounded-2xl bg-rose-50/60 border border-rose-200/80 flex flex-col justify-between gap-3">
+            <div className="space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg bg-rose-800 text-white text-xs font-bold">
+                  <BookOpen className="w-3.5 h-3.5" />
+                  <span>Level C1</span>
+                </span>
+                <span className="text-xs font-semibold text-rose-900">
+                  {c1Count} Articles · 60 Words
+                </span>
+              </div>
+              <h3 className="font-serif font-bold text-base text-stone-900 pt-1">
+                C1 Advanced Complete Book
+              </h3>
+              <p className="text-xs text-stone-600 leading-relaxed">
+                Includes all {c1Count} long-form C1 articles with advanced academic vocabulary and
+                examples.
+              </p>
+            </div>
+
+            <div className="space-y-2 pt-1">
+              <button
+                type="button"
+                onClick={() => handleDownloadLevelPDF('C1', 'ALL')}
+                className="w-full py-2.5 px-3.5 rounded-xl bg-rose-800 hover:bg-rose-900 text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors shadow-2xs"
+              >
+                <FileDown className="w-4 h-4" />
+                <span>Download All {c1Count} C1 Articles (PDF)</span>
+              </button>
+              <div className="text-center py-1 text-2xs text-rose-800 font-medium">
+                Complete C1 Master Collection
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Section 1: Activate Pro by Student Gmail */}
       <section className="bg-white p-6 rounded-3xl border border-stone-200/90 shadow-xs space-y-4">
         <div className="flex items-center gap-2.5">
@@ -420,8 +612,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               Activate Pro by Student Gmail
             </h2>
             <p className="text-xs text-stone-500">
-              Enter a student&apos;s Gmail address (even before they sign in) to unlock all 70+
-              articles immediately.
+              Enter a student&apos;s Gmail address (even before they sign in) to unlock all{' '}
+              {articles.length} articles immediately.
             </p>
           </div>
         </div>

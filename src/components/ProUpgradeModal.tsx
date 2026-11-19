@@ -108,7 +108,7 @@ export const ProUpgradeModal: React.FC<ProUpgradeModalProps> = ({
               id="pro-upgrade-modal-title"
               className="font-serif text-xl sm:text-2xl font-bold text-white leading-snug"
             >
-              Unlock All 70+ Graded Articles
+              Unlock All 130 Graded Articles
             </h2>
             <p className="text-xs sm:text-sm text-stone-300 mt-1 leading-relaxed">
               The first 10 articles in each level (B1, B2, C1) are free. Upgrade to Pro to read and
@@ -139,7 +139,7 @@ export const ProUpgradeModal: React.FC<ProUpgradeModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-stone-700">
               <div className="flex items-center gap-2 p-2.5 rounded-xl bg-stone-50 border border-stone-200/70">
                 <BookOpen className="w-4 h-4 text-amber-700 shrink-0" />
-                <span>All 30 B1, 30 B2 &amp; 10 C1 Articles</span>
+                <span>All 60 B1, 60 B2 &amp; 10 C1 Articles</span>
               </div>
               <div className="flex items-center gap-2 p-2.5 rounded-xl bg-stone-50 border border-stone-200/70">
                 <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />

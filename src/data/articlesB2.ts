@@ -1,4 +1,6 @@
 import { Article } from '../types';
+import { B2_PRO_BATCH_1 } from './articlesB2ProBatch1';
+import { B2_PRO_BATCH_2 } from './articlesB2ProBatch2';
 
 export const B2_ARTICLES: Article[] = [
   {
@@ -4160,7 +4162,9 @@ export const B2_ARTICLES: Article[] = [
         ]
       }
     }
-  }
+  },
+  ...B2_PRO_BATCH_1,
+  ...B2_PRO_BATCH_2
 ];
 
 

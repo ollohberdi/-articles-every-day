@@ -112,21 +112,30 @@ test('filterArticles filters properly by CEFR level and category', () => {
   assert.equal(searchGrids[0].id, '2');
 });
 
-test('ARTICLES_DATA contains 70 graded articles across B1 (30), B2 (30), and C1 (10) with target vocabulary', async () => {
+test('ARTICLES_DATA contains 130 graded articles across B1 (60), B2 (60), and C1 (10) with target vocabulary', async () => {
   const { ARTICLES_DATA } = await import('../data/articlesData');
-  assert.equal(ARTICLES_DATA.length, 70);
+  assert.equal(ARTICLES_DATA.length, 130);
 
   const b1 = ARTICLES_DATA.filter((a) => a.level === 'B1');
   const b2 = ARTICLES_DATA.filter((a) => a.level === 'B2');
   const c1 = ARTICLES_DATA.filter((a) => a.level === 'C1');
 
-  assert.equal(b1.length, 30);
-  assert.equal(b2.length, 30);
+  assert.equal(b1.length, 60);
+  assert.equal(b2.length, 60);
   assert.equal(c1.length, 10);
 
+  const seenArticleIds = new Set<string>();
+  const seenVocabIds = new Set<string>();
+
   for (const article of ARTICLES_DATA) {
+    assert.equal(seenArticleIds.has(article.id), false, `Duplicate article ID: ${article.id}`);
+    seenArticleIds.add(article.id);
     assert.ok(article.paragraphs.length >= 4, `Article ${article.id} should have at least 4 paragraphs`);
     assert.ok(article.targetVocabulary.length >= 5, `Article ${article.id} should have at least 5 target words`);
+    for (const vocab of article.targetVocabulary) {
+      assert.equal(seenVocabIds.has(vocab.id), false, `Duplicate vocab ID: ${vocab.id} in ${article.id}`);
+      seenVocabIds.add(vocab.id);
+    }
   }
 
   const coreCategories = new Set([
@@ -139,8 +148,8 @@ test('ARTICLES_DATA contains 70 graded articles across B1 (30), B2 (30), and C1 
   const coreArticles = ARTICLES_DATA.filter((a) => coreCategories.has(a.category));
   const complexArticles = ARTICLES_DATA.filter((a) => !coreCategories.has(a.category));
 
-  assert.equal(coreArticles.length, 58);
-  assert.equal(complexArticles.length, 12);
+  assert.equal(coreArticles.length, 113);
+  assert.equal(complexArticles.length, 17);
 });
 
 test('resolveArticleFromLocation and buildArticleShareUrl resolve exact articles by ID, slug, or title', async () => {
@@ -210,8 +219,8 @@ test('B1 target words have Uzbek meanings while B2 and C1 target words remain in
   const b2Words = ARTICLES_DATA.filter((a) => a.level === 'B2').flatMap((a) => a.targetVocabulary);
   const c1Words = ARTICLES_DATA.filter((a) => a.level === 'C1').flatMap((a) => a.targetVocabulary);
 
-  assert.equal(b1Words.length, 150);
-  assert.equal(b2Words.length, 158);
+  assert.equal(b1Words.length, 300);
+  assert.equal(b2Words.length, 308);
   assert.ok(c1Words.length >= 60);
   // Every B1 definition is written in Uzbek (does not start with English "To " or "A " or "The ")
   for (const item of b1Words) {

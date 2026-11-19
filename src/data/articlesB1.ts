@@ -4,6 +4,8 @@
  */
 
 import { Article } from '../types';
+import { B1_PRO_BATCH_1 } from './articlesB1ProBatch1';
+import { B1_PRO_BATCH_2 } from './articlesB1ProBatch2';
 
 export const B1_ARTICLES: Article[] = [
   {
@@ -4139,7 +4141,9 @@ export const B1_ARTICLES: Article[] = [
         ]
       }
     }
-  }
+  },
+  ...B1_PRO_BATCH_1,
+  ...B1_PRO_BATCH_2
 ];
 
 

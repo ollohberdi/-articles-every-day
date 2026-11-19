@@ -51,7 +51,8 @@ import {
   revokeStudentProByEmail,
   saveSubscriptionSettingsToCloud,
 } from './firebase';
-import { Search } from 'lucide-react';
+import { Search, FileDown, ShieldCheck } from 'lucide-react';
+import { downloadLevelArticlesAsPDF } from './utils/pdfExport';
 
 const DEFAULT_DOCUMENT_TITLE =
   'Articles ED (Every day) - Graded English Readers & Interactive Vocabulary (B1, B2, C1)';
@@ -865,6 +866,62 @@ export default function App() {
             totalTargetWordsCount={totalTargetWordsCount}
             levelCounts={levelCounts}
           />
+
+          {/* Admin-Exclusive Quick Download Section (Strictly visible ONLY to ollohberdiinfo@gmail.com) */}
+          {isAdmin && (
+            <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
+              <div className="bg-stone-900 text-white rounded-2xl p-4 sm:p-5 border border-stone-800 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 text-2xs font-bold uppercase tracking-wider">
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Admin Exclusive · Only Visible to You</span>
+                  </div>
+                  <h2 className="font-serif text-base sm:text-lg font-bold text-white">
+                    Download All Articles by Level (PDF Books)
+                  </h2>
+                  <p className="text-xs text-stone-300">
+                    One-click PDF anthology download containing every article, table of contents,
+                    and vocabulary list for each level.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => downloadLevelArticlesAsPDF(articles, 'B1', 'ALL')}
+                    className="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-2xs"
+                  >
+                    <FileDown className="w-3.5 h-3.5" />
+                    <span>All B1 ({levelCounts.B1} Articles)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => downloadLevelArticlesAsPDF(articles, 'B2', 'ALL')}
+                    className="px-3.5 py-2 rounded-xl bg-amber-700 hover:bg-amber-600 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-2xs"
+                  >
+                    <FileDown className="w-3.5 h-3.5" />
+                    <span>All B2 ({levelCounts.B2} Articles)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => downloadLevelArticlesAsPDF(articles, 'C1', 'ALL')}
+                    className="px-3.5 py-2 rounded-xl bg-rose-800 hover:bg-rose-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors shadow-2xs"
+                  >
+                    <FileDown className="w-3.5 h-3.5" />
+                    <span>All C1 ({levelCounts.C1} Articles)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => downloadLevelArticlesAsPDF(articles, 'ALL', 'ALL')}
+                    className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/15 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                  >
+                    <FileDown className="w-3.5 h-3.5 text-amber-300" />
+                    <span>All {articles.length} Articles</span>
+                  </button>
+                </div>
+              </div>
+            </section>
+          )}
 
           {/* Graded Articles Grid */}
           <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10">
